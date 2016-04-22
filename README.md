@@ -2,4 +2,4 @@
 ContextProject Virtual Humans for Serious Gaming
 
 ## Deliverables
-[Sprint 1] (deliverables/Sprint_1.pdf)
+[Sprint 1] (Contextproject-VH/Deliverables/Sprint_1.pdf)
