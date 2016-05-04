@@ -17,3 +17,7 @@ ContextProject Virtual Humans for Serious Gaming
 [Draft Product Vision](Deliverables/Week 2/Product Vision (Draft).pdf)
 
 [Draft Product Plan](Deliverables/Week 2/Product Plan (Draft).pdf)
+
+[Final Product Vision](Deliverables/Week 3/Final Product Vision.pdf)
+
+[Final Product Plan](Deliverables/Week 3/Final Product Plan.pdf)
