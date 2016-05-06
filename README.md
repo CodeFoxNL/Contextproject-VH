@@ -11,6 +11,10 @@ ContextProject Virtual Humans for Serious Gaming
 
 [Sprint 2](Deliverables/Week 2/Backlog Sprint 2.pdf)
 
+[Sprint 2 Retrospective](Deliverables/Week 3/Retrospective Sprint 2.pdf)
+
+[Sprint 3](Deliverables/Week 3/Backlog Sprint 3.pdf)
+
 
 ### Software Engineering Aspects
 
@@ -21,3 +25,5 @@ ContextProject Virtual Humans for Serious Gaming
 [Final Product Vision](Deliverables/Week 3/Final Product Vision.pdf)
 
 [Final Product Plan](Deliverables/Week 3/Final Product Plan.pdf)
+
+[Draft Architecture Design](Deliverables/Week 3/Architecture Design (Week 3 Draft).pdf)
