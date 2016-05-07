@@ -1,0 +1,12 @@
+use "tygronenv-1.0.3-jar-with-dependencies.jar" as environment 
+	with map = "testgoalmap" .
+
+define tygronagent as agent {
+	use tygron as main module.
+	use tygronEvents as event module.
+	use tygronInit as init module.
+}
+
+launchpolicy {
+	when entity launch tygronagent.
+}
