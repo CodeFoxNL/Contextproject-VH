@@ -1,4 +1,4 @@
-use "tygronenv-1.0.3-jar-with-dependencies.jar" as environment 
+use "tygronenv-1.0.5-jar-with-dependencies.jar" as environment 
 	with map = "testgoalmap" .
 
 define tygronagent as agent {
@@ -8,5 +8,5 @@ define tygronagent as agent {
 }
 
 launchpolicy {
-	when entity launch tygronagent.
+	when name=entity launch tygronagent.
 }
