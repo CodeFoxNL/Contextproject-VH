@@ -1,3 +1,12 @@
 notifications:
+# Add Slack integration with an encrypted access token
   slack:
     secure: mJQ7laXxuXsL9cQtxK529Eyx8Ga1u7LajEiLcSO3Xzejy5l3kRjOGutSOuayzFN6xgp6tFTkqJ9m3Sbiu+hrjqegSzhIgt//wfxuWutqK6RZ2YHmJrHRWc6JaQgzAVRBa9ZOQlU/8T+WbK7wAIxWBi2VbB3GNkugnFWdGuJhxCqz9Pvn+0uiO7nRMv70+/VGHGWKWLCldlXVMDV7oo8ta1jXEvXsC8bCjMALKeLRwytGdmanLnSEMru21L1mxfym97iCse4AWVczo8uHEXwh+C7o79uIvUGnnBBGZeprkqDr45DKEeDsTsfXUDuNH243ePkB1eBnEGVpp1zrIIh0tIdS7dcUgvB/EAPPdIyo5RQO3Ms3f+fT9f/cNcQuSfsql55YIWzqugMMofR0KsxbKvEaQ+BhVbqATUqj1e0gCrvvx60eU0v3sGw9/k1gRPTUZYuvBwKCe3IuXDjMjSH97edL8dBHvrmHRBIUh9n0LUOLb+N5eu8R1q7LQ0wQ6/5K1yKKnjCe3Htq+e+szc7Z0JPnYdrCxOOrWOY+bewvL0uJXKTMR5bbYEvVL73VQmSqtIvDCIKoejSP/jZ6ORCk+oUbZgfa9LnBzi5RoHMojyIX2AuLrgyekxDs0XBFhKLUVDtVgMXeor9yJWSOCSju3bNdIHvgjvfr0A6r4QxyyDA=
+
+# Handle git submodules yourself
+git:
+    submodules: false
+# Use sed to replace the SSH URL with the public URL, then initialize submodules
+before_install:
+    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+    - git submodule update --init --recursive
