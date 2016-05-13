@@ -24,7 +24,7 @@ install:
 - ls
 - cd $rd
 # move generated env jar to the same folder as the test file(s)
-- mv $rd/lib/tygron/environment/target/tygronenv-*-jar-with-dependencies.jar $rd\src\nl\codefox\contextvh
+- mv $rd/lib/tygron/environment/target/tygronenv-*-jar-with-dependencies.jar $rd/src/nl/codefox/contextvh
 
 # make app.properties through travis before script start, needed for user validation
 before_script:
