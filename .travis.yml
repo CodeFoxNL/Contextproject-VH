@@ -11,7 +11,6 @@ git:
 before_install:
 # Save root directory as enviroment variable
   - export rd=$(pwd)
-  - echo !doc
 # Use sed to replace the SSH URL with the public URL, then initialize submodules
   - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
   - git submodule update --init --recursive
@@ -19,7 +18,7 @@ before_install:
 install:
 # build the connector, testing of the connector is done in the tygron repo CI.
 - cd $rd/lib/tygron
-- mvn -pl "!doc" install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+- mvn -pl "environment" install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 - java -cp environment/target/tygronenv-*-jar-with-dependencies.jar login.Login $email $password
 - cd ..
 # move generated env jar to the same folder as the test file(s)
