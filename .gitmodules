@@ -1,0 +1,3 @@
+[submodule "lib/tygron"]
+	path = lib/tygron
+	url = git@github.com:CodeFoxNL/tygron.git
