@@ -31,7 +31,9 @@ before_script:
 - mv tygronenv-*-jar-with-dependencies.jar tygronenv-jar-with-dependencies.jar
 - sed -i s/tygronenv-.*-jar-with-dependencies.jar/tygronenv-jar-with-dependencies.jar/g ./Tygron.mas2g
 script:
-- echo $rd
+- cd $rd/lib/goal
+- ls
+- cd $rd/src/nl/codefox/contextvh
 # run the Goal Test with a 60s timeout
 - timeout 60 java -cp $rd/lib/goal/com.github.goalhub.runtime.jar-with-dependencies_2.0.2.20160418123535.jar goal.tools.Run ./test.test2g -v > result.txt || echo 0
 # print the test output
