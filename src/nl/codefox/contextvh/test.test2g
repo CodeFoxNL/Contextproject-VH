@@ -4,7 +4,7 @@ use tygron as module.
 timeout = 5.
 
 test tygron with
-  pre{not(buildings(_))}
+  pre{buildings(_)}
   in{ }
   post{buildings(_)}
 
