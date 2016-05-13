@@ -1,0 +1,13 @@
+use Tygron as mas.
+use tygron as knowledge.
+use tygron as module.
+timeout = 5.
+
+test tygron with
+  pre{not(buildings(_))}
+  in{ }
+  post{buildings(_)}
+
+  tygron {
+    do helloWorld.
+  }

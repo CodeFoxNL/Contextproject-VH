@@ -20,14 +20,14 @@ install:
 - cd $rd/lib/tygron
 - mvn -pl "environment" install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 - java -cp environment/target/tygronenv-*-jar-with-dependencies.jar login.Login $email $password
-- cd ..
+- cd $rd
 # move generated env jar to the same folder as the test file(s)
-- mv lib/tygron/environment/target/tygronenv-*-jar-with-dependencies.jar .\src\nl\codefox\contextvh
+- mv $rd/lib/tygron/environment/target/tygronenv-*-jar-with-dependencies.jar .\src\nl\codefox\contextvh
 
 # make app.properties through travis before script start, needed for user validation
 before_script:
 # omit tygron version in env name and mas2g env location name
-- cd .\src\nl\codefox\contextvh
+- cd $rd/src/nl/codefox/contextvh
 - mv tygronenv-*-jar-with-dependencies.jar tygronenv-jar-with-dependencies.jar
 - sed -i s/tygronenv-.*-jar-with-dependencies.jar/tygronenv-jar-with-dependencies.jar/g Municipality/Tygron.mas2g
 script:
