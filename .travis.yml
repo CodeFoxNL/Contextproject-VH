@@ -29,10 +29,10 @@ before_script:
 # omit tygron version in env name and mas2g env location name
 - cd $rd/src/nl/codefox/contextvh
 - mv tygronenv-*-jar-with-dependencies.jar tygronenv-jar-with-dependencies.jar
-- sed -i s/tygronenv-.*-jar-with-dependencies.jar/tygronenv-jar-with-dependencies.jar/g Municipality/Tygron.mas2g
+- sed -i s/tygronenv-.*-jar-with-dependencies.jar/tygronenv-jar-with-dependencies.jar/g ./Tygron.mas2g
 script:
 # run the Goal Test with a 60s timeout
-- timeout 60 java -cp com.github.goalhub.runtime.jar-with-dependencies_2.0.2.20160418123535.jar goal.tools.Run Municipality/test.test2g -v > result.txt || echo 0
+- timeout 60 java -cp com.github.goalhub.runtime.jar-with-dependencies_2.0.2.20160418123535.jar goal.tools.Run ./test.test2g -v > result.txt || echo 0
 # print the test output
 - cat result.txt
 # if there is a test failed then the build fails
