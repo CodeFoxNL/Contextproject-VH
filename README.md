@@ -6,8 +6,8 @@ ContextProject Virtual Humans for Serious Gaming
 
 | Repository | master | dev | latest |
 |:----------:|:------:|:---:|:------:|
-| Agent | ![Master Build Status][CIAgentMaster] | ![Dev Build Status][CIAgentDev] | ![Latest Build Status][CIAgentLatest] |
-| Connector | ![Master Build Status][CIConnectorMaster] | ![Dev Build Status][CIConnectorDev] | ![Latest Build Status][CIConnectorLatest] |
+| Agent | [![Master Build Status][CIAgentMaster]][CIAgentLink] | [![Dev Build Status][CIAgentDev]][CIAgentLink] | [![Latest Build Status][CIAgentLatest]][CIAgentLink] |
+| Connector | [![Master Build Status][CIConnectorMaster]][CIConnectorLink] | [![Dev Build Status][CIConnectorDev]][CIConnectorLink] | [![Latest Build Status][CIConnectorLatest]][CIConnectorLink] |
 
 ## Deliverables
 
@@ -32,6 +32,8 @@ ContextProject Virtual Humans for Serious Gaming
 
 [Draft Architecture Design](Deliverables/Week 3/Architecture Design (Week 3 Draft).pdf)
 
+[CIAgentLink]: https://travis-ci.org/CodeFoxNL/Contextproject-VH/branches
+[CIConnectorLink]: https://travis-ci.org/CodeFoxNL/tygron/branches
 [CIAgentMaster]: https://travis-ci.org/CodeFoxNL/Contextproject-VH.svg?branch=master
 [CIAgentDev]: https://travis-ci.org/CodeFoxNL/Contextproject-VH.svg?branch=dev
 [CIAgentLatest]: https://travis-ci.org/CodeFoxNL/Contextproject-VH.svg
