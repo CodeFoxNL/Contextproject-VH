@@ -1,24 +1,24 @@
 # Contextproject-VH
 ContextProject Virtual Humans for Serious Gaming
+------------------------------------------------
+
+## Continuous Integration
+
+| Repository | master | dev | latest |
+|:----------:|:------:|:---:|:------:|
+| [Agent][GHAgent] | [![Master Build Status][CIAgentMaster]][CIAgentLink] | [![Dev Build Status][CIAgentDev]][CIAgentLink] | [![Latest Build Status][CIAgentLatest]][CIAgentLink] |
+| [Connector][GHConnector] | [![Master Build Status][CIConnectorMaster]][CIConnectorLink] | [![Dev Build Status][CIConnectorDev]][CIConnectorLink] | [![Latest Build Status][CIConnectorLatest]][CIConnectorLink] |
 
 ## Deliverables
 
 ### Sprints
 
-[Sprint 1](Deliverables/Week 1/Sprint_1.pdf)
-
-[Sprint 1 Retrospective](Deliverables/Week 2/Retrospective Sprint 1.pdf)
-
-[Sprint 2](Deliverables/Week 2/Backlog Sprint 2.pdf)
-
-[Sprint 2 Retrospective](Deliverables/Week 3/Retrospective Sprint 2.pdf)
-
-[Sprint 3](Deliverables/Week 3/Backlog Sprint 3.pdf)
-
-[Sprint 3 Retrospective](Deliverables/Week 4/Retrospective Sprint 3.pdf)
-
-[Sprint 4](Deliverables/Week 4/Backlog Sprint 4.pdf)
-
+| Sprint | Plan | Retrospective |
+|:------:|:----:|:-------------:|
+| 1      | [Sprint 1 Plan][S1P] | [Sprint 1 Retrospective][S1R] |
+| 2      | [Sprint 2 Plan][S2P] | [Sprint 2 Retrospective][S2R] |
+| 3      | [Sprint 3 Plan][S3P] | [Sprint 3 Retrospective][S3R] |
+| 4      | [Sprint 4 Plan][S4P] |               |
 
 ### Software Engineering Aspects
 
@@ -31,3 +31,21 @@ ContextProject Virtual Humans for Serious Gaming
 [Final Product Plan](Deliverables/Week 3/Final Product Plan.pdf)
 
 [Draft Architecture Design](Deliverables/Week 3/Architecture Design (Week 3 Draft).pdf)
+
+[GHAgent]: https://github.com/CodeFoxNL/Contextproject-VH
+[GHConnector]: https://github.com/CodeFoxNL/tygron
+[CIAgentLink]: https://travis-ci.org/CodeFoxNL/Contextproject-VH/branches
+[CIConnectorLink]: https://travis-ci.org/CodeFoxNL/tygron/branches
+[CIAgentMaster]: https://travis-ci.org/CodeFoxNL/Contextproject-VH.svg?branch=master
+[CIAgentDev]: https://travis-ci.org/CodeFoxNL/Contextproject-VH.svg?branch=dev
+[CIAgentLatest]: https://travis-ci.org/CodeFoxNL/Contextproject-VH.svg
+[CIConnectorMaster]: https://travis-ci.org/CodeFoxNL/tygron.svg?branch=master
+[CIConnectorDev]: https://travis-ci.org/CodeFoxNL/tygron.svg?branch=dev
+[CIConnectorLatest]: https://travis-ci.org/CodeFoxNL/tygron.svg
+[S1P]: <Deliverables/Week%201/Sprint_1.pdf>
+[S1R]: Deliverables/Week%202/Retrospective%20Sprint%201.pdf
+[S2P]: Deliverables/Week%202/Backlog%20Sprint%202.pdf
+[S2R]: Deliverables/Week%202/Retrospective%20Sprint%202.pdf
+[S3P]: Deliverables/Week%202/Backlog%20Sprint%203.pdf
+[S3R]: Deliverables/Week%202/Retrospective%20Sprint%203.pdf
+[S4P]: Deliverables/Week%202/Backlog%20Sprint%204.pdf
