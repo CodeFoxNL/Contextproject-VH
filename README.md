@@ -1,5 +1,13 @@
 # Contextproject-VH
 ContextProject Virtual Humans for Serious Gaming
+------------------------------------------------
+
+## Continuous Integration
+
+| Repository | master | dev | latest |
+|:----------:|:------:|:---:|:------:|
+| Agent | ![Master Build Status][CIAgentMaster] | ![Dev Build Status][CIAgentDev] | ![Latest Build Status][CIAgentLatest] |
+| Connector | ![Master Build Status][CIConnectorMaster] | ![Dev Build Status][CIConnectorDev] | ![Latest Build Status][CIConnectorLatest] |
 
 ## Deliverables
 
@@ -24,6 +32,12 @@ ContextProject Virtual Humans for Serious Gaming
 
 [Draft Architecture Design](Deliverables/Week 3/Architecture Design (Week 3 Draft).pdf)
 
+[CIAgentMaster]: https://travis-ci.org/CodeFoxNL/Contextproject-VH.svg?branch=master
+[CIAgentDev]: https://travis-ci.org/CodeFoxNL/Contextproject-VH.svg?branch=dev
+[CIAgentLatest]: https://travis-ci.org/CodeFoxNL/Contextproject-VH.svg
+[CIConnectorMaster]: https://travis-ci.org/CodeFoxNL/tygron.svg?branch=master
+[CIConnectorDev]: https://travis-ci.org/CodeFoxNL/tygron.svg?branch=dev
+[CIConnectorLatest]: https://travis-ci.org/CodeFoxNL/tygron.svg
 [S1P]: <Deliverables/Week%201/Sprint_1.pdf>
 [S1R]: Deliverables/Week%202/Retrospective%20Sprint%201.pdf
 [S2P]: Deliverables/Week%202/Backlog%20Sprint%202.pdf
