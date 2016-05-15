@@ -42,10 +42,10 @@ ContextProject Virtual Humans for Serious Gaming
 [CIConnectorMaster]: https://travis-ci.org/CodeFoxNL/tygron.svg?branch=master
 [CIConnectorDev]: https://travis-ci.org/CodeFoxNL/tygron.svg?branch=dev
 [CIConnectorLatest]: https://travis-ci.org/CodeFoxNL/tygron.svg
-[S1P]: <Deliverables/Week%201/Sprint_1.pdf>
+[S1P]: Deliverables/Week%201/Backlog%20Sprint%201.pdf
 [S1R]: Deliverables/Week%202/Retrospective%20Sprint%201.pdf
 [S2P]: Deliverables/Week%202/Backlog%20Sprint%202.pdf
-[S2R]: Deliverables/Week%202/Retrospective%20Sprint%202.pdf
-[S3P]: Deliverables/Week%202/Backlog%20Sprint%203.pdf
-[S3R]: Deliverables/Week%202/Retrospective%20Sprint%203.pdf
-[S4P]: Deliverables/Week%202/Backlog%20Sprint%204.pdf
+[S2R]: Deliverables/Week%203/Retrospective%20Sprint%202.pdf
+[S3P]: Deliverables/Week%203/Backlog%20Sprint%203.pdf
+[S3R]: Deliverables/Week%204/Retrospective%20Sprint%203.pdf
+[S4P]: Deliverables/Week%204/Backlog%20Sprint%204.pdf
