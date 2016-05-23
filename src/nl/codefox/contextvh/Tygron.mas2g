@@ -1,5 +1,5 @@
-use "tygronenv-1.0.3-jar-with-dependencies.jar" as environment 
-	with map = "testgoalmap" .
+use "tygronenv-jar-with-dependencies.jar" as environment
+	with project = "vhproject" .
 
 define tygronagent as agent {
 	use tygron as main module.
