@@ -1,0 +1,44 @@
+language: java
+notifications:
+# Add Slack integration with an encrypted access token
+  slack:
+    secure: mJQ7laXxuXsL9cQtxK529Eyx8Ga1u7LajEiLcSO3Xzejy5l3kRjOGutSOuayzFN6xgp6tFTkqJ9m3Sbiu+hrjqegSzhIgt//wfxuWutqK6RZ2YHmJrHRWc6JaQgzAVRBa9ZOQlU/8T+WbK7wAIxWBi2VbB3GNkugnFWdGuJhxCqz9Pvn+0uiO7nRMv70+/VGHGWKWLCldlXVMDV7oo8ta1jXEvXsC8bCjMALKeLRwytGdmanLnSEMru21L1mxfym97iCse4AWVczo8uHEXwh+C7o79uIvUGnnBBGZeprkqDr45DKEeDsTsfXUDuNH243ePkB1eBnEGVpp1zrIIh0tIdS7dcUgvB/EAPPdIyo5RQO3Ms3f+fT9f/cNcQuSfsql55YIWzqugMMofR0KsxbKvEaQ+BhVbqATUqj1e0gCrvvx60eU0v3sGw9/k1gRPTUZYuvBwKCe3IuXDjMjSH97edL8dBHvrmHRBIUh9n0LUOLb+N5eu8R1q7LQ0wQ6/5K1yKKnjCe3Htq+e+szc7Z0JPnYdrCxOOrWOY+bewvL0uJXKTMR5bbYEvVL73VQmSqtIvDCIKoejSP/jZ6ORCk+oUbZgfa9LnBzi5RoHMojyIX2AuLrgyekxDs0XBFhKLUVDtVgMXeor9yJWSOCSju3bNdIHvgjvfr0A6r4QxyyDA=
+
+# Handle git submodules yourself
+git:
+    submodules: false
+
+before_install:
+# Save root directory as enviroment variable
+  - export rd=$(pwd)
+# Use sed to replace the SSH URL with the public URL, then initialize submodules
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
+
+install:
+# build the connector, testing of the connector is done in the tygron repo CI.
+- cd $rd/lib/tygron
+- mvn -pl "sdk,sdk-tests,environment" install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+- java -cp environment/target/tygronenv-*-jar-with-dependencies.jar login.Login $email $password
+- cd $rd
+# move generated env jar to the same folder as the test file(s)
+- mv $rd/lib/tygron/environment/target/tygronenv-*-jar-with-dependencies.jar $rd/src/nl/codefox/contextvh
+
+# make app.properties through travis before script start, needed for user validation
+before_script:
+# omit tygron version in env name and mas2g env location name
+- cd $rd/src/nl/codefox/contextvh
+- mv tygronenv-*-jar-with-dependencies.jar tygronenv-jar-with-dependencies.jar
+- sed -i s/tygronenv-.*-jar-with-dependencies.jar/tygronenv-jar-with-dependencies.jar/g ./Tygron.mas2g
+script:
+- cd $rd/src/nl/codefox/contextvh
+# run the Goal Test with a 60s timeout
+- timeout 60 java -cp $rd/lib/goal/com.github.goalhub.runtime.jar-with-dependencies_2.0.2.20160418123535.jar goal.tools.Run ./test.test2g -v > result.txt || echo 0
+# print the test output
+- cat result.txt
+# if there is a test failed then the build fails
+- grep "test failed:" result.txt && $? || echo 0
+# check that the tests actually passed otherwise the build still fails
+- grep "test passed:" result.txt && echo 0 || $?
+jdk:
+- oraclejdk8
