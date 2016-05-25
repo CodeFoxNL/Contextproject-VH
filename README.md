@@ -33,6 +33,20 @@ ContextProject Virtual Humans for Serious Gaming
 
 [Draft Architecture Design](Deliverables/Week 5/Architecture Design (Week 5 Draft).pdf)
 
+
+##Documentation
+
+###Agent Documentation
+
+[Agent Business Plan](doc/Agentbusinessplan.pdf)
+[Percepts Required](doc/Perceptsnecessary.pdf)
+[Actions Required](doc/RequiredAgentActions.pdf)
+[Housing Corporation Role Description](doc/Roledescription.pdf)
+
+###Tygron Documentation
+
+[Tygron Manual](doc/TygronManual.pdf)
+
 [GHAgent]: https://github.com/CodeFoxNL/Contextproject-VH
 [GHConnector]: https://github.com/CodeFoxNL/tygron
 [CIAgentLink]: https://travis-ci.org/CodeFoxNL/Contextproject-VH/branches
