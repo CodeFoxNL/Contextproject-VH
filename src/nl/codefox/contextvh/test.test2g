@@ -1,5 +1,5 @@
 use Tygron as mas.
-use tygron as knowledge.
+use dummy as knowledge.
 use tygron as module.
 timeout = 5.
 
