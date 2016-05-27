@@ -38,8 +38,11 @@ ContextProject Virtual Humans for Serious Gaming
 ###Agent Documentation
 
 [Agent Business Plan](doc/Agentbusinessplan.pdf)
+
 [Percepts Required](doc/Perceptsnecessary.pdf)
+
 [Actions Required](doc/RequiredAgentActions.pdf)
+
 [Housing Corporation Role Description](doc/Roledescription.pdf)
 
 ###Tygron Documentation
