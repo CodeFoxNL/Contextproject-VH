@@ -1,8 +1,17 @@
 
+
 :- dynamic stakeholders/1.
 :- dynamic settings/1.
 :- dynamic functions/1.
 :- dynamic buildings/1.
+
+:- dynamic indicator/3.
+:- dynamic indicatorLink/2.
+:- dynamic stakeholder/4.
+:- dynamic building/6.
+
+:- dynamic zone_links/1.
+:- dynamic upgrade_types/1.
 
 % we have a building if the building list has at least 1 element.
 havebuilding :- buildings([X|Y]).
