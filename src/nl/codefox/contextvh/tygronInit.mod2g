@@ -5,6 +5,8 @@ module tygronInit {
 		if true then insert(functions([])).
 		if true then insert(stakeholders([])).
 		if true then insert(buildings(none)).
+		if true then insert(lands([])).
+		if true then insert(requests([])).
 		
 		if true then insert(zone_links([])).
 		if true then insert(upgrade_types([])).
