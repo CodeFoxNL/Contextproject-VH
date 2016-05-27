@@ -3,7 +3,9 @@
 :- dynamic stakeholders/1.
 :- dynamic settings/1.
 :- dynamic functions/1.
+:- dynamic lands/1.
 :- dynamic buildings/1.
+:- dynamic requests/1.
 
 :- dynamic indicator/3.
 :- dynamic indicatorLink/2.
