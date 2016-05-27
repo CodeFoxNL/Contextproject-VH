@@ -1,5 +1,5 @@
 use "tygronenv-1.0.9-jar-with-dependencies.jar" as environment
-	with project = "vhprojectcodefox", stakeholders = ['MUNICIPALITY'].
+	with project = "vhprojectcodefox", stakeholders = ['Private_Woningbouw_Burgers'].
 
 
 define tygronagent as agent {
@@ -9,5 +9,5 @@ define tygronagent as agent {
 }
 
 launchpolicy {
-	when name=MUNICIPALITY launch tygronagent.
+	when name=PRIVATE_WONINGBOUW_BURGERS launch tygronagent.
 }
