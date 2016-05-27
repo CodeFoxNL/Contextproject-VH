@@ -8,7 +8,8 @@ module tygronEvents {
 	if percept(settings(X)), bel(settings(Y)) then insert(settings(X)) +delete(settings(Y)).
 	if percept(functions(X)), bel(functions(Y)) then insert(functions(X)) + delete(functions(Y)).
 	if percept(buildings(X)), bel(buildings(Y)) then insert(buildings(X))+delete(buildings(Y)).
-	
+	if percept(lands(X)), bel(lands(Y)) then delete (lands(Y)) + insert(lands(X)).
+	if percept(requests(R)), bel(requests(O)) then delete(requests(O)) + insert(requests(R)).
 	if percept(zone_links(X)), bel(zone_links(Y)) then insert(zone_links(X)) + delete(zone_links(Y)).
 	if percept(upgrade_types(X)), bel(upgrade_types(Y)) then insert(upgrade_types(X)) + delete(upgrade_types(Y)).
 
