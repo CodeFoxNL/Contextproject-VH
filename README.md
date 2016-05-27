@@ -15,10 +15,12 @@ ContextProject Virtual Humans for Serious Gaming
 
 | Sprint | Plan | Retrospective |
 |:------:|:----:|:-------------:|
-| 1      | [Sprint 1 Plan][S1P] | [Sprint 1 Retrospective][S1R] |
-| 2      | [Sprint 2 Plan][S2P] | [Sprint 2 Retrospective][S2R] |
-| 3      | [Sprint 3 Plan][S3P] | [Sprint 3 Retrospective][S3R] |
-| 4      | [Sprint 4 Plan][S4P] |               |
+| 1      | [Sprint 1 Backlog][S1P] | [Sprint 1 Retrospective][S1R] |
+| 2      | [Sprint 2 Backlog][S2P] | [Sprint 2 Retrospective][S2R] |
+| 3      | [Sprint 3 Backlog][S3P] | [Sprint 3 Retrospective][S3R] |
+| 4      | [Sprint 4 Backlog][S4P] | [Sprint 4 Retrospective][S4R] |
+| 5      | [Sprint 5 Backlog][S5P] | [Sprint 5 Retrospective][S5R] |
+| 6      | [Sprint 6 Backlog][S6P] |  |
 
 ### Software Engineering Aspects
 
@@ -66,3 +68,7 @@ ContextProject Virtual Humans for Serious Gaming
 [S3P]: Deliverables/Week%203/Backlog%20Sprint%203.pdf
 [S3R]: Deliverables/Week%204/Retrospective%20Sprint%203.pdf
 [S4P]: Deliverables/Week%204/Backlog%20Sprint%204.pdf
+[S4R]: Deliverables/Week%204/Retrospective%20Sprint%204.pdf
+[S5P]: Deliverables/Week%204/Backlog%20Sprint%205.pdf
+[S5R]: Deliverables/Week%204/Retrospective%20Sprint%205.pdf
+[S6P]: Deliverables/Week%204/Backlog%20Sprint%206.pdf
