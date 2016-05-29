@@ -5,4 +5,25 @@ module tygronInit {
 		if true then insert(functions([])).
 		if true then insert(stakeholders([])).
 		if true then insert(buildings(none)).
+		if true then insert(lands([])).
+		if true then insert(requests([])).
+		
+		if true then insert(zone_links([])).
+		if true then insert(upgrade_types([])).
+		
+		forall percept(stakeholders(List)), 
+			bel(member(SubList, List), member(stakeholder(ID,Name,Budget,Income), SubList)) 
+			do insert(stakeholder(ID, Name,Budget,Income)).
+		
+		forall percept(stakeholders(List)), 
+			bel(member(SubList, List), member(indicatorLink(ID,Weights), SubList)) 
+			do insert(indicatorLink(ID,Weights)).
+		
+		forall percept(buildings(List)), 
+			bel(member(building(ID,Name,OwnerID,BuildYear,Categories,Floors),List))
+			do insert(building(ID,Name,OwnerID,BuildYear,Categories,Floors)).
+			
+		forall percept(indicators(List)), 
+			bel(member(indicator(ID,Value,Target),List))
+			do insert(indicator(ID,Value,Target)).
 }
