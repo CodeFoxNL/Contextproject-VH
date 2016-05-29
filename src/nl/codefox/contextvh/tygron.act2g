@@ -3,3 +3,33 @@ use dummy as knowledge.
 define	building_plan_construction(Id, Level, MultiPolygon) with
    pre{ true }
    post{ true }
+   
+ define map_sell_land(Buyer, Poly, Price) with 
+   pre{ true }
+   post{ true }
+  
+ define popup_answer(RequestID, AnswerID) with
+   pre{ true }
+   post{ true }
+   
+define BUILDING_PLAN_DEMOLISH(StakeholderId, BuildingID) with
+   pre{ true }
+   post{ true }
+
+define BUILDING_PLAN_DEMOLISH_POLYGON(StakeholderID, MultiPolygon, GroundType) with
+   pre{ true }
+   post{ true }
+    
+define BUILDING_REVERT_POLYGON(StakeholderID, MultiPoligon) with
+   pre{ true }
+   post{ true }
+    
+define MAP_BUY_LAND(StakeholderID, MultiPolygon, PricePerSquareMeter) with 
+   pre{ true }
+   post{ true }
+
+define MAP_SELL_LAND(StakeholderID, MultiPolygon, PricePerSquareMeter) with 
+   pre{ true }
+   post{ true }
+
+
