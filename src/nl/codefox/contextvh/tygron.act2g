@@ -11,7 +11,7 @@ define building_plan_upgrade(UpgradeID, MultiPolygon) with
   post{ true }
   
 % demolish a building
-define building_plan_demolish(StakeholderID, BuildingID) with
+define building_plan_demolish(BuildingID) with
    pre{ true }
    post{ true }
 
