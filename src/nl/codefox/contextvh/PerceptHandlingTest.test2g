@@ -1,0 +1,18 @@
+use Tygron as mas.
+use dummy as knowledge.
+use tygron as module.
+timeout = 5.
+
+test tygron with
+  pre{true}
+  in{
+  	%percept(indicators(List)), member(indicator(A,B,C), List) leadsto bel(indicator(A,B,C)).
+  	%true leadsto bel(stakeholder(_, "Pannenkoek", _, _))).
+  	always goal(p).
+  }
+  post{bel(indicator(1,2,4))}
+
+  tygron {
+    do helloWorld.
+  }
+  
