@@ -9,12 +9,12 @@
 :- dynamic soldLand/0.
 :- dynamic lands/1.
 
-:- dynamic indicator/3.
+:- dynamic indicator/4.
 :- dynamic indicatorLink/2.
 :- dynamic stakeholder/4.
 :- dynamic building/6.
 
-:- dynamic zone_links/1.
+:- dynamic zone_link/4.
 :- dynamic upgrade_types/1.
 
 % we have a building if the building list has at least 1 element.

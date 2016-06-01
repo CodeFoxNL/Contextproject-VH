@@ -10,7 +10,8 @@ module tygronInit {
 		
 		if true then insert(zone_links([])).
 		if true then insert(upgrade_types([])).
-		
+		if true then insert(zones([])).
+				
 		forall percept(stakeholders(List)), 
 			bel(member(SubList, List), member(stakeholder(ID,Name,Budget,Income), SubList), ID =:= 2) 
 			do insert(stakeholder(ID, Name,Budget,Income)).
@@ -24,6 +25,10 @@ module tygronInit {
 			do insert(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors)).
 			
 		forall percept(indicators(List)), 
-			bel(member(indicator(ID,Value,Target),List))
-			do insert(indicator(ID,Value,Target)).
+			bel(member(indicator(ID,Value,Target, ZoneLink),List))
+			do insert(indicator(ID,Value,Target, ZoneLink)).
+			
+		forall percept(zones(List)), 
+			bel(member(zone(ID,A,B,C,D),List))
+			do insert(zone(ID,A,B, C, D)).
 }

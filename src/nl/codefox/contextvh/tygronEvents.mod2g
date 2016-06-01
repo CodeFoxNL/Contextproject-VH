@@ -9,20 +9,20 @@ module tygronEvents {
 	if percept(lands(X)), bel(lands(Y)) then delete (lands(Y)) + insert(lands(X)).
 	if percept(requests(R)), bel(requests(O)) then delete(requests(O)) + insert(requests(R)).
 	if percept(zones(X)), bel(zones(Y)) then delete(zones(Y)) + insert(zones(X)).
-	if percept(zone_links(X)), bel(zone_links(Y)) then delete(zone_links(Y)) + insert(zone_links(X)).
 	if percept(upgrade_types(X)), bel(upgrade_types(Y)) then delete(upgrade_types(Y)) + insert(upgrade_types(X)).
 
-%Insert indicator/3 to beliefs when it is received as percept but is not already in the beliefs. 
+%Insert indicator/4 to beliefs when it is received as percept but is not already in the beliefs. 
 	forall percept(indicators(List)), 
-		bel(member(indicator(ID,Value,Target),List), not(indicator(ID,_,_)))
-		do insert(indicator(ID,Value,Target)).	
+		bel(member(indicator(ID,Value,Target, ZoneLink),List), not(indicator(ID,_,_,_)))
+		do insert(indicator(ID,Value,Target, ZoneLink)).	
 		
-%Update indicator/3 when another percept is received with similar ID but with other values. 			
+%Update indicator/4 when another percept is received with similar ID but with other values. 			
 	forall percept(indicators(List)), 
-		bel(indicator(ID,Value,Target), member(indicator(ID,OtherValue,OtherTarget),List), (Value \= OtherValue ; Target \= OtherTarget)) 
-		do delete(indicator(ID,Value,Target)) + 
-		insert(indicator(ID,OtherValue,OtherTarget)).
-		
+		bel(indicator(ID,Value,Target,ZoneLinks), member(indicator(ID,OtherValue,OtherTarget, OtherZoneLinks),List), (Value \= OtherValue ; Target \= OtherTarget; ZoneLinks \= OtherZoneLinks)) 
+		do delete(indicator(ID,Value,Target,ZoneLinks)) + 
+		insert(indicator(ID,OtherValue,OtherTarget, OtherZoneLinks)).
+
+
 %Insert building/7 to beliefs when it is received as percept but is not already in the beliefs.		
 	forall percept(buildings(List)), 
 		bel(member(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors),List), not(building(ID,_,_,_,_,_,_))) 
@@ -37,7 +37,7 @@ module tygronEvents {
 %Delete building/7 from beliefs when no percept is received with similar ID. 
 	forall percept(buildings(List)), 
 		bel(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,FunctionID,OtherFloors), 
-		not(member(building(ID,_,_,_,_,_),List))) 
+		not(member(building(ID,_,_,_,_,_,_),List))) 
 		do delete(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,FunctionID,OtherFloors)).
 
 }

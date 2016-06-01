@@ -3,10 +3,14 @@ use tygron as actionspec.
 use somegoal as goals.
 
 exit=nogoals.
-module helloWorld {
+module tygron {
 	% find a function to build a road (always 1 floor)
 	%if bel(functions(FS), member([Name,Id,L],FS), member('ROAD',L))
 		%then building_plan_construction(Id, 1, square(10,10,200,10)).
-	if true then exit-module .
+	forall bel(zones(List), indicator(Indicator,_,_,_), member(zone(Zone, _, _, _, _), List), needImprovement(Indicator, Zone)) do adopt(improvedZone(Indicator, Zone)).
+	
+%	if true then exit-module .
+	
+	
 
 }

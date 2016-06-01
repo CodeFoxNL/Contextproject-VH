@@ -14,9 +14,12 @@
 :- dynamic requests/1.
 
 :- dynamic indicatorLink/2.
-:- dynamic indicator/3.
+:- dynamic indicator/4.
 :- dynamic stakeholder/4.
 :- dynamic building/7.
+:- dynamic zone_link/4.
+:- dynamic zone/5.
+
 
 %%% Percepts for indicators that the agent uses
 % check with metrics what our agent needs (!)
@@ -36,4 +39,7 @@ havebuilding :- buildings([X|Y]).
 % the money we have in our cashstack
 budget(X) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', X, Income).
 
+
+needImprovement(IndicatorID, ZoneID) :- indicator(Id, Value, Target, ZoneLink), member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget), ZoneLink), CurrentValue < CurrentTarget.  
+improvedZone(IndicatorID, ZoneID) :- indicator(Id, Value, Target, ZoneLink), member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget), ZoneLink), CurrentValue >= CurrentTarget.
 
