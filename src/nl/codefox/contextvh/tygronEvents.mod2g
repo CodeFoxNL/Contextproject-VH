@@ -1,17 +1,16 @@
-use dummy as knowledge.
+use knowledgebase as knowledge.
 
 module tygronEvents {
 	%%%%% Percept Processing %%%%%
-
-
-	if percept(stakeholders(X)), bel(stakeholders(Y))  then  insert( stakeholders(X) ) + delete(stakeholders(Y)).
-	if percept(settings(X)), bel(settings(Y)) then insert(settings(X)) +delete(settings(Y)).
-	if percept(functions(X)), bel(functions(Y)) then insert(functions(X)) + delete(functions(Y)).
-	if percept(buildings(X)), bel(buildings(Y)) then insert(buildings(X))+delete(buildings(Y)).
+	if percept(stakeholders(X)), bel(stakeholders(Y))  then  delete( stakeholders(Y) ) + insert(stakeholders(X)).
+	if percept(settings(X)), bel(settings(Y)) then delete(settings(Y)) + insert(settings(X)).
+	if percept(functions(X)), bel(functions(Y)) then delete(functions(Y)) + insert(functions(X)).
+	if percept(buildings(X)), bel(buildings(Y)) then delete(buildings(Y))+ insert(buildings(X)).
 	if percept(lands(X)), bel(lands(Y)) then delete (lands(Y)) + insert(lands(X)).
 	if percept(requests(R)), bel(requests(O)) then delete(requests(O)) + insert(requests(R)).
-	if percept(zone_links(X)), bel(zone_links(Y)) then insert(zone_links(X)) + delete(zone_links(Y)).
-	if percept(upgrade_types(X)), bel(upgrade_types(Y)) then insert(upgrade_types(X)) + delete(upgrade_types(Y)).
+	if percept(zones(X)), bel(zones(Y)) then delete(zones(Y)) + insert(zones(X)).
+	if percept(zone_links(X)), bel(zone_links(Y)) then delete(zone_links(Y)) + insert(zone_links(X)).
+	if percept(upgrade_types(X)), bel(upgrade_types(Y)) then delete(upgrade_types(Y)) + insert(upgrade_types(X)).
 
 %Insert indicator/3 to beliefs when it is received as percept but is not already in the beliefs. 
 	forall percept(indicators(List)), 
@@ -20,25 +19,25 @@ module tygronEvents {
 		
 %Update indicator/3 when another percept is received with similar ID but with other values. 			
 	forall percept(indicators(List)), 
-		bel(indicator(ID,Value,Target), member(indicator(ID,OtherValue,OtherTarget),List)) 
+		bel(indicator(ID,Value,Target), member(indicator(ID,OtherValue,OtherTarget),List), (Value \= OtherValue ; Target \= OtherTarget)) 
 		do delete(indicator(ID,Value,Target)) + 
 		insert(indicator(ID,OtherValue,OtherTarget)).
 		
-%Insert building/6 to beliefs when it is received as percept but is not already in the beliefs.		
+%Insert building/7 to beliefs when it is received as percept but is not already in the beliefs.		
 	forall percept(buildings(List)), 
-		bel(member(building(ID,Name,OwnerID,BuildYear,Categories,Floors),List), not(building(ID,_,_,_,_,_))) 
-		do insert(building(ID,Name,OwnerID,BuildYear,Categories,Floors)).
+		bel(member(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors),List), not(building(ID,_,_,_,_,_,_))) 
+		do insert(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors)).
 
-%Update building/6 when another percept is received with similar ID but with other values.
+%Update building/7 when another percept is received with similar ID but with other values.
 	forall percept(buildings(List)), 
-		bel(building(ID,Name,OwnerID,BuildYear,Categories,Floors), member(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,OtherFloors),List)) 
-		do delete(building(ID,Name,OwnerID,BuildYear,Categories,Floors)) + 
-		insert(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,OtherFloors)).
+		bel(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors), member(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,OtherFunctionID,OtherFloors),List), (OwnerID \= OtherOwnerID ; Name \= OtherName; BuildYear \= OtherBuildYear; Categories \= OtherCategories; Floors \= OtherFloors; FunctionID \= OtherFunctionID)) 
+		do delete(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors)) + 
+		insert(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,OtherFunctionID,OtherFloors)).
 
-%Delete building/6 from beliefs when no percept is received with similar ID. 
+%Delete building/7 from beliefs when no percept is received with similar ID. 
 	forall percept(buildings(List)), 
-		bel(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,OtherFloors), 
+		bel(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,FunctionID,OtherFloors), 
 		not(member(building(ID,_,_,_,_,_),List))) 
-		do delete(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,OtherFloors)).
+		do delete(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,FunctionID,OtherFloors)).
 
 }

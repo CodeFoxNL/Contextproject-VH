@@ -1,4 +1,4 @@
-use dummy as beliefs.
+use knowledgebase as beliefs.
 
 module tygronInit {
 		if true then insert(settings([])).
@@ -20,8 +20,8 @@ module tygronInit {
 			do insert(indicatorLink(ID,Weights)).
 		
 		forall percept(buildings(List)), 
-			bel(member(building(ID,Name,OwnerID,BuildYear,Categories,Floors),List))
-			do insert(building(ID,Name,OwnerID,BuildYear,Categories,Floors)).
+			bel(member(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors),List))
+			do insert(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors)).
 			
 		forall percept(indicators(List)), 
 			bel(member(indicator(ID,Value,Target),List))
