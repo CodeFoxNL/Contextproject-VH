@@ -39,6 +39,7 @@ havebuilding :- buildings([X|Y]).
 % the money we have in our cashstack
 budget(X) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', X, Income).
 
+ownedBuilding(BuildingID) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers',_,_), building(_,_,OwnerID,_,_,_,_), OwnerID = StakeholderID. 
 
 needImprovement(IndicatorID, ZoneID) :- indicator(Id, Value, Target, ZoneLink), member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget), ZoneLink), CurrentValue < CurrentTarget.  
 improvedZone(IndicatorID, ZoneID) :- indicator(Id, Value, Target, ZoneLink), member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget), ZoneLink), CurrentValue >= CurrentTarget.

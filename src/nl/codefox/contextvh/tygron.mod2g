@@ -3,11 +3,17 @@ use tygron as actionspec.
 use somegoal as goals.
 
 exit=nogoals.
+order = linearall.
 module tygron {
 	% find a function to build a road (always 1 floor)
 	%if bel(functions(FS), member([Name,Id,L],FS), member('ROAD',L))
 		%then building_plan_construction(Id, 1, square(10,10,200,10)).
 	forall bel(zones(List), indicator(Indicator,_,_,_), member(zone(Zone, _, _, _, _), List), needImprovement(Indicator, Zone)) do adopt(improvedZone(Indicator, Zone)).
+	if percept(functions([Head|FS])) then  print(Head).
+	if percept(settings([Head|FS])) then  print(Head).
+	if percept(lands([Head|FS])) then  print(Head).
+	if percept(zones([Head|FS])) then  print(Head).
+	if percept(upgrade_types([Head|FS])) then  print(Head).
 	
 %	if true then exit-module .
 	
