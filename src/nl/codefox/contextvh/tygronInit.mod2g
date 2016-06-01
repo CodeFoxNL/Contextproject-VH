@@ -12,11 +12,11 @@ module tygronInit {
 		if true then insert(upgrade_types([])).
 		
 		forall percept(stakeholders(List)), 
-			bel(member(SubList, List), member(stakeholder(ID,Name,Budget,Income), SubList)) 
+			bel(member(SubList, List), member(stakeholder(ID,Name,Budget,Income), SubList), ID =:= 2) 
 			do insert(stakeholder(ID, Name,Budget,Income)).
 		
 		forall percept(stakeholders(List)), 
-			bel(member(SubList, List), member(indicatorLink(ID,Weights), SubList)) 
+			bel(member(SubList, List), member(indicatorLink(ID,Weights), SubList), stakeholder(SID,_,_,_), SID =:= ID) 
 			do insert(indicatorLink(ID,Weights)).
 		
 		forall percept(buildings(List)), 
