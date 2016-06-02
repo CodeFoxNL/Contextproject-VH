@@ -1,7 +1,7 @@
 use knowledgebase as knowledge.
 use tygron as actionspec.
 use demolish as module.
-use build as module.
+use construct as module.
 
 exit=always.
 
