@@ -5,7 +5,7 @@ use sellLand as module.
 use construct as module.
 use demolish as module.
 use upgrade as module.
-use somegoal as goals.
+%use somegoal as goals.
 
 exit=nogoals.
 order = linearall.
