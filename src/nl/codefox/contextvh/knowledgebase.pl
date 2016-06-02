@@ -18,7 +18,7 @@
 :- dynamic indicator/4.
 :- dynamic stakeholder/4.
 :- dynamic zone_link/4.
-:- dynamic building/7.
+:- dynamic building/8.
 :- dynamic zone/5.
 
 %%% Knowledge
@@ -36,7 +36,7 @@ myStakeholderID(StakeholderID) :- stakeholder(StakeholderID, 'Private_Woningbouw
 budget(Money) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', Money, Income).
 
 % check if our agent owns a building
-ownedBuilding(BuildingID) :- building(BuildingID,_,OwnerID,_,_,_,_), OwnerID = myStakeholderID(StakeholderID). 
+ownedBuilding(BuildingID) :- building(BuildingID,_,OwnerID,_,_,_,_,_), OwnerID = myStakeholderID(StakeholderID). 
 % check if a building is ours
 mine(building(_,_,myStakeholderID(StakeholderID),_,_,_,_,_)).
 % generates list of all buildings that the agent owns

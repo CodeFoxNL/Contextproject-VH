@@ -25,8 +25,8 @@ module tygronInit {
 			do insert(indicatorLink(ID,Weights)).
 		
 		forall percept(buildings(List)), 
-			bel(member(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors),List))
-			do insert(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors)).
+			bel(member(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors, MultiPolygon),List))
+			do insert(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors, MultiPolygon)).
 			
 		forall percept(indicators(List)), 
 			bel(member(indicator(ID,Value,Target, ZoneLink),List))

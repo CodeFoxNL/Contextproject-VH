@@ -24,7 +24,7 @@ module tygron {
 		do adopt(improveZone(Indicator, Zone)).
 		
 	% Example of a building we will demolish
-	if bel(building(BuildingId,'Prof. Henketstraat 48-80',_,_,_,_,_)) then adopt( demolishBuilding(BuildingId)).
+	if bel(building(BuildingId,'Prof. Henketstraat 48-80',_,_,_,_,_,_)) then adopt( demolishBuilding(BuildingId)).
 	
 	forall bel(lands(List), member(land(LandID, OwnerID, MultiPoly), List), landOfOthers(MultiPoly), not(doneBuying(MultiPoly))) 
 		do adopt(doneBuying(MultiPoly)).	
