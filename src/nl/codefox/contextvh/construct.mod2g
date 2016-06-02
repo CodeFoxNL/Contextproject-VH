@@ -6,7 +6,13 @@ order=linearall.
 % The constructing module
 module construct(MultiPoly) {
 	
-if bel(functions(FunctionList), member(['hedendaagse middenklasse appartementen',FunctionId,List],FunctionList))
-				then building_plan_construction(FunctionId, 3, MultiPoly) + delete(emptyPoly(MultiPoly)) + insert(buildOn(MultiPoly)).
+% construct a building on an empty multipolygon that we own
+if bel(functions(FunctionList), ourID(OurID), member(['hedendaagse middenklasse appartementen', FunctionId, List], FunctionList))
+	then building_plan_construction(FunctionId, OurID, MultiPoly) + delete(emptyPoly(MultiPoly)) + insert(buildOn(MultiPoly)).
+
+% Types of buildings that we want to build according to the wikipedia of Tygron: 
+% Affordable Housing, Market Housing, Senior Housing, Top Market Housing
+
+if true then exit-module.
 
 }
