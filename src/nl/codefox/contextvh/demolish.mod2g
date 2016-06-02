@@ -1,0 +1,12 @@
+use knowledgebase as knowledge.
+use tygron as actionspec.
+
+exit=always.
+
+% The demolish module
+module demolish(BuildingID) {
+	if 
+		bel(ownedBuilding(BuildingID), buildings(BS), member(building(BuildingID,_,_,_), BS))
+	then 
+		building_plan_demolish(BuildingID).
+}

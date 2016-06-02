@@ -1,22 +1,39 @@
 use knowledgebase as knowledge.
 use tygron as actionspec.
-use somegoal as goals.
+%use buyLand as module.
+%use sellLand as module.
+%use construct as module.
+use demolish as module.
+%use upgrade as module.
+%use somegoal as goals.
 
 exit=nogoals.
 order = linearall.
+
+% The main module
 module tygron {
-	% find a function to build a road (always 1 floor)
-	%if bel(functions(FS), member([Name,Id,L],FS), member('ROAD',L))
-		%then building_plan_construction(Id, 1, square(10,10,200,10)).
-	forall bel(zones(List), indicator(Indicator,_,_,_), member(zone(Zone, _, _, _, _), List), needImprovement(Indicator, Zone)) do adopt(improvedZone(Indicator, Zone)).
+	
+	% achieve current goals
+	%if goal (buyLand) then buyLand.
+	%if goal (sellLand) then sellLand.
+	%if goal (constructBuilding) then construct.
+	if goal (demolishBuilding(BuildingID)) then demolish(BuildingID).
+	%if goal (improveZone(Indicator, Zone)) then upgrade(Zone).
+		
+	forall bel(zones(List), indicator(Indicator,_,_,_), member(zone(Zone, _, _, _, _), List), needImprovement(Indicator, Zone)) 
+		do adopt(improveZone(Indicator, Zone)).
+		
 	if percept(functions([Head|FS])) then  print(Head).
 	if percept(settings([Head|FS])) then  print(Head).
 	if percept(lands([Head|FS])) then  print(Head).
 	if percept(zones([Head|FS])) then  print(Head).
 	if percept(upgrade_types([Head|FS])) then  print(Head).
 	
+	%%% from example agent
+	% find a function to build a road (always 1 floor)
+	%if bel(functions(FS), member([Name,Id,L],FS), member('ROAD',L))
+		%then building_plan_construction(Id, 1, square(10,10,200,10)).
+	
 %	if true then exit-module .
-	
-	
 
 }

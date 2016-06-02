@@ -1,0 +1,13 @@
+use knowledgebase as knowledge.
+use tygron as actionspec.
+use demolish as module.
+use build as module.
+
+exit=always.
+
+% The upgrading module
+module upgrade {
+
+% Find a building in the zone that we can improve by demolishing it and building a newer, better building.
+
+}

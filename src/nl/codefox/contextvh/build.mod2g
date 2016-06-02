@@ -1,0 +1,9 @@
+use knowledgebase as knowledge.
+use tygron as actionspec.
+
+exit=always.
+
+% The building module
+module build {
+
+}
