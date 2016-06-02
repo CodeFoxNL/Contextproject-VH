@@ -13,7 +13,7 @@
 % others
 :- dynamic offeredLand/0.
 :- dynamic soldLand/0.
-:- dynamic upgrade_types/1.
+:- dynamic upgrade_type/3.
 :- dynamic indicatorLink/2.
 :- dynamic indicator/4.
 :- dynamic stakeholder/4.
@@ -23,6 +23,7 @@
 
 %%% Knowledge
 :- dynamic demolished/1.
+:- dynamic upgraded/1.
 :- dynamic improvedZone/1.
 :- dynamic myBuildingList/1.
 
@@ -30,6 +31,7 @@
 
 % Goals that can be adopted
 demolishBuilding(BuildingID) :- demolished(BuildingID).
+upgradeBuilding(UpgradeID, MultiPolygon) :- upgraded(MultiPolygon).
 improveZone(IndicatorID, ZoneID) :- improvedZone(IndicatorID, ZoneID).
 
 % the ID of our agent

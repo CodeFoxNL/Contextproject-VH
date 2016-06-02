@@ -14,10 +14,13 @@ module tygronEvents {
 	
 	% not yet perceived from environment
 	%if percept(upgrade_types(X)), bel(upgrade_types(Y)) then delete(upgrade_types(Y)) + insert(upgrade_types(X)).
-
+	forall percept(upgrade_types(List)),
+		bel(member(upgrade_type(UpgradeID, SourceID, TargetID), List), not(upgrade_type(UpgradeID,_,_)))
+		do insert(upgrade_type(UpgradeID, SourceID, TargetID)).
+	
 	% insert indicator/4 to beliefs when it is received as percept but is not already in the beliefs. 
 	forall percept(indicators(List)), 
-		bel(member(indicator(ID,Value,Target, ZoneLink),List), not(indicator(ID,_,_,_)))
+		bel(member(indicator(ID,Value,Target, ZoneLink), List), not(indicator(ID,_,_,_)))
 		do insert(indicator(ID,Value,Target, ZoneLink)).	
 		
 	% update indicator/4 when another percept is received with similar ID but with other values. 			
