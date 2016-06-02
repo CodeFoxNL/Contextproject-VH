@@ -1,11 +1,11 @@
 use knowledgebase as knowledge.
 use tygron as actionspec.
-%use buyLand as module.
-%use sellLand as module.
-%use construct as module.
+use buyLand as module.
+use sellLand as module.
+use construct as module.
 use demolish as module.
-%use upgrade as module.
-%use somegoal as goals.
+use upgrade as module.
+use somegoal as goals.
 
 exit=nogoals.
 order = linearall.
@@ -23,6 +23,7 @@ module tygron {
 	forall bel(zones(List), indicator(Indicator,_,_,_), member(zone(Zone, _, _, _, _), List), needImprovement(Indicator, Zone)) 
 		do adopt(improveZone(Indicator, Zone)).
 		
+	% Example of a building we will demolish
 	if bel(building(BuildingId,'Prof. Henketstraat 48-80',_,_,_,_,_)) then adopt( demolishBuilding(BuildingId)).
 	
 	if percept(functions([Head|FS])) then  print(Head).

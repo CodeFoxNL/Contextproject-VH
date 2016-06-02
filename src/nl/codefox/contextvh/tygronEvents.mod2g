@@ -7,37 +7,43 @@ module tygronEvents {
 	if percept(functions(X)), bel(functions(Y)) then delete(functions(Y)) + insert(functions(X)).
 	if percept(buildings(X)), bel(buildings(Y)) then delete(buildings(Y))+ insert(buildings(X)).
 	if percept(lands(X)), bel(lands(Y)) then delete (lands(Y)) + insert(lands(X)).
-	if percept(requests(R)), bel(requests(O)) then delete(requests(O)) + insert(requests(R)).
 	if percept(zones(X)), bel(zones(Y)) then delete(zones(Y)) + insert(zones(X)).
-	if percept(upgrade_types(X)), bel(upgrade_types(Y)) then delete(upgrade_types(Y)) + insert(upgrade_types(X)).
+	if percept(indicators(X)), bel(indicators(Y)) then delete(indicators(Y)) + insert(indicators(X)).
+	if percept(actions(X)), bel(actions(Y)) then delete(actions(X)) + insert(actions(Y)).
+	if percept(requests(R)), bel(requests(O)) then delete(requests(O)) + insert(requests(R)).
+	
+	% not yet perceived from environment
+	%if percept(upgrade_types(X)), bel(upgrade_types(Y)) then delete(upgrade_types(Y)) + insert(upgrade_types(X)).
 
-%Insert indicator/4 to beliefs when it is received as percept but is not already in the beliefs. 
+	% insert indicator/4 to beliefs when it is received as percept but is not already in the beliefs. 
 	forall percept(indicators(List)), 
 		bel(member(indicator(ID,Value,Target, ZoneLink),List), not(indicator(ID,_,_,_)))
 		do insert(indicator(ID,Value,Target, ZoneLink)).	
 		
-%Update indicator/4 when another percept is received with similar ID but with other values. 			
+	% update indicator/4 when another percept is received with similar ID but with other values. 			
 	forall percept(indicators(List)), 
 		bel(indicator(ID,Value,Target,ZoneLinks), member(indicator(ID,OtherValue,OtherTarget, OtherZoneLinks),List), (Value \= OtherValue ; Target \= OtherTarget; ZoneLinks \= OtherZoneLinks)) 
 		do delete(indicator(ID,Value,Target,ZoneLinks)) + 
 		insert(indicator(ID,OtherValue,OtherTarget, OtherZoneLinks)).
 
-
-%Insert building/7 to beliefs when it is received as percept but is not already in the beliefs.		
+	% insert building/7 to beliefs when it is received as percept but is not already in the beliefs.		
 	forall percept(buildings(List)), 
 		bel(member(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors),List), not(building(ID,_,_,_,_,_,_))) 
 		do insert(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors)).
 
-%Update building/7 when another percept is received with similar ID but with other values.
+	% update building/7 when another percept is received with similar ID but with other values.
 	forall percept(buildings(List)), 
 		bel(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors), member(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,OtherFunctionID,OtherFloors),List), (OwnerID \= OtherOwnerID ; Name \= OtherName; BuildYear \= OtherBuildYear; Categories \= OtherCategories; Floors \= OtherFloors; FunctionID \= OtherFunctionID)) 
 		do delete(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors)) + 
 		insert(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,OtherFunctionID,OtherFloors)).
-
-%Delete building/7 from beliefs when no percept is received with similar ID. 
+	
+	% delete building/7 from beliefs when no percept is received with similar ID. 
 	forall percept(buildings(List)), 
 		bel(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,FunctionID,OtherFloors), 
 		not(member(building(ID,_,_,_,_,_,_),List))) 
 		do delete(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,FunctionID,OtherFloors)).
+		
+	% insert my buildings
+	if bel(myBuildingList([]), buildings(List), myBuildings(MyBuildings, List)) then delete(myBuildingList([])) + insert(myBuildingList(MyBuildings)).
 
 }
