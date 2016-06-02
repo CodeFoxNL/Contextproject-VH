@@ -20,6 +20,7 @@
 :- dynamic zone_link/4.
 :- dynamic building/8.
 :- dynamic zone/5.
+:- dynamic actionlog/4.
 
 %%% Knowledge
 :- dynamic demolished/1.
@@ -28,6 +29,7 @@
 :- dynamic myBuildingList/1.
 
 :- dynamic emptyPoly/1.
+:- dynamic buildOn/1. 
 
 % Goals that can be adopted
 demolishBuilding(BuildingID) :- demolished(BuildingID).

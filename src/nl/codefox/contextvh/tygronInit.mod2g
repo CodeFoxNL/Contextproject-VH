@@ -8,14 +8,12 @@ module tygronInit {
 		if true then insert(lands([])).
 		if true then insert(zones([])).
 		if true then insert(actions([])).
-		if true then insert(requests([])).
 		if true then insert(indicators([])).
-		%if true then insert(zone_links([])).
 		%if true then insert(upgrade_types([])).
 		
 		% agent has no buildings until the myBuildingList is generated
 		if true then insert(myBuildingList([])).
-				
+		
 		forall percept(stakeholders(List)), 
 			bel(member(SubList, List), member(stakeholder(ID,Name,Budget,Income), SubList)) 
 			do insert(stakeholder(ID, Name,Budget,Income)).

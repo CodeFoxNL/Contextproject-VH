@@ -2,7 +2,7 @@ use knowledgebase as knowledge.
 use tygron as actionspec.
 
 exit=always.
-
+order=linearall.
 % The buying land module
 module buyLand(MultiPoly) {
 	

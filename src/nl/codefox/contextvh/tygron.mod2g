@@ -19,7 +19,10 @@ module tygron {
 	
 	if goal (demolishBuilding(BuildingID)) then demolish(BuildingID).	
 	if goal (doneBuying(MultiPoly)) then buyLand(MultiPoly).
+
 	if goal (upgradeBuilding(UpgradeID, MultiPolygon)) then upgrade(UpgradeID, MultiPolygon).
+
+	if goal(buildOn(MultiPoly)) then construct(MultiPoly). 
 		
 	forall bel(zones(List), indicator(Indicator,_,_,_), member(zone(Zone, _, _, _, _), List), needImprovement(Indicator, Zone)) 
 		do adopt(improveZone(Indicator, Zone)).
@@ -30,10 +33,6 @@ module tygron {
 	forall bel(lands(List), member(land(LandID, OwnerID, MultiPoly), List), landOfOthers(MultiPoly), not(doneBuying(MultiPoly))) 
 		do adopt(doneBuying(MultiPoly)).	
 	
-	if percept(functions([Head|FS])) then  print(Head).
-	if percept(settings([Head|FS])) then  print(Head).
-	if percept(lands([Head|FS])) then  print(Head).
-	if percept(zones([Head|FS])) then  print(Head).
-	if percept(upgrade_types([Head|FS])) then  print(Head).
+	forall bel(emptyPoly(MultiPoly)) do adopt(buildOn(MultiPoly)).
 	
 }

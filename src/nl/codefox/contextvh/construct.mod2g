@@ -2,8 +2,11 @@ use knowledgebase as knowledge.
 use tygron as actionspec.
 
 exit=always.
-
+order=linearall.
 % The constructing module
-module construct {
-if true then exit-module.
+module construct(MultiPoly) {
+	
+if bel(functions(FunctionList), member(['hedendaagse middenklasse appartementen',FunctionId,List],FunctionList))
+				then building_plan_construction(FunctionId, 3, MultiPoly) + delete(emptyPoly(MultiPoly)) + insert(buildOn(MultiPoly)).
+
 }

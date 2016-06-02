@@ -10,7 +10,7 @@ module tygronEvents {
 	if percept(zones(X)), bel(zones(Y)) then delete(zones(Y)) + insert(zones(X)).
 	if percept(indicators(X)), bel(indicators(Y)) then delete(indicators(Y)) + insert(indicators(X)).
 	if percept(actions(X)), bel(actions(Y)) then delete(actions(X)) + insert(actions(Y)).
-	if percept(requests(R)), bel(requests(O)) then delete(requests(O)) + insert(requests(R)).
+	
 	
 	% not yet perceived from environment
 	%if percept(upgrade_types(X)), bel(upgrade_types(Y)) then delete(upgrade_types(Y)) + insert(upgrade_types(X)).
@@ -47,6 +47,15 @@ module tygronEvents {
 		not(member(building(ID,_,_,_,_,_,_,_),List))) 
 		do delete(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,FunctionID,OtherFloors,OtherMultiPolygon)).
 		
+	forall percept(actionlog(StakeholderID, ActionLog, LogId, ParameterList)),
+		bel(not(actionlog(StakeholderID, ActionLog, LogId, ParameterList)))
+		do insert(actionlog(StakeholderID, ActionLog, LogId, ParameterList)).
+		
+	%forall percept(actionlog(StakeholderID, ActionLog, LogId, ParameterList)),
+		%bel(actionlog(StakeholderID, OtherActionLog, OtherLogId, OtherParameterList))
+		%do delete( actionlog(StakeholderID, OtherActionLog, OtherLogId, OtherParameterList)) +
+		%insert(actionlog(StakeholderID, ActionLog, LogId, ParameterList)).
+				
 	% insert my buildings
 	if bel(myBuildingList([]), buildings(List), myBuildings(MyBuildings, List)) then delete(myBuildingList([])) + insert(myBuildingList(MyBuildings)).
 
