@@ -31,15 +31,20 @@
 :- dynamic emptyPoly/1.
 :- dynamic buildOn/1. 
 
+:- dynamic requestedLand/2.
+:- dynamic offeredLand/2.
+
 % Goals that can be adopted
 demolishBuilding(BuildingID) :- demolished(BuildingID).
 upgradeBuilding(UpgradeID, MultiPolygon) :- upgraded(MultiPolygon).
 improveZone(IndicatorID, ZoneID) :- improvedZone(IndicatorID, ZoneID).
 
-% the ID of our agent
-myStakeholderID(StakeholderID) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', Money, Income).
-% the money we have in our cashstack
-budget(Money) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', Money, Income).
+% we achieve these goals when we have tried 3 times or when we actually bought or sold land.
+doneBuying(MultiPoly) :- (requestedLand(MultiPoly, A), A >= 3) ; ourLand(MultiPoly).
+doneSelling(MultiPoly) :- (offeredLand(MultiPoly, A), A >= 3); landOfOthers(MultiPoly).
+
+% we have a building if the building list has at least 1 element.
+%havebuilding :- buildings([X|Y]).
 
 % check if our agent owns a building
 ownedBuilding(BuildingID) :- building(BuildingID,_,OwnerID,_,_,_,_,_), OwnerID = myStakeholderID(StakeholderID). 
@@ -48,20 +53,14 @@ mine(building(_,_,myStakeholderID(StakeholderID),_,_,_,_,_)).
 % generates list of all buildings that the agent owns
 myBuildings(MyBuildings, List):- findall(Building, (member(Building, List), mine(Building)), Members), sort(Members, MyBuildings).
 
-:- dynamic requestedLand/2.
-
-% we have a building if the building list has at least 1 element.
-%havebuilding :- buildings([X|Y]).
-
-% the money we have in our cashstack
+% predicates for information about our stakeholder: budget and ID
 budget(X) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', X, Income).
+ourID(StakeholderID) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', Money, Income).
+notOurID(StakeholderID) :- stakeholder(StakeholderID, _, _, _), not(ourID(StakeholderID)).
 
-ourID(StakeholderID) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers',_,_).
-
+% predicates to determine if land on the map is ours or others
 landOfOthers(MultiPoly) :- lands(List), member(land(LandID, stakeholder(OwnerID,_,_,_), MultiPoly), List), not(ourID(OwnerID)).
 ourLand(MultiPoly) :- lands(List), member(land(LandID, stakeholder(OwnerID,_,_,_), MultiPoly), List), ourID(OwnerID).
-
-doneBuying(MultiPoly) :- (requestedLand(MultiPoly, A), A >= 3) ; ourLand(MultiPoly).
 
 % determine when a zone needs to be improved and on what aspect
 needImprovement(IndicatorID, ZoneID) :- indicator(Id, Value, Target, ZoneLink), member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget), ZoneLink), CurrentValue < CurrentTarget.  

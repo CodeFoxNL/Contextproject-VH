@@ -6,12 +6,12 @@ order=linearall.
 % The buying land module
 module buyLand(MultiPoly) {
 	
-	if bel(landOfOthers(MultiPoly ), requestedLand(MultiPoly, A), B is A + 1, X is B * 150 + 100) 
+	if bel(landOfOthers(MultiPoly), requestedLand(MultiPoly, A), B is A + 1, X is B * 150 + 100) 
 		then map_buy_land(MultiPoly, X) + 
 		delete(requestedLand(MultiPoly, A)) + 
 		insert(requestedLand(MultiPoly, B)).
 	
-	if bel(landOfOthers(MultiPoly ), not(requestedLand(MultiPoly, A))) 
+	if bel(landOfOthers(MultiPoly), not(requestedLand(MultiPoly, A))) 
 		then map_buy_land(MultiPoly, 250) + 
 		insert(requestedLand(MultiPoly, 1)).
 	
