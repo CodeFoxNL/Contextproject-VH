@@ -26,6 +26,8 @@
 :- dynamic improvedZone/1.
 :- dynamic myBuildingList/1.
 
+:- dynamic emptyPoly/1.
+
 % Goals that can be adopted
 demolishBuilding(BuildingID) :- demolished(BuildingID).
 improveZone(IndicatorID, ZoneID) :- improvedZone(IndicatorID, ZoneID).

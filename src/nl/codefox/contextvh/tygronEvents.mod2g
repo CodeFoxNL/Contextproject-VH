@@ -26,18 +26,19 @@ module tygronEvents {
 		do delete(indicator(ID,Value,Target,ZoneLinks)) + 
 		insert(indicator(ID,OtherValue,OtherTarget, OtherZoneLinks)).
 
-	% insert building/7 to beliefs when it is received as percept but is not already in the beliefs.		
+	% insert building/8 to beliefs when it is received as percept but is not already in the beliefs.		
 	forall percept(buildings(List)), 
 		bel(member(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPolygon),List), not(building(ID,_,_,_,_,_,_,_))) 
 		do insert(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPolygon)).
 
-	% update building/7 when another percept is received with similar ID but with other values.
+	% update building/8 when another percept is received with similar ID but with other values.
 	forall percept(buildings(List)), 
-		bel(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPolygon), member(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,OtherFunctionID,OtherFloors,OtherMultiPolygon),List), (OwnerID \= OtherOwnerID ; Name \= OtherName; BuildYear \= OtherBuildYear; Categories \= OtherCategories; Floors \= OtherFloors; FunctionID \= OtherFunctionID; MultiPolygon\=OtherMultiPolygon)) 
-		do delete(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors, MultiPolygon)) + 
-		insert(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,OtherFunctionID,OtherFloors, OtherMultiPolygon)).
+		bel(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPolygon), member(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,OtherFunctionID,OtherFloors,OtherMultiPolygon),List), 
+		(OwnerID \= OtherOwnerID ; Name \= OtherName; BuildYear \= OtherBuildYear; Categories \= OtherCategories; Floors \= OtherFloors; FunctionID \= OtherFunctionID; MultiPolygon \= OtherMultiPolygon)) 
+		do delete(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPolygon)) + 
+		insert(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,OtherFunctionID,OtherFloors,OtherMultiPolygon)).
 	
-	% delete building/7 from beliefs when no percept is received with similar ID. 
+	% delete building/8 from beliefs when no percept is received with similar ID. 
 	forall percept(buildings(List)), 
 		bel(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,FunctionID,OtherFloors,OtherMultiPolygon), 
 		not(member(building(ID,_,_,_,_,_,_,_),List))) 
