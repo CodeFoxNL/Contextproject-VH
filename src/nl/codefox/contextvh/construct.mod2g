@@ -5,5 +5,5 @@ exit=always.
 
 % The constructing module
 module construct {
-
+if true then exit-module.
 }

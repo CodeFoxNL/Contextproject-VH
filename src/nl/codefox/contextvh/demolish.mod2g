@@ -6,7 +6,7 @@ exit=always.
 % The demolish module
 module demolish(BuildingID) {
 	if 
-		bel(ownedBuilding(BuildingID), buildings(BS), member(building(BuildingID,_,_,_), BS))
+		bel(ownedBuilding(BuildingID))
 	then 
-		building_plan_demolish(BuildingID).
+		building_plan_demolish(BuildingID) + insert(demolished(BuildingID)).
 }

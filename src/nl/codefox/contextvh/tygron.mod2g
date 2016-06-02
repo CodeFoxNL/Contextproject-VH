@@ -23,6 +23,8 @@ module tygron {
 	forall bel(zones(List), indicator(Indicator,_,_,_), member(zone(Zone, _, _, _, _), List), needImprovement(Indicator, Zone)) 
 		do adopt(improveZone(Indicator, Zone)).
 		
+	if bel(building(BuildingId,'Prof. Henketstraat 48-80',_,_,_,_,_)) then adopt( demolishBuilding(BuildingId)).
+	
 	if percept(functions([Head|FS])) then  print(Head).
 	if percept(settings([Head|FS])) then  print(Head).
 	if percept(lands([Head|FS])) then  print(Head).
