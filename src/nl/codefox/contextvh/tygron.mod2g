@@ -14,11 +14,11 @@ order = linearall.
 module tygron {
 	
 	% achieve current goals
-	%if goal (buyLand) then buyLand.
-	%if goal (sellLand) then sellLand.
 	%if goal (constructBuilding) then construct.
-	if goal (demolishBuilding(BuildingID)) then demolish(BuildingID).
 	%if goal (improveZone(Indicator, Zone)) then upgrade(Zone).
+	
+	if goal (demolishBuilding(BuildingID)) then demolish(BuildingID).	
+	if goal (doneBuying(MultiPoly)) then buyLand(MultiPoly).
 		
 	forall bel(zones(List), indicator(Indicator,_,_,_), member(zone(Zone, _, _, _, _), List), needImprovement(Indicator, Zone)) 
 		do adopt(improveZone(Indicator, Zone)).
@@ -26,17 +26,13 @@ module tygron {
 	% Example of a building we will demolish
 	if bel(building(BuildingId,'Prof. Henketstraat 48-80',_,_,_,_,_)) then adopt( demolishBuilding(BuildingId)).
 	
+	forall bel(lands(List), member(land(LandID, OwnerID, MultiPoly), List), landOfOthers(MultiPoly), not(doneBuying(MultiPoly))) 
+		do adopt(doneBuying(MultiPoly)).	
+	
 	if percept(functions([Head|FS])) then  print(Head).
 	if percept(settings([Head|FS])) then  print(Head).
 	if percept(lands([Head|FS])) then  print(Head).
 	if percept(zones([Head|FS])) then  print(Head).
 	if percept(upgrade_types([Head|FS])) then  print(Head).
 	
-	%%% from example agent
-	% find a function to build a road (always 1 floor)
-	%if bel(functions(FS), member([Name,Id,L],FS), member('ROAD',L))
-		%then building_plan_construction(Id, 1, square(10,10,200,10)).
-	
-%	if true then exit-module .
-
 }

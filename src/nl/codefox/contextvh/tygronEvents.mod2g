@@ -3,7 +3,7 @@ use knowledgebase as knowledge.
 module tygronEvents {
 	%%%%% Percept Processing %%%%%
 	if percept(stakeholders(X)), bel(stakeholders(Y))  then  delete( stakeholders(Y) ) + insert(stakeholders(X)).
-	if percept(settings(X)), bel(settings(Y)) then delete(settings(Y)) + insert(settings(X)).
+	if percept(settings(X)), bel(settings(Y), X \= Y) then delete(settings(Y)) + insert(settings(X)).
 	if percept(functions(X)), bel(functions(Y)) then delete(functions(Y)) + insert(functions(X)).
 	if percept(buildings(X)), bel(buildings(Y)) then delete(buildings(Y))+ insert(buildings(X)).
 	if percept(lands(X)), bel(lands(Y)) then delete (lands(Y)) + insert(lands(X)).

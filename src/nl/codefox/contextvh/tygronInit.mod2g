@@ -17,7 +17,7 @@ module tygronInit {
 		if true then insert(myBuildingList([])).
 				
 		forall percept(stakeholders(List)), 
-			bel(member(SubList, List), member(stakeholder(ID,Name,Budget,Income), SubList), ID =:= 2) 
+			bel(member(SubList, List), member(stakeholder(ID,Name,Budget,Income), SubList)) 
 			do insert(stakeholder(ID, Name,Budget,Income)).
 		
 		forall percept(stakeholders(List)), 

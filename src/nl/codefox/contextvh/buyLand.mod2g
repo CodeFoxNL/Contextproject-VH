@@ -4,8 +4,15 @@ use tygron as actionspec.
 exit=always.
 
 % The buying land module
-module buyLand {
-	% we do not know what kind of land is available so we will need to hardcode a location
-	%if true then map_buy_land(square(a, b, c, d), 100).
-	if true then exit-module.
-}
+module buyLand(MultiPoly) {
+	
+	if bel(landOfOthers(MultiPoly ), requestedLand(MultiPoly, A), X is (A + 1) * 150 + 100) 
+		then map_buy_land(MultiPoly, X) + 
+		delete(requestedLand(MultiPoly, A)) + 
+		insert(requestedLand(MultiPoly, A + 1)).
+	
+	if bel(landOfOthers(MultiPoly ), not(requestedLand(MultiPoly, A))) 
+		then map_buy_land(MultiPoly, 250) + 
+		insert(requestedLand(MultiPoly, 1)).
+	
+	}

@@ -42,6 +42,21 @@ mine(building(_,_,myStakeholderID(StakeholderID),_,_,_,_,_)).
 % generates list of all buildings that the agent owns
 myBuildings(MyBuildings, List):- findall(Building, (member(Building, List), mine(Building)), Members), sort(Members, MyBuildings).
 
+:- dynamic requestedLand/2.
+
+% we have a building if the building list has at least 1 element.
+%havebuilding :- buildings([X|Y]).
+
+% the money we have in our cashstack
+budget(X) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', X, Income).
+
+ourID(StakeholderID) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers',_,_).
+
+landOfOthers(MultiPoly) :- lands(List), member(land(LandID, stakeholder(OwnerID,_,_,_), MultiPoly), List), not(ourID(OwnerID)).
+ourLand(MultiPoly) :- lands(List), member(land(LandID, stakeholder(OwnerID,_,_,_), MultiPoly), List), ourID(OwnerID).
+
+doneBuying(MultiPoly) :- (requestedLand(MultiPoly, A), A >= 3) ; ourLand(MultiPoly).
+
 % determine when a zone needs to be improved and on what aspect
 needImprovement(IndicatorID, ZoneID) :- indicator(Id, Value, Target, ZoneLink), member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget), ZoneLink), CurrentValue < CurrentTarget.  
 % a zone is improved when the indicator score is higher or equal to the agent's target
