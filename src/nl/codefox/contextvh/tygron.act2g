@@ -1,4 +1,4 @@
-use dummy as knowledge.
+use knowledgebase as knowledge.
 
 % plan to build a construction
 define	building_plan_construction(Id, Level, MultiPolygon) with
