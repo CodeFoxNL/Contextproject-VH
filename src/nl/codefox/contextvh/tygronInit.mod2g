@@ -1,29 +1,36 @@
 use knowledgebase as beliefs.
 
 module tygronInit {
+		if true then insert(stakeholders([])).
 		if true then insert(settings([])).
 		if true then insert(functions([])).
-		if true then insert(stakeholders([])).
 		if true then insert(buildings(none)).
 		if true then insert(lands([])).
-		if true then insert(requests([])).
+		if true then insert(zones([])).
+		if true then insert(actions([])).
+		if true then insert(indicators([])).
+		%if true then insert(upgrade_types([])).
 		
-		if true then insert(zone_links([])).
-		if true then insert(upgrade_types([])).
+		% agent has no buildings until the myBuildingList is generated
+		if true then insert(myBuildingList([])).
 		
 		forall percept(stakeholders(List)), 
 			bel(member(SubList, List), member(stakeholder(ID,Name,Budget,Income), SubList)) 
 			do insert(stakeholder(ID, Name,Budget,Income)).
 		
 		forall percept(stakeholders(List)), 
-			bel(member(SubList, List), member(indicatorLink(ID,Weights), SubList)) 
+			bel(member(SubList, List), member(indicatorLink(ID,Weights), SubList), ID =:= 2) 
 			do insert(indicatorLink(ID,Weights)).
 		
 		forall percept(buildings(List)), 
-			bel(member(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors),List))
-			do insert(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors)).
+			bel(member(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors, MultiPolygon),List))
+			do insert(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors, MultiPolygon)).
 			
 		forall percept(indicators(List)), 
-			bel(member(indicator(ID,Value,Target),List))
-			do insert(indicator(ID,Value,Target)).
+			bel(member(indicator(ID,Value,Target, ZoneLink),List))
+			do insert(indicator(ID,Value,Target, ZoneLink)).
+			
+		forall percept(zones(List)), 
+			bel(member(zone(ID,A,B,C,D),List))
+			do insert(zone(ID,A,B, C, D)).
 }

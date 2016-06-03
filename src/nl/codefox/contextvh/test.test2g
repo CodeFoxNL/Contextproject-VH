@@ -9,5 +9,5 @@ test tygron with
   post{buildings(_)}
 
   tygron {
-    do helloWorld.
+    do tygron.
   }
