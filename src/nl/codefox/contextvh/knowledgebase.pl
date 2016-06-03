@@ -47,7 +47,7 @@ doneSelling(MultiPoly) :- (offeredLand(MultiPoly, A), A >= 3); landOfOthers(Mult
 %havebuilding :- buildings([X|Y]).
 
 % check if our agent owns a building
-ownedBuilding(BuildingID) :- building(BuildingID,_,OwnerID,_,_,_,_,_), OwnerID = myStakeholderID(StakeholderID). 
+ownedBuilding(BuildingID) :- building(BuildingID,_,OwnerID,_,_,_,_,_), stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', Money, Income), StakeholderID = OwnerID. 
 % check if a building is ours
 mine(building(_,_,myStakeholderID(StakeholderID),_,_,_,_,_)).
 % generates list of all buildings that the agent owns
@@ -58,9 +58,12 @@ budget(X) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', X, Income)
 ourID(StakeholderID) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', Money, Income).
 notOurID(StakeholderID) :- stakeholder(StakeholderID, _, _, _), not(ourID(StakeholderID)).
 
+ourID(StakeholderID) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers',_,_).
+
 % predicates to determine if land on the map is ours or others
-landOfOthers(MultiPoly) :- lands(List), member(land(LandID, stakeholder(OwnerID,_,_,_), MultiPoly), List), not(ourID(OwnerID)).
-ourLand(MultiPoly) :- lands(List), member(land(LandID, stakeholder(OwnerID,_,_,_), MultiPoly), List), ourID(OwnerID).
+landOfOthers(MultiPoly) :- lands(List),stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', _, _), not(member(land(LandID, stakeholder(StakeholderID,_,_,_), MultiPoly), List)), MultiPoly \= multipolygon('MULTIPOLYGON EMPTY').
+ourLand(MultiPoly) :- lands(List),stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', _, _), member(land(LandID, stakeholder(StakeholderID,_,_,_), MultiPoly), List), MultiPoly \= multipolygon('MULTIPOLYGON EMPTY').
+
 
 % determine when a zone needs to be improved and on what aspect
 needImprovement(IndicatorID, ZoneID) :- indicator(Id, Value, Target, ZoneLink), member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget), ZoneLink), CurrentValue < CurrentTarget.  
