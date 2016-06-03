@@ -68,7 +68,9 @@ ContextProject Virtual Humans for Serious Gaming
 [S3P]: Deliverables/Week%203/Backlog%20Sprint%203.pdf
 [S3R]: Deliverables/Week%204/Retrospective%20Sprint%203.pdf
 [S4P]: Deliverables/Week%204/Backlog%20Sprint%204.pdf
-[S4R]: Deliverables/Week%204/Retrospective%20Sprint%204.pdf
-[S5P]: Deliverables/Week%204/Backlog%20Sprint%205.pdf
-[S5R]: Deliverables/Week%204/Retrospective%20Sprint%205.pdf
-[S6P]: Deliverables/Week%204/Backlog%20Sprint%206.pdf
+[S4R]: Deliverables/Week%205/Retrospective%20Sprint%204.pdf
+[S5P]: Deliverables/Week%206/Backlog%20Sprint%205.pdf
+[S5R]: Deliverables/Week%206/Retrospective%20Sprint%205.pdf
+[S6P]: Deliverables/Week%206/Backlog%20Sprint%206.pdf
+[S6R]: Deliverables/Week%207/Retrospective%20Sprint%206.pdf
+[S7P]: Deliverables/Week%207/Backlog%20Sprint%207.pdf
