@@ -14,7 +14,7 @@ order = linearall.
 module tygron {
 	
 	% achieve current goals
-	if goal (constructBuilding(MultiPoly)) then construct(MultiPoly)
+	if goal (constructBuilding(MultiPoly)) then construct(MultiPoly).
 	if goal (demolishBuilding(BuildingID)) then demolish(BuildingID).	
 	if goal (doneBuying(MultiPoly)) then buyLand(MultiPoly).
 	if goal (doneSelling(MultiPoly)) then sellLand(MultiPoly).
