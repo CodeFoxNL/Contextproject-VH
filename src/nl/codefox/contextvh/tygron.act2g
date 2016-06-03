@@ -1,5 +1,40 @@
-use dummy as knowledge.
+use knowledgebase as knowledge.
 
+% plan to build a construction
 define	building_plan_construction(Id, Level, MultiPolygon) with
    pre{ true }
    post{ true }
+   
+% plan to build an upgrade
+define building_plan_upgrade(UpgradeID, MultiPolygon) with
+  pre{ true }
+  post{ true }
+  
+% demolish a building
+define building_plan_demolish(BuildingID) with
+   pre{ true }
+   post{ true }
+
+% buy land  
+define map_buy_land(MultiPolygon, PricePerSquareMeter) with 
+   pre{ true }
+   post{ true }
+   
+% sell land
+ define map_sell_land(BuyerID, MultiPolygon, Price) with 
+   pre{ true }
+   post{ true }
+  
+ define popup_answer(RequestID, AnswerID) with
+   pre{ true }
+   post{ true }
+
+define BUILDING_PLAN_DEMOLISH_POLYGON(StakeholderID, MultiPolygon, GroundType) with
+   pre{ true }
+   post{ true }
+    
+define BUILDING_REVERT_POLYGON(StakeholderID, MultiPoligon) with
+   pre{ true }
+   post{ true }
+
+

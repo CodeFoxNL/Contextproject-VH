@@ -1,0 +1,12 @@
+use knowledgebase as knowledge.
+use tygron as actionspec.
+
+exit=always.
+
+% The demolish module
+module demolish(BuildingID) {
+	if 
+		bel(building(BuildingID,_,_,_,_,_,_,MultiPoly), ownedBuilding(BuildingId))
+	then 
+		building_plan_demolish(BuildingID) + insert(demolished(BuildingID)) + insert(emptyPoly(MultiPoly)).
+}
