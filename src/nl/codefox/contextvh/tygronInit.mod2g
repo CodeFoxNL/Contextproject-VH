@@ -19,7 +19,7 @@ module tygronInit {
 			do insert(stakeholder(ID, Name,Budget,Income)).
 		
 		forall percept(stakeholders(List)), 
-			bel(member(SubList, List), member(indicatorLink(ID,Weights), SubList), stakeholder(SID,_,_,_), SID =:= ID) 
+			bel(member(SubList, List), member(indicatorLink(ID,Weights), SubList), ID =:= 2) 
 			do insert(indicatorLink(ID,Weights)).
 		
 		forall percept(buildings(List)), 
