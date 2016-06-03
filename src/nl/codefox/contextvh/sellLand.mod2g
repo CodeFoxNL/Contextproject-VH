@@ -6,7 +6,7 @@ exit=always.
 % The selling land module
 module sellLand(MultiPoly) {
 		
-	if bel(ourLand(MultiPoly), offeredLand(MultiPoly, A), B is A + 1, X is B * 150 + 100, notOurID(BuyerID))
+	if bel(ourLand(MultiPoly), offeredLand(MultiPoly, A), B is A + 1, X is B * (2/3) - 100, notOurID(BuyerID))
 		then map_sell_land(BuyerID, MultiPoly, X) + 
 		delete(offeredLand(MultiPoly, A)) + 
 		insert(offeredLand(MultiPoly, B)).
