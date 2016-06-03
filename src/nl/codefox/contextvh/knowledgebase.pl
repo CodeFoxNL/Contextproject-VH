@@ -58,8 +58,6 @@ budget(X) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', X, Income)
 ourID(StakeholderID) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', Money, Income).
 notOurID(StakeholderID) :- stakeholder(StakeholderID, _, _, _), not(ourID(StakeholderID)).
 
-ourID(StakeholderID) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers',_,_).
-
 % predicates to determine if land on the map is ours or others
 landOfOthers(MultiPoly) :- lands(List),stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', _, _), not(member(land(LandID, stakeholder(StakeholderID,_,_,_), MultiPoly), List)), MultiPoly \= multipolygon('MULTIPOLYGON EMPTY').
 ourLand(MultiPoly) :- lands(List),stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', _, _), member(land(LandID, stakeholder(StakeholderID,_,_,_), MultiPoly), List), MultiPoly \= multipolygon('MULTIPOLYGON EMPTY').
