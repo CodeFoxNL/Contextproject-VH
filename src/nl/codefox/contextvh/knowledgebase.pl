@@ -64,6 +64,9 @@ ourID(StakeholderID) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers',
 landOfOthers(MultiPoly) :- lands(List),stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', _, _), not(member(land(LandID, stakeholder(StakeholderID,_,_,_), MultiPoly), List)), MultiPoly \= multipolygon('MULTIPOLYGON EMPTY').
 ourLand(MultiPoly) :- lands(List),stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', _, _), member(land(LandID, stakeholder(StakeholderID,_,_,_), MultiPoly), List), MultiPoly \= multipolygon('MULTIPOLYGON EMPTY').
 
+needLuxeHouse:- indicator(34,_, _, ZoneLinkList), member(zone_link(0,_,Current1,Target1), ZoneLinkList), 
+indicator(34,_, _, ZoneLinkList), member(zone_link(1,_,Current2,Target2), ZoneLinkList),
+Target1 - Current1 > Target2 - Current2. 
 
 % determine when a zone needs to be improved and on what aspect
 needImprovement(IndicatorID, ZoneID) :- indicator(Id, Value, Target, ZoneLink), member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget), ZoneLink), CurrentValue < CurrentTarget.  
