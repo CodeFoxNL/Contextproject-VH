@@ -24,18 +24,19 @@
 
 %%% Knowledge
 :- dynamic demolished/1.
+:- dynamic constructed/1.
 :- dynamic upgraded/1.
 :- dynamic improvedZone/1.
 :- dynamic myBuildingList/1.
 
 :- dynamic emptyPoly/1.
-:- dynamic buildOn/1. 
 
 :- dynamic requestedLand/2.
 :- dynamic offeredLand/2.
 
 % Goals that can be adopted
 demolishBuilding(BuildingID) :- demolished(BuildingID).
+constructBuilding(BuildingID) :- constructed(BuildingID).
 upgradeBuilding(UpgradeID, MultiPolygon) :- upgraded(MultiPolygon).
 improveZone(IndicatorID, ZoneID) :- improvedZone(IndicatorID, ZoneID).
 
@@ -61,7 +62,6 @@ notOurID(StakeholderID) :- stakeholder(StakeholderID, _, _, _), not(ourID(Stakeh
 % predicates to determine if land on the map is ours or others
 landOfOthers(MultiPoly) :- lands(List),stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', _, _), not(member(land(LandID, stakeholder(StakeholderID,_,_,_), MultiPoly), List)), MultiPoly \= multipolygon('MULTIPOLYGON EMPTY').
 ourLand(MultiPoly) :- lands(List),stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', _, _), member(land(LandID, stakeholder(StakeholderID,_,_,_), MultiPoly), List), MultiPoly \= multipolygon('MULTIPOLYGON EMPTY').
-
 
 % determine when a zone needs to be improved and on what aspect
 needImprovement(IndicatorID, ZoneID) :- indicator(Id, Value, Target, ZoneLink), member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget), ZoneLink), CurrentValue < CurrentTarget.  

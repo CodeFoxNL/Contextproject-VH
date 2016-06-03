@@ -14,13 +14,13 @@ order = linearall.
 module tygron {
 	
 	% achieve current goals
-	%if goal (constructBuilding) then construct.
-	%if goal (improveZone(Indicator, Zone)) then upgrade(UpgradeID, MultiPolygon).
-	
+	if goal (constructBuilding(MultiPoly)) then construct(MultiPoly).
 	if goal (demolishBuilding(BuildingID)) then demolish(BuildingID).	
 	if goal (doneBuying(MultiPoly)) then buyLand(MultiPoly).
+	if goal (doneSelling(MultiPoly)) then sellLand(MultiPoly).
 	if goal (upgradeBuilding(UpgradeID, MultiPolygon)) then upgrade(UpgradeID, MultiPolygon).
-	if goal (buildOn(MultiPoly)) then construct(MultiPoly). 
+	%if goal (improveZone(Indicator, Zone)) then upgrade(UpgradeID, MultiPolygon).
+	%if goal (buildOn(MultiPoly)) then construct(MultiPoly). 
 		
 	%Adopt goals to improve zones for which the agent has not achieved it's target values'	
 	forall bel(zones(List), indicator(Indicator,_,_,_), member(zone(Zone, _, _, _, _), List), needImprovement(Indicator, Zone)) 
@@ -32,18 +32,18 @@ module tygron {
 	% Example of building we will upgrade
 	if bel(building(BuildingId,'Prof. Henketstraat 49-85',_,_,_,FunctionID,_,MultiPolygon), ownedBuilding(BuildingId), upgrade_type(UpgradeID,FunctionID,_)) then adopt(upgradeBuilding(UpgradeID, MultiPolygon)).
 	
-	%%%Code that adopts goals to buy alot of available land
+	%%%Code that adopts goals to buy a lot of available land
 	%forall bel(lands(List), member(land(LandID, OwnerID, MultiPoly), List), landOfOthers(MultiPoly), not(doneBuying(MultiPoly))) 
 		%do adopt(doneBuying(MultiPoly)).	
 		
-	%Example of buying and demolish on ground that we just bought. 
+	% Example of demolishing a building we own 
 	if bel(building(BuildingId, 'Overige functie (1218) verkocht', _, _, _, _, _, MultiPoly), ownedBuilding(BuildingId)) 
 		then adopt(demolishBuilding(BuildingId)).		
-	%Example of buying and demolish on ground that we just bought.
+	% Example of buying ground
 	if bel(building(BuildingId, 'Overige functie (1218)', _, _, _, _, _, MultiPoly), landOfOthers(MultiPoly), not(doneBuying(MultiPoly))) 
 		then adopt(doneBuying(MultiPoly)).
 
 	%Replace a previously demolished building with a new one. 	
-	forall bel(emptyPoly(MultiPoly)) do adopt(buildOn(MultiPoly)).
+	forall bel(emptyPoly(MultiPoly)) do adopt(constructBuilding(MultiPoly)).
 	
 }
