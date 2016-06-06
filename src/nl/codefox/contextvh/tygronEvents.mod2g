@@ -5,14 +5,12 @@ module tygronEvents {
 	if percept(stakeholders(X)), bel(stakeholders(Y))  then  delete( stakeholders(Y) ) + insert(stakeholders(X)).
 	if percept(settings(X)), bel(settings(Y), X \= Y) then delete(settings(Y)) + insert(settings(X)).
 	if percept(functions(X)), bel(functions(Y)) then delete(functions(Y)) + insert(functions(X)).
-	if percept(buildings(X)), bel(buildings(Y)) then delete(buildings(Y))+ insert(buildings(X)).
 	if percept(lands(X)), bel(lands(Y)) then delete (lands(Y)) + insert(lands(X)).
 	if percept(zones(X)), bel(zones(Y)) then delete(zones(Y)) + insert(zones(X)).
 	if percept(indicators(X)), bel(indicators(Y)) then delete(indicators(Y)) + insert(indicators(X)).
 	if percept(actions(X)), bel(actions(Y)) then delete(actions(X)) + insert(actions(Y)).
 	
-	% not yet perceived from environment
-	%if percept(upgrade_types(X)), bel(upgrade_types(Y)) then delete(upgrade_types(Y)) + insert(upgrade_types(X)).
+	% insert upgrade_type/3 to beliefs when it is received as percept but is not already in the beliefs.  
 	forall percept(upgrade_types(List)),
 		bel(member(upgrade_type(UpgradeID, SourceID, TargetID), List), not(upgrade_type(UpgradeID,_,_)))
 		do insert(upgrade_type(UpgradeID, SourceID, TargetID)).
@@ -50,12 +48,4 @@ module tygronEvents {
 		bel(not(actionlog(StakeholderID, ActionLog, LogId, ParameterList)))
 		do insert(actionlog(StakeholderID, ActionLog, LogId, ParameterList)).
 		
-	%forall percept(actionlog(StakeholderID, ActionLog, LogId, ParameterList)),
-		%bel(actionlog(StakeholderID, OtherActionLog, OtherLogId, OtherParameterList))
-		%do delete( actionlog(StakeholderID, OtherActionLog, OtherLogId, OtherParameterList)) +
-		%insert(actionlog(StakeholderID, ActionLog, LogId, ParameterList)).
-				
-	% insert my buildings
-	if bel(myBuildingList([]), buildings(List), myBuildings(MyBuildings, List)) then delete(myBuildingList([])) + insert(myBuildingList(MyBuildings)).
-
 }
