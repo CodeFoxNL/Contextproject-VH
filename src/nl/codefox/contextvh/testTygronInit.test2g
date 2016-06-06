@@ -1,0 +1,37 @@
+use Tygron as mas.
+use knowledgebase as knowledge.
+use tygronInit as module.
+timeout = 5.
+
+test tygronInit with
+	pre{true}
+	in{
+		%Test if all stakeholders are added to the beliefbase.
+		percept(stakeholders(List)), bel(member(SubList, List), member(stakeholer(ID, Name, Budget, Income), SubList))
+			leadsto bel(stakeholder(ID, Name, Budget, Income)).
+			
+		%Test if all indicatorLinks are added to the beliefbase.
+		percept(stakeholders(List)), bel(member(SubList, List), member(indicatorLink(ID, Weights), SubList))
+			leadsto bel(indicatorLink(2, Weigths)).
+		
+		%Test if only the the indicatorLinks for our own stakeholder are added.
+		always not(bel(indicatorLink(ID, Weights), ID \= 2)).
+		
+		%Test if all buildings are added to the beliefbase.
+		percept(buildings(List)), bel(member(building(ID, Name, OwnerID, BuildYear, Categories, FunctionID, Floors, MultiPolygon), List))
+			leadsto bel(building(ID, Name, OwnerID, BuildYear, Categories, FunctionID, Floort, MultiPolygon)).
+			
+		%Test if all indicators are added to the beliefbase.
+		percept(indicators(List)), bel(member(indicator(ID, Value, Target, ZoneLink), List))
+			leadsto bel(indicator(ID, Value, Target, ZoneLink)).
+			
+		%Test if all zones are added to the beliefbase.
+		percept(zones(List)), bel(member(zone(ID, A, B, C, D), List))
+			leadsto bel(zone(ID, A, B, C, D)).
+			
+	}
+	post{true}
+	
+	tygronagent {
+		do tygronInit.	
+	}
