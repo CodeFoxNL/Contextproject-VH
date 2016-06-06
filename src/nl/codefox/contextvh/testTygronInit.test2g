@@ -1,8 +1,8 @@
 use Tygron as mas.
 use knowledgebase as knowledge.
 use tygronInit as module.
-timeout = 5.
 
+%Tests for the init module of the agents.
 test tygronInit with
 	pre{true}
 	in{
