@@ -7,8 +7,6 @@ test tygronInit with
 	pre{true}
 	in{
 		%Test if all stakeholders are added to the beliefbase.
-		%percept(stakeholders(List)), bel(member(SubList, List), member(stakeholer(ID, Name, Budget, Income), SubList))
-		%	leadsto bel(stakeholder(ID, Name, Budget, Income)).
 		eventually bel(stakeholder(0, 'Gemeente', _, _)).	
 		eventually bel(stakeholder(1, 'Bedrijf', _, _)).
 		eventually bel(stakeholder(2, 'Private_Woningbouw_Burgers', _, _)).
