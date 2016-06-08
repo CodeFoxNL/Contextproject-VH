@@ -1,6 +1,8 @@
 use knowledgebase as knowledge.
+use tygronGoals as module. 
 
 module tygronEvents {
+	
 	%%%%% Percept Processing %%%%%
 	if percept(stakeholders(X)), bel(stakeholders(Y))  then  delete( stakeholders(Y) ) + insert(stakeholders(X)).
 	if percept(settings(X)), bel(settings(Y), X \= Y) then delete(settings(Y)) + insert(settings(X)).
@@ -48,4 +50,5 @@ module tygronEvents {
 		bel(not(actionlog(StakeholderID, ActionLog, LogId, ParameterList)))
 		do insert(actionlog(StakeholderID, ActionLog, LogId, ParameterList)).
 		
+	if true then tygronGoals. 		
 }
