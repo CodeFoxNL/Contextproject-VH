@@ -16,14 +16,6 @@ module tygronInit {
 		forall percept(stakeholders(List)), 
 			bel(member(SubList, List), member(indicatorLink(ID,Weights), SubList), ID =:= 2) 
 			do insert(indicatorLink(ID,Weights)).
-		
-		forall percept(buildings(List)), 
-			bel(member(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors, MultiPolygon),List))
-			do insert(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors, MultiPolygon)).
-			
-		forall percept(indicators(List)), 
-			bel(member(indicator(ID,Value,Target, ZoneLink),List))
-			do insert(indicator(ID,Value,Target, ZoneLink)).
 			
 		forall percept(zones(List)), 
 			bel(member(zone(ID,A,B,C,D),List))

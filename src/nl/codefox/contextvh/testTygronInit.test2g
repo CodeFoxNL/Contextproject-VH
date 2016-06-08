@@ -24,19 +24,11 @@ test tygronInit with
 		%Test if only the the indicatorLinks for our own stakeholder are added.
 		always not(bel(indicatorLink(ID, Weights), ID \= 2)).
 		%eventually bel(indicatorLink(ID, Weigths), ID \= 2).
-		
-		%Test if all buildings are added to the beliefbase.
-		%percept(buildings(List)), bel(member(building(ID, Name, OwnerID, BuildYear, Categories, FunctionID, Floors, MultiPolygon), List))
-		%	leadsto bel(building(ID, Name, OwnerID, BuildYear, Categories, FunctionID, Floort, MultiPolygon)).
-			
-		%Test if all indicators are added to the beliefbase.
-		%percept(indicators(List)), bel(member(indicator(ID, Value, Target, ZoneLink), List))
-		%	leadsto bel(indicator(ID, Value, Target, ZoneLink)).
 			
 		%Test if all zones are added to the beliefbase.
 		%percept(zones(List)), bel(member(zone(ID, A, B, C, D), List))
 		%	leadsto bel(zone(ID, A, B, C, D)).
-			
+		eventually bel(zone(ID, Name, OwnerID, C, D)).
 	}
 	post{true}
 	
