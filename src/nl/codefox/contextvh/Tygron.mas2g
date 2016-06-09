@@ -1,7 +1,7 @@
 % Our agent will fulfill the role of the Private Housing Corporation in the Tygron environment.
 
-use "tygronenv-1.0.9-jar-with-dependencies.jar" as environment
-	with project = "vhproject_codefox", domain = "tudelft", stakeholders = ['Private_Woningbouw_Burgers'].
+use "contextvh-1.0.1-jar-with-dependencies.jar" as environment
+	with project = "vhproject_codefox", stakeholders = ['Private_Woningbouw_Burgers'].
 
 define tygronagent as agent {
 	use tygron as main module.
