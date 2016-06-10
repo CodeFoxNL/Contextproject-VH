@@ -8,9 +8,10 @@ test buyLand(_) with
 	pre{bel(building(BuildingId, 'Overige functie (1218)', _, _, _, _, _, MultiPoly), landOfOthers(MultiPoly), not(doneBuying(MultiPoly))), goal(doneBuying(MultiPoly))}
 	in{ 
 		eventually done(map_buy_land(MultiPoly, Price)).
+		eventually done(buyLand(MultiPoly)).
 		eventually bel(ownedBuilding(BuildingId)).
 	}
-	post{ }
+	post{true}
 	
 	tygronagent {
 		do buyLand(MultiPoly).
