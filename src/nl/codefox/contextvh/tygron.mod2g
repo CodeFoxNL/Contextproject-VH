@@ -4,7 +4,7 @@ use buyLand as module.
 use sellLand as module.
 use construct as module.
 use demolish as module.
-use upgrade as module.
+use upgradeByReplacement as module.
 
 
 exit=nogoals.
@@ -30,8 +30,8 @@ module tygron {
 		then sellLand(MultiPoly).
 		
 	% upgrade a building
-	if goal (upgradeBuilding(UpgradeID, MultiPolygon)) 
-		then upgrade(UpgradeID, MultiPolygon). 
+	if goal (upgradeBuildingByReplacement(UpgradeID, MultiPolygon)) 
+		then upgradeByReplacement(UpgradeID, MultiPolygon). 
 	%__________________________________________________________________________________________________%
 	
 	

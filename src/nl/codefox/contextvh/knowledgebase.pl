@@ -19,7 +19,7 @@
 %%% Knowledge
 :- dynamic demolished/1.
 :- dynamic constructed/1.
-:- dynamic upgraded/1.
+:- dynamic upgradedByReplacement/1.
 :- dynamic improvedZone/1.
 :- dynamic myBuildingList/1.
 :- dynamic emptyPoly/1.
@@ -29,7 +29,7 @@
 % Goals that can be adopted
 demolishBuilding(BuildingID) :- demolished(BuildingID).
 constructBuilding(BuildingID) :- constructed(BuildingID).
-upgradeBuilding(UpgradeID, MultiPolygon) :- upgraded(MultiPolygon).
+upgradeBuildingByReplacement(UpgradeID, MultiPolygon) :- upgradedByReplacement(MultiPolygon).
 improveZone(IndicatorID, ZoneID) :- improvedZone(IndicatorID, ZoneID).
 
 % we achieve these goals when we have tried 3 times or when we actually bought or sold land.
