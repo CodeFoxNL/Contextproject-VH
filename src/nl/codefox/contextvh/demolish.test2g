@@ -1,0 +1,16 @@
+use Tygron as mas.
+use knowledgebase as knowledge.
+use demolish as module.
+
+test demolish(_) with
+	pre{bel(building(BuildingID,'Prof. Henketstraat 48-80',_,_,_,_,_,MultiPoly)), goal(demolishBuilding(BuildingID))}
+	in{ 
+		eventually done(demolish(BuildingID)).
+		eventually bel(demolished(BuildingID)).
+		eventually bel(emptyPoly(MultiPoly)).
+	}
+	post{true}
+	
+	tygronagent {
+		do demolish(BuildingID).
+	}
