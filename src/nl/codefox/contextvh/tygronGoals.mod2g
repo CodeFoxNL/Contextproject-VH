@@ -1,0 +1,34 @@
+use knowledgebase as knowledge.
+
+module tygronGoals {
+	%_______________________________Adopt goals based on the environment_______________________________%
+	
+	% Adopt goal to build where a demolished building was previously located. 	
+	forall bel(emptyPoly(MultiPoly)) 
+		do adopt(constructBuilding(MultiPoly)).
+	
+	% Adopt goals to improve zones for which the agent has not achieved it's target values'	
+	forall bel(zones(List), indicator(Indicator,_,_,_), member(zone(Zone, _, _, _, _), List), needImprovement(Indicator, Zone)) 
+		do adopt(improveZone(Indicator, Zone)).
+		
+	% Example of buying and demolish on ground that we just bought. 
+	if bel(building(BuildingId, 'Overige functie (1218) verkocht', _, _, _, _, _, MultiPoly), ownedBuilding(BuildingId)) 
+		then adopt(demolishBuilding(BuildingId)).	
+			
+	% Example of buying and demolish on ground that we just bought.
+	if bel(building(BuildingId, 'Overige functie (1218)', _, _, _, _, _, MultiPoly), landOfOthers(MultiPoly), not(doneBuying(MultiPoly))) 
+		then adopt(doneBuying(MultiPoly)).
+			
+	% Example of a building we will demolish	
+	if bel(building(BuildingId,'Prof. Henketstraat 48-80',_,_,_,_,_,_), ownedBuilding(BuildingId)) 
+		then adopt( demolishBuilding(BuildingId)).
+	
+	% Example of building we will upgrade by replacing and rebuilding it
+	if bel(building(BuildingId,_,_,_,['LUXE'],FunctionID,_,MultiPolygon), ownedBuilding(BuildingId), upgrade_type(UpgradeID,FunctionID,_)) 
+		then adopt(upgradeBuilding(UpgradeID, MultiPolygon)).
+	 
+	% Adtop goals to demolish social buildings when we want more luxury or normal buildings 
+	if bel(indicator(34,_, _, ZoneLinkList), member(zone_link(2,_,Current3,Target3), ZoneLinkList), Current3 < Target3, member(zone_link(1,_,Current2,Target2), ZoneLinkList), member(zone_link(0,_,Current1,Target1), ZoneLinkList), (Current1 < Target1 ; Current2 < Target2), building(BuildingId,_,_,_,['SOCIAL'],_,_,_), ownedBuilding(BuildingId) ) 
+		then adopt (demolishBuilding(BuildingId)).
+	%__________________________________________________________________________________________________%
+}
