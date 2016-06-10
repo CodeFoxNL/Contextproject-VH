@@ -3,20 +3,18 @@
 :- dynamic settings/1.
 :- dynamic functions/1.
 :- dynamic indicators/1.
-:- dynamic buildings/1.
 :- dynamic lands/1.
-:- dynamic zones/1.
-:- dynamic actions/1.
 
 % others
 :- dynamic upgrade_type/3.
 :- dynamic indicatorLink/2.
 :- dynamic indicator/4.
 :- dynamic stakeholder/4.
-:- dynamic zone_link/4.
 :- dynamic building/8.
-:- dynamic zone/5.
+:- dynamic zones/1.
+:- dynamic zone/5. 
 :- dynamic actionlog/4.
+:- dynamic actions/1.
 
 %%% Knowledge
 :- dynamic demolished/1.
@@ -24,9 +22,7 @@
 :- dynamic upgraded/1.
 :- dynamic improvedZone/1.
 :- dynamic myBuildingList/1.
-
 :- dynamic emptyPoly/1.
-
 :- dynamic requestedLand/2.
 :- dynamic offeredLand/2.
 
@@ -51,8 +47,8 @@ ourID(StakeholderID) :- stakeholder(StakeholderID, 'Private_Woningbouw_Burgers',
 notOurID(StakeholderID) :- stakeholder(StakeholderID, _, _, _), not(ourID(StakeholderID)).
 
 % predicates to determine if land on the map is ours or others
-landOfOthers(MultiPoly) :- lands(List),stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', _, _), not(member(land(LandID, stakeholder(StakeholderID,_,_,_), MultiPoly), List)), MultiPoly \= multipolygon('MULTIPOLYGON EMPTY').
-ourLand(MultiPoly) :- lands(List),stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', _, _), member(land(LandID, stakeholder(StakeholderID,_,_,_), MultiPoly), List), MultiPoly \= multipolygon('MULTIPOLYGON EMPTY').
+landOfOthers(MultiPoly) :- lands(List), stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', _, _), not(member(land(LandID, stakeholder(StakeholderID,_,_,_), MultiPoly, _, _), List)), MultiPoly \= multipolygon('MULTIPOLYGON EMPTY').
+ourLand(MultiPoly) :- lands(List), stakeholder(StakeholderID, 'Private_Woningbouw_Burgers', _, _), member(land(LandID, stakeholder(StakeholderID,_,_,_), MultiPoly, _, _), List), MultiPoly \= multipolygon('MULTIPOLYGON EMPTY').
 
 %Uses indicator scores to determine whether more Luxury houses are desirable, if this is not the case Normal houses are desirable.  
 needLuxeHouse:- indicator(34,_, _, ZoneLinkList), member(zone_link(0,_,Current1,Target1), ZoneLinkList), 
