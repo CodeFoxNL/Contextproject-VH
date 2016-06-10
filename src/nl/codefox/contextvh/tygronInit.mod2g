@@ -9,31 +9,26 @@ module tygronInit {
 		if true then insert(actions([])).
 		if true then insert(indicators([])).
 		
-		% insert all stakeholders
-		forall percept(stakeholders(List)), 
-			bel(member(SubList, List), member(stakeholder(ID, Name, Budget, Income), SubList)) 
-			do insert(stakeholder(ID, Name, Budget, Income)).
-			
-		% insert the indicatorLink of our stakeholder
-		forall percept(stakeholders(List)), 
-			bel(member(SubList, List), member(indicatorLink(ID, Weights), SubList), ID =:= 2) 
-			do insert(indicatorLink(ID, Weights)).
-		
 		% insert all lands on the map
 		forall percept(lands(List)), bel(member(land(LandID, OwnerID, MultiPoly, ZoneList, Size), List))
 			do insert(land(LandID, OwnerID, MultiPoly, ZoneList, Size)).
+				
+		forall percept(stakeholders(List)), 
+			bel(member(SubList, List), member(stakeholder(ID,Name,Budget,Income), SubList)) 
+			do insert(stakeholder(ID, Name,Budget,Income)).
 		
-		% insert all buildings on the map
+		forall percept(stakeholders(List)), 
+			bel(member(SubList, List), member(indicatorLink(ID,Weights), SubList), ID =:= 2) 
+			do insert(indicatorLink(ID,Weights)).
+		
 		forall percept(buildings(List)), 
-			bel(member(building(ID, Name, OwnerID, BuildYear, Categories, FunctionID, Floors, MultiPolygon),List))
-			do insert(building(ID, Name, OwnerID, BuildYear, Categories, FunctionID, Floors, MultiPolygon)).
+			bel(member(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors, MultiPolygon),List))
+			do insert(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors, MultiPolygon)).
 			
-		% insert all indicators
 		forall percept(indicators(List)), 
-			bel(member(indicator(ID, Value, Target, ZoneLink),List))
-			do insert(indicator(ID, Value, Target, ZoneLink)).
-		
-		% insert all zones
+			bel(member(indicator(ID,Value,Target, ZoneLink),List))
+			do insert(indicator(ID,Value,Target, ZoneLink)).
+			
 		forall percept(zones(List)), 
 			bel(member(zone(ID, A, B, C, D), List))
 			do insert(zone(ID, A, B, C, D)).
