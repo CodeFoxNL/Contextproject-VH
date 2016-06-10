@@ -1,0 +1,19 @@
+use Tygron as mas.
+use knowledgebase as knowledge.
+use construct as module.
+use tygron as actionspec.
+
+test construct(_) with
+	pre{bel(emptyPoly(MultiPoly)), goal(constructBuilding(MultiPoly))}
+	in{ 
+		eventually done(building_plan_construction(_, _, MultiPoly)).
+		eventually done(construct(MultiPoly)).
+		eventually not(bel(emptyPoly(MultiPoly))).
+		eventually bel(constructed(MultiPoly)).
+		eventually bel(building(_, _, _, _, _, _, _, MultiPoly)).
+	}
+	post{true}
+	
+	tygronagent {
+		do construct(MultiPoly).
+	}
