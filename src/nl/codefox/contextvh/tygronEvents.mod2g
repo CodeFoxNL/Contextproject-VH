@@ -7,8 +7,25 @@ module tygronEvents {
 	if percept(stakeholders(X)), bel(stakeholders(Y))  then  delete( stakeholders(Y) ) + insert(stakeholders(X)).
 	if percept(settings(X)), bel(settings(Y), X \= Y) then delete(settings(Y)) + insert(settings(X)).
 	if percept(functions(X)), bel(functions(Y)) then delete(functions(Y)) + insert(functions(X)).
+	
 	if percept(lands(X)), bel(lands(Y)) then delete (lands(Y)) + insert(lands(X)).
+	
+	% Add new lands to the believe base
+	forall percept(lands(List)), bel(member(land(LandID, OwnerID, MultiPoly, ZoneIDList, Size),List), not(land(LandID,_,_,_,_)))
+		do insert(land(LandID, OwnerID, MultiPoly, ZoneIDList, Size)).
+	% Update lands
+	forall percept(lands(List)), bel(land(LandID, OldOwnerID, OldMultiPoly, OldZoneList, OldSize),
+		member(land(LandID, NewOwnerID, NewMultiPoly, NewZoneList, NewSize), List))
+		do delete(land(LandID, OldOwnerID, OldMultiPoly, OldZoneList, OldSize)) + insert(land(LandID, NewOwnerID, NewMultiPoly, NewZoneList, NewSize)).
+	
 	if percept(zones(X)), bel(zones(Y)) then delete(zones(Y)) + insert(zones(X)).
+	
+	% insert and update all zone/5
+	forall percept(zones(List)), bel(zone(ZoneID, OldName, OldFloors, OldSize, OldCategoriesList), 
+		member(zone(ZoneID, NewName, NewFloors, NewSize, NewCategoriesList), List)) 
+		do delete(zone(ZoneID, OldName, OldFloors, OldSize, OldCategoriesList)) 
+		+ insert(zone(ZoneID, NewName, NewFloors, NewSize, NewCategoriesList)).
+	
 	if percept(indicators(X)), bel(indicators(Y)) then delete(indicators(Y)) + insert(indicators(X)).
 	if percept(actions(X)), bel(actions(Y)) then delete(actions(X)) + insert(actions(Y)).
 	
@@ -45,10 +62,12 @@ module tygronEvents {
 		bel(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,FunctionID,OtherFloors,OtherMultiPolygon), 
 		not(member(building(ID,_,_,_,_,_,_,_),List))) 
 		do delete(building(ID, OtherName,OtherOwnerID,OtherConstructionYear,OtherCategoriesList,FunctionID,OtherFloors,OtherMultiPolygon)).
-		
+	
+	% insert actionlog/4 to belief base	
 	forall percept(actionlog(StakeholderID, ActionLog, LogId, ParameterList)),
 		bel(not(actionlog(StakeholderID, ActionLog, LogId, ParameterList)))
 		do insert(actionlog(StakeholderID, ActionLog, LogId, ParameterList)).
-		
+	
+	% go to goal module	
 	if true then tygronGoals. 		
 }
