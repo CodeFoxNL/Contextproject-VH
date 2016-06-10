@@ -11,10 +11,10 @@ module tygronGoals {
 	forall bel( zones(List), indicator(Indicator,_,_,_), member(zone(Zone, _, _, _, _), List), needImprovement(Indicator, Zone) ) 
 		do adopt( improveZone(Indicator, Zone) ).
 	
-	% Adopt goal to sell land	
-	%%% need to get zoneID from the qualityindicator
-	%if bel( qualityIndicator(Value, Target, ZoneLink), Value < Target, ourLand(MultiPoly), 
-	%	land(LandID,OwnerID, MultiPoly, ZoneIDList, Size), member(zone(ZoneID, _, _, _, _), ZoneIDList) )
+	% Adopt goal to sell land
+	%if bel( qualityIndicator(Value, Target, ZoneLinkID), Value < Target, 
+	%	land(LandID, OwnerID, MultiPoly, ZoneIDList, Size), ourLand(MultiPoly), 
+	%	member(zone(ZoneID, _, _, _, _), ZoneIDList), zone_link(ZoneID, _, _, _) )
 	%	then adopt( doneSelling(MultiPoly) ).
 		
 	% Example of demolishing a building. 
