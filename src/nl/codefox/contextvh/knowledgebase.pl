@@ -1,4 +1,5 @@
 %%% Percepts that the agent receives from the environment
+:- dynamic stakeholders/1.
 :- dynamic settings/1.
 :- dynamic functions/1.
 :- dynamic indicators/1.
