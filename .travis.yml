@@ -18,18 +18,18 @@ before_install:
 install:
 # build the connector, testing of the connector is done in the tygron repo CI.
 - cd $rd/lib/tygron
-- mvn -pl "sdk,sdk-tests,environment" install -DskipTests=true -Dmaven.javadoc.skip=true -Dcobertura.skip -B -V
-- java -cp environment/target/tygronenv-*-jar-with-dependencies.jar login.Login $email $password
+- mvn -pl "!doc" install -DskipTests=true -Dmaven.javadoc.skip=true -Dcobertura.skip -B -V
+- java -cp contextvh/target/contextvh-*-jar-with-dependencies.jar login.Login $email $password
 - cd $rd
 # move generated env jar to the same folder as the test file(s)
-- mv $rd/lib/tygron/environment/target/tygronenv-*-jar-with-dependencies.jar $rd/src/nl/codefox/contextvh
+- mv $rd/lib/tygron/contextvh/target/contextvh-*-jar-with-dependencies.jar $rd/src/nl/codefox/contextvh
 
 # make app.properties through travis before script start, needed for user validation
 before_script:
 # omit tygron version in env name and mas2g env location name
 - cd $rd/src/nl/codefox/contextvh
-- mv tygronenv-*-jar-with-dependencies.jar tygronenv-jar-with-dependencies.jar
-- sed -i s/tygronenv-.*-jar-with-dependencies.jar/tygronenv-jar-with-dependencies.jar/g ./Tygron.mas2g
+- mv contextvh-*-jar-with-dependencies.jar contextvh-jar-with-dependencies.jar
+- sed -i s/contextvh-.*-jar-with-dependencies.jar/contextvh-jar-with-dependencies.jar/g ./Tygron.mas2g
 script:
 - cd $rd/src/nl/codefox/contextvh
 # run the Goal Test with a 60s timeout
@@ -37,7 +37,7 @@ script:
 # print the test output
 - cat result.txt
 # if there is a test failed then the build fails
-- grep "test failed:" result.txt && $? || echo 0
+- grep "test failed:" result.txt && exit 1 || echo 0
 # check that the tests actually passed otherwise the build still fails
 - grep "test passed:" result.txt && echo 0 || $?
 jdk:
