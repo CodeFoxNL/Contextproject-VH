@@ -12,10 +12,10 @@ module tygronGoals {
 		do adopt( improveZone(Indicator, Zone) ).
 	
 	% Adopt goal to sell land
-	if bel( qualityIndicator(Value, Target, ZoneID), Value < Target, 
-		land(LandID, OwnerID, MultiPoly, ZoneIDList, Size), ourLand(MultiPoly), 
-		member(zone(ZoneID, _, _, _, _), ZoneIDList) )
-		then adopt( doneSelling(MultiPoly) ).
+%	if bel( qualityIndicator(Value, Target, ZoneID), Value < Target, 
+%		land(LandID, OwnerID, MultiPoly, ZoneIDList, Size), ourLand(MultiPoly), 
+%		member(zone(ZoneID, _, _, _, _), ZoneIDList) )
+%		then adopt( doneSelling(MultiPoly) ).
 		
 	% Example of demolishing a building. 
 	if bel( building(BuildingId, 'Overige functie (1218) verkocht', _, _, _, _, _, MultiPoly), ownedBuilding(BuildingId) ) 

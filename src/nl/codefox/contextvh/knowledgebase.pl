@@ -66,15 +66,15 @@ needImprovement(IndicatorID, ZoneID) :- indicator(IndicatorID, Value, Target, Zo
 improvedZone(IndicatorID, ZoneID) :- indicator(IndicatorID, Value, Target, ZoneLink), member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget), ZoneLink), CurrentValue >= CurrentTarget.
 
 % indicator of the spatial quality
-qualityIndicator(Value, Target, ZoneID) :- 
-	indicatorLink(_, IndicatorWeights), member(indicatorWeights(IndicatorID, IndicatorName, _), 
-	IndicatorWeights), (IndicatorName == 'Ruimtelijke kwaliteit'), 
-	indicator(IndicatorID, Value, Target, ZoneLink), 
-	member(zone_link(ZoneID, IndicatorID, Value, Target), ZoneLink).
+%qualityIndicator(Value, Target, ZoneID) :- 
+%	indicatorLink(_, IndicatorWeights), member(indicatorWeights(IndicatorID, IndicatorName, _), 
+%	IndicatorWeights), (IndicatorName == 'Ruimtelijke kwaliteit'), 
+%	indicator(IndicatorID, Value, Target, ZoneLink), 
+%	member(zone_link(ZoneID, IndicatorID, Value, Target), ZoneLink).
 
 % indicator of the sound
-soundIndicator(Value, Target, ZoneID) :- 
-	indicatorLink(_, IndicatorWeights), member(indicatorWeights(IndicatorID, IndicatorName, _),
-	IndicatorWeights), (IndicatorName == 'Geluidsoverlast Verkeer'), 
-	indicator(IndicatorID, Value, Target, ZoneLink), 
-	member(zone_link(ZoneID, IndicatorID, Value, Target), ZoneLink).
+%soundIndicator(Value, Target, ZoneID) :- 
+%	indicatorLink(_, IndicatorWeights), member(indicatorWeights(IndicatorID, IndicatorName, _),
+%	IndicatorWeights), (IndicatorName == 'Geluidsoverlast Verkeer'), 
+%	indicator(IndicatorID, Value, Target, ZoneLink), 
+%	member(zone_link(ZoneID, IndicatorID, Value, Target), ZoneLink).
