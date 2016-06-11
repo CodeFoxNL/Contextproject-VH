@@ -65,9 +65,9 @@ module tygronEvents {
 		do insert(upgrade_type(UpgradeID,SourceID,TargetID)).
 	
 	%%% ACTIONLOG PERCEPTS	
-	forall percept(actionlog(StakeholderID,ActionLog,LogId,ParameterList)),
-		bel(not(actionlog(StakeholderID,ActionLog,LogId,ParameterList)))
-		do insert(actionlog(StakeholderID,ActionLog,LogId,ParameterList)).
+	forall percept(actionlog(StakeholderID,ActionLog,LogID,Parameters)),
+		bel(not(actionlog(StakeholderID,ActionLog,LogID,Parameters)))
+		do insert(actionlog(StakeholderID,ActionLog,LogID,Parameters)).
 	
 	% enter tygronGoals to adopt goals when preconditions are met
 	if true then tygronGoals. 		
