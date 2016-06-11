@@ -1,30 +1,42 @@
 use knowledgebase as beliefs.
 
 module tygronInit {
-		if true then insert(stakeholders([])).
+	
+	%%% Insert Once percepts
+	
+		% stakeholders do not change during the game
+		forall percept(stakeholders(List)), 
+			bel(member(SubList,List), member(stakeholder(StakeholderID,Name,Budget,Income),SubList)) 
+			do insert(stakeholder(StakeholderID,Name,Budget,Income)).
+		% functions do not change during the game	
+		forall percept(functions(FunctionList)), bel(member(function(FunctionName,FunctionID,List),FunctionList))
+			do insert(function(FunctionName,FunctionID,List)).
+	
+	%%% Initialize knowledge (will be updated in the event module each cycle)
+	
+		% initialize settings
 		if true then insert(settings([])).
-		if true then insert(functions([])).
-		if true then insert(lands([])).
-		if true then insert(zones([])).
 		if true then insert(actions([])).
-						
-		forall percept(stakeholders(List)), 
-			bel(member(SubList, List), member(stakeholder(ID,Name,Budget,Income), SubList)) 
-			do insert(stakeholder(ID, Name,Budget,Income)).
+		if true then insert(requests([])).
 		
-		forall percept(stakeholders(List)), 
-			bel(member(SubList, List), member(indicatorLink(ID,Weights), SubList), ID =:= 2) 
-			do insert(indicatorLink(ID,Weights)).
-		
+		% initialize all lands
+		forall percept(lands(List)), bel(member(land(LandID,OwnerID,MultiPoly,ZoneList,Size),List))
+			do insert(land(LandID,OwnerID,MultiPoly,ZoneList,Size)).
+		% initialize all zones
+		forall percept(zones(List)), bel(member(zone(ZoneID,Name,Floors,Size,Categories),List)) 
+			do insert(zone(ZoneID,Name,Floors,Size,Categories)).
+		% initialize all buildings
 		forall percept(buildings(List)), 
-			bel(member(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors, MultiPolygon),List))
-			do insert(building(ID,Name,OwnerID,BuildYear,Categories, FunctionID, Floors, MultiPolygon)).
-			
+			bel(member(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPoly),List))
+			do insert(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPoly)).
+
+		% initialize the indicatorLinks of our agent				
+		forall percept(stakeholders(List)), 
+			bel(member(SubList,List), member(indicatorLink(StakeholderID,Weights), SubList), ourID(StakeholderID)) 
+			do insert(indicatorLink(StakeholderID,Weights)).
+		
+		% initialize all indicators	
 		forall percept(indicators(List)), 
-			bel(member(indicator(ID,Value,Target, ZoneLink),List))
-			do insert(indicator(ID,Value,Target, ZoneLink)).
-			
-		forall percept(zones(List)), 
-			bel(member(zone(ID,A,B,C,D),List))
-			do insert(zone(ID,A,B, C, D)).
+			bel(member(indicator(ID,Value,Target,ZoneLink),List))
+			do insert(indicator(ID,Value,Target,ZoneLink)).
 }
