@@ -2,7 +2,7 @@ use Tygron as mas.
 use knowledgebase as knowledge.
 use buyLand as module.
 use tygron as module.
-use tygron as actionspec.
+%use tygron as actionspec.
 timeout = 10.
 
 

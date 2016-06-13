@@ -1,8 +1,8 @@
 use Tygron as mas.
 use knowledgebase as knowledge.
-%use upgrade as module.
+use upgrade as module.
 use tygron as module.
-use tygron as actionspec.
+%use tygron as actionspec.
 timeout = 10.
 
 test upgrade(_, _) with

@@ -2,7 +2,7 @@ use Tygron as mas.
 use knowledgebase as knowledge.
 use construct as module.
 use tygron as module.
-use tygron as actionspec.
+%use tygron as actionspec.
 timeout = 10.
 
 test construct(_) with
