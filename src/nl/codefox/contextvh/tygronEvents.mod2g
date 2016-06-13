@@ -9,8 +9,7 @@ module tygronEvents {
 	if percept(settings(X)), bel(settings(Y), X \= Y) then delete(settings(Y)) + insert(settings(X)).
 	% update list actions and requests if they have changed
 	if percept(actions(X)), bel(actions(Y)) then delete(actions(X)) + insert(actions(Y)).
-	if percept(requests(X)), bel(requests(Y)) then delete(requests(X)) + insert(requests(Y)).
-	
+		
 	%%% BUILDING PERCEPTS
 	% update building/8 when another percept is received with similar ID but with other values.
 	forall percept(buildings(List)), 
