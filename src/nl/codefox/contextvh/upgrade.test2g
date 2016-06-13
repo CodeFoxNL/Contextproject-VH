@@ -19,5 +19,5 @@ test upgrade(_, _) with
 	post{true}
 	
 	tygronagent {
-		do upgrade(UpgradeID, MultiPolygon).
+		do tygron.
 	}
