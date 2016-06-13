@@ -6,10 +6,10 @@ use construct as module.
 exit=always.
 
 % The upgrading module
-% Find a building in the zone that we can improve by demolishing it and building a newer, better building.
-module upgrade(UpgradeID, MultiPolygon) {
+% Find a building in the zone that we can improve by demolishing it and building a newer,better building.
+module upgrade(UpgradeID,MultiPolygon) {
 	if 
-		bel(building(BuildingID,_,_,_,_,_,_,MultiPolygon), ownedBuilding(BuildingID))
+		bel(building(BuildingID,_,_,_,_,_,_,MultiPolygon,_),ownedBuilding(BuildingID))
 	then
-		building_plan_upgrade(UpgradeID, MultiPolygon) + insert(upgraded(MultiPolygon)).
+		building_plan_upgrade(UpgradeID,MultiPolygon) + insert(upgraded(MultiPolygon)).
 }
