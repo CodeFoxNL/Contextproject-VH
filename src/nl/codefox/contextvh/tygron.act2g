@@ -36,5 +36,12 @@ define BUILDING_PLAN_DEMOLISH_POLYGON(StakeholderID, MultiPolygon, GroundType) w
 define BUILDING_REVERT_POLYGON(StakeholderID, MultiPoligon) with
    pre{ true }
    post{ true }
+   
+   %%%CUSTOM ACTIONS
+   
+   % this returns relevant areas from the tygron environment. 
+ define get_relevant_areas(Id, ActionType, Filters) with     
+   	pre { true } 
+   	post{ true }
 
 
