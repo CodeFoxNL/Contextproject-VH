@@ -4,6 +4,8 @@ order = linearall.
 module tygronGoals {
 	%_______________________________Adopt goals based on the environment_______________________________%
 	
+	if true then adopt(permaGoal).
+	
 	% Adopt goal to build where a demolished building was previously located.
 	forall bel(emptyPoly(MultiPoly))
 		do adopt(constructBuilding(MultiPoly)).

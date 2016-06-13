@@ -1,5 +1,7 @@
 use knowledgebase as knowledge.
 use tygronGoals as module. 
+use tygronRequests as module.
+use tygron as actionspec.
 
 module tygronEvents {
 	
@@ -39,7 +41,8 @@ module tygronEvents {
 	% update lands
 	forall percept(lands(List)),
 		bel(land(LandID,OldOwnerID,OldMultiPoly,OldZoneList,OldSize),
-		member(land(LandID,NewOwnerID,NewMultiPoly,NewZoneList,NewSize),List))
+		member(land(LandID,NewOwnerID,NewMultiPoly,NewZoneList,NewSize),List),
+		(OldOwnerID\= NewOwnerID ; OldMultiPoly \= NewMultiPoly ; OldZoneList \= NewZoneList ; OldSize \= NewSize))
 		do delete(land(LandID,OldOwnerID,OldMultiPoly,OldZoneList,OldSize)) + insert(land(LandID,NewOwnerID,NewMultiPoly,NewZoneList,NewSize)).
 	% insert new lands
 	forall percept(lands(List)),bel(member(land(LandID,OwnerID,MultiPoly,ZoneIDList,Size),List),not(land(LandID,_,_,_,_)))
@@ -61,13 +64,9 @@ module tygronEvents {
 	%%% ACTIONLOG PERCEPTS	
 	forall percept(actionlog(StakeholderID,ActionLog,LogID,Parameters)),
 		bel(not(actionlog(StakeholderID,ActionLog,LogID,Parameters)))
-		do insert(actionlog(StakeholderID,ActionLog,LogID,Parameters)).
-		
-	%%% REQUEST PERCEPTS
-	% insert request/9 to beliefs
-	forall percept(request(Type,RequestType,RequestID,ContentLinkID,VisibieStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,Area,Answers)) 
-		do insert(request(Type,RequestType,RequestID,ContentLinkID,VisibieStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,Area,Answers)). 
+		do insert(actionlog(StakeholderID,ActionLog,LogID,Parameters)).    
 			
 	% enter tygronGoals to adopt goals when preconditions are met
-	if true then tygronGoals. 		
+	if true then tygronGoals. 	
+	if true then tygronRequests.	
 }
