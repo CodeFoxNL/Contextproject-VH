@@ -50,7 +50,7 @@ module tygronEvents {
 
 	%%% INDICATOR PERCEPTS
 	% update indicator/4 [indicator(IndicatorID,Current,Target,ZoneIndicatorsList)]]
-	%	when another percept is received with the same IndicatorID but with other values. 			
+	% when another percept is received with the same IndicatorID but with other values. 			
 	forall percept(indicators(List)), 
 		bel(indicator(IndicatorID,Value,Target,ZoneLinks), 
 		member(indicator(IndicatorID,OtherValue,OtherTarget,OtherZoneLinks),List), 
