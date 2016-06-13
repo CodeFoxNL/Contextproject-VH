@@ -14,21 +14,21 @@ module tygronEvents {
 	%%% BUILDING PERCEPTS
 	% update building/8 when another percept is received with similar ID but with other values.
 	forall percept(buildings(List)), 
-		bel(building(BuildingID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPolygon), 
-		member(building(BuildingID,OtherName,OtherOwnerID,OtherConstructionYear,OtherCategories,OtherFunctionID,OtherFloors,OtherMultiPoly),List), 
-		(OwnerID\=OtherOwnerID; Name\=OtherName; BuildYear\=OtherBuildYear; Categories\=OtherCategories; Floors\=OtherFloors; FunctionID\=OtherFunctionID; MultiPoly\=OtherMultiPoly)) 
-		do delete(building(BuildingID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPoly)) + 
-		insert(building(BuildingID,OtherName,OtherOwnerID,OtherConstructionYear,OtherCategories,OtherFunctionID,OtherFloors,OtherMultiPoly)).
+		bel(building(BuildingID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPolygon,Area), 
+		member(building(BuildingID,OtherName,OtherOwnerID,OtherConstructionYear,OtherCategories,OtherFunctionID,OtherFloors,OtherMultiPoly,OtherArea),List), 
+		(OwnerID\=OtherOwnerID; Name\=OtherName; BuildYear\=OtherBuildYear; Categories\=OtherCategories; Floors\=OtherFloors; FunctionID\=OtherFunctionID; MultiPoly\=OtherMultiPoly;Area\=OtherArea)) 
+		do delete(building(BuildingID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPoly,Area)) + 
+		insert(building(BuildingID,OtherName,OtherOwnerID,OtherConstructionYear,OtherCategories,OtherFunctionID,OtherFloors,OtherMultiPoly,OtherArea)).
 	% delete building/8 from beliefs when a building no longer exists.
 	forall percept(buildings(List)), 
-		bel(building(BuildingID,Name,OwnerID,ConstructionYear,Categories,FunctionID,Floors,Multipoly), 
-		not(member(building(BuildingID,_,_,_,_,_,_,_),List))) 
-		do delete(building(BuildingID,Name,OwnerID,ConstructionYear,Categories,FunctionID,Floors,Multipoly)).
+		bel(building(BuildingID,Name,OwnerID,ConstructionYear,Categories,FunctionID,Floors,Multipoly,Area), 
+		not(member(building(BuildingID,_,_,_,_,_,_,_,_),List))) 
+		do delete(building(BuildingID,Name,OwnerID,ConstructionYear,Categories,FunctionID,Floors,Multipoly,Area)).
 	% insert building/8 into beliefs when a new building has been built.
 	forall percept(buildings(List)), 
-		bel(member(building(BuildingID,Name,OwnerID,ConstructionYear,Categories,FunctionID,Floors,MultiPoly),List), 
-		not(building(BuildingID,_,_,_,_,_,_,_))) 
-		do insert(building(BuildingID,Name,OwnerID,ConstructionYear,Categories,FunctionID,Floors,MultiPoly)).
+		bel(member(building(BuildingID,Name,OwnerID,ConstructionYear,Categories,FunctionID,Floors,MultiPoly,Area),List), 
+		not(building(BuildingID,_,_,_,_,_,_,_,_))) 
+		do insert(building(BuildingID,Name,OwnerID,ConstructionYear,Categories,FunctionID,Floors,MultiPoly,Area)).
 		
 	%%% ZONE PERCEPT
 	forall percept(zones(List)), bel(zone(ZoneID,OldName,OldFloors,OldSize,OldCategories), 
