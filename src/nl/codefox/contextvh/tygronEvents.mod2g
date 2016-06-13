@@ -6,55 +6,55 @@ module tygronEvents {
 	%%%%% Percept Processing %%%%%
 	
 	% update settings if they have changed
-	if percept(settings(X)), bel(settings(Y), X \= Y) then delete(settings(Y)) + insert(settings(X)).
+	if percept(settings(X)),bel(settings(Y),X \= Y) then delete(settings(Y)) + insert(settings(X)).
 	% update list actions if they have changed
-	if percept(actions(X)), bel(actions(Y)) then delete(actions(X)) + insert(actions(Y)).
+	if percept(actions(X)),bel(actions(Y)) then delete(actions(X)) + insert(actions(Y)).
 		
 	%%% BUILDING PERCEPTS
 	% update building/8 when another percept is received with similar ID but with other values.
-	forall percept(buildings(List)), 
-		bel(building(BuildingID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPolygon,Area), 
-		member(building(BuildingID,OtherName,OtherOwnerID,OtherConstructionYear,OtherCategories,OtherFunctionID,OtherFloors,OtherMultiPoly,OtherArea),List), 
+	forall percept(buildings(List)),
+		bel(building(BuildingID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPolygon,Area),
+		member(building(BuildingID,OtherName,OtherOwnerID,OtherConstructionYear,OtherCategories,OtherFunctionID,OtherFloors,OtherMultiPoly,OtherArea),List),
 		(OwnerID\=OtherOwnerID; Name\=OtherName; BuildYear\=OtherBuildYear; Categories\=OtherCategories; Floors\=OtherFloors; FunctionID\=OtherFunctionID; MultiPoly\=OtherMultiPoly;Area\=OtherArea)) 
 		do delete(building(BuildingID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPoly,Area)) + 
 		insert(building(BuildingID,OtherName,OtherOwnerID,OtherConstructionYear,OtherCategories,OtherFunctionID,OtherFloors,OtherMultiPoly,OtherArea)).
 	% delete building/8 from beliefs when a building no longer exists.
-	forall percept(buildings(List)), 
-		bel(building(BuildingID,Name,OwnerID,ConstructionYear,Categories,FunctionID,Floors,Multipoly,Area), 
+	forall percept(buildings(List)),
+		bel(building(BuildingID,Name,OwnerID,ConstructionYear,Categories,FunctionID,Floors,Multipoly,Area),
 		not(member(building(BuildingID,_,_,_,_,_,_,_,_),List))) 
 		do delete(building(BuildingID,Name,OwnerID,ConstructionYear,Categories,FunctionID,Floors,Multipoly,Area)).
 	% insert building/8 into beliefs when a new building has been built.
-	forall percept(buildings(List)), 
-		bel(member(building(BuildingID,Name,OwnerID,ConstructionYear,Categories,FunctionID,Floors,MultiPoly,Area),List), 
+	forall percept(buildings(List)),
+		bel(member(building(BuildingID,Name,OwnerID,ConstructionYear,Categories,FunctionID,Floors,MultiPoly,Area),List),
 		not(building(BuildingID,_,_,_,_,_,_,_,_))) 
 		do insert(building(BuildingID,Name,OwnerID,ConstructionYear,Categories,FunctionID,Floors,MultiPoly,Area)).
 		
 	%%% ZONE PERCEPT
-	forall percept(zones(List)), bel(zone(ZoneID,OldName,OldFloors,OldSize,OldCategories), 
+	forall percept(zones(List)),bel(zone(ZoneID,OldName,OldFloors,OldSize,OldCategories),
 		member(zone(ZoneID,NewName,NewFloors,NewSize,NewCategories),List)) 
 		do delete(zone(ZoneID,OldName,OldFloors,OldSize,OldCategories)) 
 		+ insert(zone(ZoneID,NewName,NewFloors,NewSize,NewCategories)).
 		
 	%%% LAND PERCEPT
 	% update lands
-	forall percept(lands(List)), 
+	forall percept(lands(List)),
 		bel(land(LandID,OldOwnerID,OldMultiPoly,OldZoneList,OldSize),
-		member(land(LandID,NewOwnerID,NewMultiPoly,NewZoneList,NewSize), List))
+		member(land(LandID,NewOwnerID,NewMultiPoly,NewZoneList,NewSize),List))
 		do delete(land(LandID,OldOwnerID,OldMultiPoly,OldZoneList,OldSize)) + insert(land(LandID,NewOwnerID,NewMultiPoly,NewZoneList,NewSize)).
 	% insert new lands
-	forall percept(lands(List)), bel(member(land(LandID,OwnerID,MultiPoly,ZoneIDList,Size),List), not(land(LandID,_,_,_,_)))
+	forall percept(lands(List)),bel(member(land(LandID,OwnerID,MultiPoly,ZoneIDList,Size),List),not(land(LandID,_,_,_,_)))
 		do insert(land(LandID,OwnerID,MultiPoly,ZoneIDList,Size)).
 	% delete old lands that no longer exist
-	forall percept(lands(List)), bel(land(LandID,OwnerID,OldMultiPoly,OldZoneList,OldSize), not(member(land(LandID,_,_,_,_),List)))
+	forall percept(lands(List)),bel(land(LandID,OwnerID,OldMultiPoly,OldZoneList,OldSize),not(member(land(LandID,_,_,_,_),List)))
 		do delete(land(LandID,OwnerID,OldMultiPoly,OldZoneList,OldSize)).
 
 	%%% INDICATOR PERCEPTS
 	% update indicator/4 [indicator(IndicatorID,Current,Target,ZoneIndicatorsList)]]
-	% when another percept is received with the same IndicatorID but with other values. 			
-	forall percept(indicators(List)), 
-		bel(indicator(IndicatorID,Value,Target,ZoneLinks), 
-		member(indicator(IndicatorID,OtherValue,OtherTarget,OtherZoneLinks),List), 
-			(Value\=OtherValue; Target\=OtherTarget; ZoneLinks\=OtherZoneLinks)) 
+	% when another percept is received with the same IndicatorID but with other values.
+	forall percept(indicators(List)),
+		bel(indicator(IndicatorID,Value,Target,ZoneLinks),
+		member(indicator(IndicatorID,OtherValue,OtherTarget,OtherZoneLinks),List),
+			(Value\=OtherValue; Target\=OtherTarget; ZoneLinks\=OtherZoneLinks))
 		do delete(indicator(IndicatorID,Value,Target,ZoneLinks)) + 
 		insert(indicator(IndicatorID,OtherValue,OtherTarget,OtherZoneLinks)).
 	
@@ -65,8 +65,8 @@ module tygronEvents {
 		
 	%%% REQUEST PERCEPTS
 	% insert request/9 to beliefs
-	forall percept(request(Type, RequestType, RequestID, ContentLinkID, VisibieStakeholdersIDList, ActionLogIDList, Price, MultiPolygon, Area, Answers)) 
-		do insert(request(Type, RequestType, RequestID, ContentLinkID, VisibieStakeholdersIDList, ActionLogIDList, Price, MultiPolygon, Area, Answers)). 
+	forall percept(request(Type,RequestType,RequestID,ContentLinkID,VisibieStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,Area,Answers)) 
+		do insert(request(Type,RequestType,RequestID,ContentLinkID,VisibieStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,Area,Answers)). 
 		
 	
 	% enter tygronGoals to adopt goals when preconditions are met
