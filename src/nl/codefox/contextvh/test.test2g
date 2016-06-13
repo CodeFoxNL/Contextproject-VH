@@ -1,0 +1,13 @@
+ use Tygron as mas.
+ use knowledgebase as knowledge.
+ use tygron as module.
+ timeout = 5.
+
+test tygron with
+	pre{ }
+	in{eventually bel(actions(_)). }
+	post{ }
+	
+tygronagent{
+	do tygron.
+}
