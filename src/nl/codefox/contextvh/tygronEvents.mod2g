@@ -67,8 +67,7 @@ module tygronEvents {
 	% insert request/9 to beliefs
 	forall percept(request(Type,RequestType,RequestID,ContentLinkID,VisibieStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,Area,Answers)) 
 		do insert(request(Type,RequestType,RequestID,ContentLinkID,VisibieStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,Area,Answers)). 
-		
-	
+			
 	% enter tygronGoals to adopt goals when preconditions are met
 	if true then tygronGoals. 		
 }

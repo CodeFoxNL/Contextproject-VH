@@ -33,7 +33,7 @@
 
 %%% Goals that can be adopted
 demolishBuilding(BuildingID) :- demolished(BuildingID).
-constructBuilding(BuildingID) :- constructed(BuildingID).
+constructBuilding(MultiPoly) :- constructed(MultiPoly).
 upgradeBuilding(UpgradeID,MultiPolygon) :- upgraded(MultiPolygon).
 improveZone(IndicatorID,ZoneID) :- improvedZone(IndicatorID,ZoneID).
 % we achieve these goals when we have tried 3 times or when we actually bought or sold land.

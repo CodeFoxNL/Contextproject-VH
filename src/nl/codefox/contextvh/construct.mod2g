@@ -7,7 +7,7 @@ order=linearall.
 module construct(MultiPoly) {
 	
 % construct a building on an empty multipolygon that we own
-if bel(needLuxeHouse,functions(FunctionList),ourID(OurID),member([_,FunctionId,['LUXE']],FunctionList) )
+if bel(needLuxeHouse,ourID(OurID),function(_,FunctionId,['LUXE']))
 	then building_plan_construction(FunctionId,OurID,MultiPoly) + delete(emptyPoly(MultiPoly)) + insert(constructed(MultiPoly)) + exit-module.
 if bel(not(needLuxeHouse),functions(FunctionList),ourID(OurID),member([_,FunctionId,['NORMAL']],FunctionList) )
 	then building_plan_construction(FunctionId,OurID,MultiPoly) + delete(emptyPoly(MultiPoly)) + insert(constructed(MultiPoly)) + exit-module.
