@@ -17,8 +17,7 @@ module tygronInit {
 		% initialize settings
 		if true then insert(settings([])).
 		if true then insert(actions([])).
-		if true then insert(requests([])).
-		
+				
 		% initialize all lands
 		forall percept(lands(List)), bel(member(land(LandID,OwnerID,MultiPoly,ZoneList,Size),List))
 			do insert(land(LandID,OwnerID,MultiPoly,ZoneList,Size)).

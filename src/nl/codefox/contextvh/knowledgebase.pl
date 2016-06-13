@@ -7,7 +7,7 @@
 :- dynamic buildings/1.
 :- dynamic settings/1.
 :- dynamic actions/1.
-:- dynamic requests/1.
+:- dynamic request/10.
 
 :- dynamic stakeholder/4.
 :- dynamic function/3.
