@@ -1,18 +1,21 @@
 use Tygron as mas.
 use knowledgebase as knowledge.
 use buyLand as module.
+use tygron as module.
 use tygron as actionspec.
+timeout = 10.
 
 
-test buyLand(_) with
+test buyLand(MultiPoly) with
 	pre{bel(building(BuildingId, 'Overige functie (1218)', _, _, _, _, _, MultiPoly), landOfOthers(MultiPoly), not(doneBuying(MultiPoly))), goal(doneBuying(MultiPoly))}
 	in{ 
-		eventually done(map_buy_land(MultiPoly, Price)).
-		eventually done(buyLand(MultiPoly)).
-		eventually bel(ownedBuilding(BuildingId)).
+		bel(building(BuildingId, 'Overige functie (1218)', _, _, _, _, _, MultiPoly), landOfOthers(MultiPoly)) leadsto goal(doneBuying(MultiPoly)).
+		goal(doneBuying(MultiPoly)) leadsto done(map_buy_land(MultiPoly, Price)).
+		goal(doneBuying(MultiPoly)) leadsto done(buyLand(MultiPoly)).
+		goal(doneBuying(MultiPoly)) leadsto bel(ownedBuilding(BuildingId)).
 	}
 	post{true}
 	
 	tygronagent {
-		do buyLand(MultiPoly).
+		do tygron.
 	}
