@@ -39,4 +39,9 @@ module tygronInit {
 		forall percept(indicators(List)), 
 			bel(member(indicator(ID,Value,Target,ZoneLink),List))
 			do insert(indicator(ID,Value,Target,ZoneLink)).
+			
+		% initialize all upgrade_types
+		forall percept(upgrade_types(List)),
+			bel(member(upgrade_type(UpgradeID,UpgradePairs),List), not(upgrade_type(UpgradeID,_)))
+			do insert(upgrade_type(UpgradeID,UpgradePairs)).
 }

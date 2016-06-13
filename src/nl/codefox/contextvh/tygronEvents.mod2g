@@ -59,11 +59,6 @@ module tygronEvents {
 		do delete(indicator(IndicatorID,Value,Target,ZoneLinks)) + 
 		insert(indicator(IndicatorID,OtherValue,OtherTarget,OtherZoneLinks)).
 	
-	%%% UPGRADE PERCEPTS
-	forall percept(upgrade_types(List)),
-		bel(member(upgrade_type(UpgradeID,SourceID,TargetID),List), not(upgrade_type(UpgradeID,_,_)))
-		do insert(upgrade_type(UpgradeID,SourceID,TargetID)).
-	
 	%%% ACTIONLOG PERCEPTS	
 	forall percept(actionlog(StakeholderID,ActionLog,LogID,Parameters)),
 		bel(not(actionlog(StakeholderID,ActionLog,LogID,Parameters)))

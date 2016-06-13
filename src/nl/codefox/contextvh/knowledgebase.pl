@@ -19,7 +19,7 @@
 % others
 :- dynamic indicatorLink/2.
 :- dynamic actionlog/4.
-:- dynamic upgrade_type/3.
+:- dynamic upgrade_type/2.
 
 %%% Defined knowledge
 :- dynamic demolished/1.

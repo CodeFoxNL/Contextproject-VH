@@ -24,7 +24,7 @@ module tygronGoals {
 		then adopt( demolishBuilding(BuildingId)).
 	
 	% Example of building we will upgrade by replacing and rebuilding it
-	if bel(building(BuildingId,_,_,_,['LUXE'],FunctionID,_,MultiPolygon), ownedBuilding(BuildingId), upgrade_type(UpgradeID,FunctionID,_)) 
+	if bel(building(BuildingId,_,_,_,['LUXE'],FunctionID,_,MultiPolygon), ownedBuilding(BuildingId), upgrade_type(UpgradeID,UpgradePairs), member(upgrade_pair(FunctionID,_), UpgradePairs)  ) 
 		then adopt(upgradeBuilding(UpgradeID, MultiPolygon)).
 	 
 	% Adtop goals to demolish social buildings when we want more luxury or normal buildings 
