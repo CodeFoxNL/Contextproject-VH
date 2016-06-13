@@ -1,5 +1,6 @@
 use knowledgebase as knowledge.
 
+order = linearall.
 module tygronGoals {
 	%_______________________________Adopt goals based on the environment_______________________________%
 	
