@@ -6,13 +6,17 @@ use tygron as actionspec.
 timeout = 10.
 
 
-test buyLand(MultiPoly) with
-	pre{bel(building(BuildingId, 'Overige functie (1218)', _, _, _, _, _, MultiPoly), landOfOthers(MultiPoly), not(doneBuying(MultiPoly))), goal(doneBuying(MultiPoly))}
+test buyLand(_) with
+	pre{bel(building(BuildingId, 'Overige functie (1218)', _, _, _, _, _, MultiPoly), landOfOthers(MultiPoly), not(doneBuying(MultiPoly)))}
 	in{ 
 		bel(building(BuildingId, 'Overige functie (1218)', _, _, _, _, _, MultiPoly), landOfOthers(MultiPoly)) leadsto goal(doneBuying(MultiPoly)).
 		goal(doneBuying(MultiPoly)) leadsto done(map_buy_land(MultiPoly, Price)).
 		goal(doneBuying(MultiPoly)) leadsto done(buyLand(MultiPoly)).
 		goal(doneBuying(MultiPoly)) leadsto bel(ownedBuilding(BuildingId)).
+		
+		goal(doneBuying(MultiPoly)) leadsto not(done(construct(_))).
+		goal(doneBuying(MultiPoly)) leadsto not(done(demolish(_))).
+		goal(doneBuying(MultiPoly)) leadsto not(done(upgrade(_))).
 	}
 	post{true}
 	
