@@ -8,9 +8,7 @@ module tygronInit {
 		forall percept(stakeholders(List)),
 			bel(member(SubList,List),member(stakeholder(StakeholderID,Name,Budget,Income),SubList)) 
 			do insert(stakeholder(StakeholderID,Name,Budget,Income)).
-		% functions do not change during the game	
-		
-		if percept(functions([H|T])) then print(search12345) + print(H).
+		% functions do not change during the game			
 		forall percept(functions(FunctionList)),bel(member([FunctionName,FunctionID,List],FunctionList))
 			do insert(function(FunctionName,FunctionID,List)).
 	
