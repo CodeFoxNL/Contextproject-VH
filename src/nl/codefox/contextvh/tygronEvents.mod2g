@@ -13,7 +13,7 @@ module tygronEvents {
 	%%% BUILDING PERCEPTS
 	% update building/8 when another percept is received with similar ID but with other values.
 	forall percept(buildings(List)),
-		bel(building(BuildingID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPolygon,Area),
+		bel(building(BuildingID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPoly,Area),
 		member(building(BuildingID,OtherName,OtherOwnerID,OtherConstructionYear,OtherCategories,OtherFunctionID,OtherFloors,OtherMultiPoly,OtherArea),List),
 		(OwnerID\=OtherOwnerID; Name\=OtherName; BuildYear\=OtherBuildYear; Categories\=OtherCategories; Floors\=OtherFloors; FunctionID\=OtherFunctionID; MultiPoly\=OtherMultiPoly;Area\=OtherArea)) 
 		do delete(building(BuildingID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPoly,Area)) + 
@@ -67,8 +67,7 @@ module tygronEvents {
 	% insert request/9 to beliefs
 	forall percept(request(Type,RequestType,RequestID,ContentLinkID,VisibieStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,Area,Answers)) 
 		do insert(request(Type,RequestType,RequestID,ContentLinkID,VisibieStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,Area,Answers)). 
-		
-	
+			
 	% enter tygronGoals to adopt goals when preconditions are met
 	if true then tygronGoals. 		
 }
