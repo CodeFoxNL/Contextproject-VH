@@ -14,7 +14,7 @@ module tygronInit {
 	
 	%%% Initialize knowledge (will be updated in the event module each cycle)
 	
-		% initialize settings
+		% initialize settings and actions
 		if true then insert(settings([])).
 		if true then insert(actions([])).
 				

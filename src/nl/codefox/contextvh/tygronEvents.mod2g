@@ -7,7 +7,7 @@ module tygronEvents {
 	
 	% update settings if they have changed
 	if percept(settings(X)), bel(settings(Y), X \= Y) then delete(settings(Y)) + insert(settings(X)).
-	% update list actions and requests if they have changed
+	% update list actions if they have changed
 	if percept(actions(X)), bel(actions(Y)) then delete(actions(X)) + insert(actions(Y)).
 		
 	%%% BUILDING PERCEPTS
