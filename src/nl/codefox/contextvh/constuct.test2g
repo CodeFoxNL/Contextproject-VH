@@ -9,6 +9,7 @@ test construct(_) with
 	pre{bel(emptyPoly(MultiPoly))}
 	in{ 
 		bel(emptyPoly(MultiPoly)) leadsto goal(constructBuilding(MultiPoly)).
+		
 		goal(constructBuilding(MultiPoly)) leadsto done(building_plan_construction(_, _, MultiPoly)).
 		goal(constructBuilding(MultiPoly)) leadsto done(construct(MultiPoly)).
 		goal(constructBuilding(MultiPoly)) leadsto not(bel(emptyPoly(MultiPoly))).
