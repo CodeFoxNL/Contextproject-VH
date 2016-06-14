@@ -49,7 +49,7 @@ improvedZone(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink)
 
 %%% Checks
 % check if our agent owns a building
-ownedBuilding(BuildingID) :- building(BuildingID,_,OwnerID,_,_,_,_,_,_),stakeholder(StakeholderID,'Private_Woningbouw_Burgers',Money,Income),StakeholderID=OwnerID.
+ownedBuilding(BuildingID) :- ourID(ID), building(BuildingID,_,ID,_,_,_,_,_,_).
 % budget of our Stakeholder
 budget(Amount) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',Amount,Income).
 % stakeholder ID for our Stakeholder
