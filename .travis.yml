@@ -33,7 +33,7 @@ before_script:
 script:
 - cd $rd/src/nl/codefox/contextvh
 # run the Goal Test with a 60s timeout
-- timeout 60 java -cp $rd/lib/goal/com.github.goalhub.runtime.jar-with-dependencies_2.0.2.20160418123535.jar goal.tools.Run ./*.test2g -v > result.txt || echo 0
+- timeout 60 java -cp $rd/lib/goal/com.github.goalhub.runtime.jar-with-dependencies_2.0.2.20160418123535.jar goal.tools.Run ./testTygronInit.test2g -v > result.txt || echo 0
 # print the test output
 - cat result.txt
 # if there is a test failed then the build fails
