@@ -8,6 +8,13 @@ module tygronRequests {
 		not(request(_,_,RequestID,_,_,_,_,_,_,_)))		
 		do popup_answer(RequestID,AnswerID). 
 	
+	% if a request is a confirmation that you are buying land 
+	forall percept(requests(List)),
+		bel(W\="NO_PRICE",member(request("INTERACTION","BUY_LAND",_,_,[2|T],_,W,MultiPolygon,_),List),not(requestedLand(MultiPolygon,_))) do insert(requestedLand(MultiPolygon, 1)).
+	forall percept(requests(List)),
+		bel(W\="NO_PRICE",member(request("INTERACTION","BUY_LAND",_,_,[2|T],_,W,MultiPolygon,_),List),requestedLand(MultiPolygon,Counter),Counter<3,NewCounter is Counter+1) 
+		do delete(requestedLand(MultiPolygon, Counter), doneBuying(MultiPolygon)) + insert(requestedLand(MultiPolygon, NewCounter)) + adopt(doneBuying(MultiPolygon)).
+		
 	% if a request is incoming from another stakeholder to buy land, decline.	
 	forall percept(requests(List)), 
 		bel(member(request("INTERACTION","BUY_LAND",RequestID,ContentLinkID,VisibleStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,AreaSize,AnswersList), List),
@@ -34,13 +41,6 @@ module tygronRequests {
 	% if a request to buy land from a stakeholder is declined increase the requestedLand counter 
 	%%%not functional because of MultiPolygon comparison #TODO!%%%
 	if percept(requests(List)), bel(member(request("INTERACTION","BUY_LAND",RequestID,_,[2|T],_,"NO_PRICE",MultiPolygon,_,_), List), not(request(_,_,RequestID,_,_,_,_,_,_,_)), requestedLand(MultiPolygon, Counter)) then print(3).
-	
-	forall percept(requests(List)), 
-		bel(member(request("INTERACTION","BUY_LAND",RequestID,_,[2|T],_,"NO_PRICE",MultiPolygon,_,_), List),
-		not(request(_,_,RequestID,_,_,_,_,_,_,_)),
-		requestedLand(MultiPolygon, Counter),
-		NewCounter is Counter + 1)
-		do delete(requestedLand(MultiPolygon, Counter), doneBuying(MultiPolygon)) + insert(requestedLand(MultiPolygon, NewCounter)). 
 	
 	% insert request/10 to beliefs
 	forall percept(requests(List)), 
