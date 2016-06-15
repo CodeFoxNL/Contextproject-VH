@@ -15,5 +15,4 @@ module buyLand(MultiPoly) {
 	if bel(landOfOthers(MultiPoly),not(requestedLand(MultiPoly,Counter))) 
 		then map_buy_land(MultiPoly,250) + 
 		insert(requestedLand(MultiPoly,1), doneBuying(MultiPoly)).
-	forall bel(requestedLand(_,Counter)) do print(Counter) + print("search123").
 	}
