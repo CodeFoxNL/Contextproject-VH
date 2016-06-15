@@ -8,9 +8,9 @@ module tygronEvents {
 	%%%%% Percept Processing %%%%%
 	
 	% update settings if they have changed
-	if percept(settings(X)),bel(settings(Y),X \= Y) then delete(settings(Y)) + insert(settings(X)).
+	if percept(settings(X)), bel(settings(Y),X \= Y) then delete(settings(Y)) + insert(settings(X)).
 	% update list actions if they have changed
-	if percept(actions(X)),bel(actions(Y)) then delete(actions(X)) + insert(actions(Y)).
+	if percept(actions(X)), bel(actions(Y)) then delete(actions(X)) + insert(actions(Y)).
 		
 	%%% BUILDING PERCEPTS
 	% update building/9 when another percept is received with similar ID but with other values.
@@ -62,9 +62,9 @@ module tygronEvents {
 		insert(indicator(IndicatorID,OtherValue,OtherTarget,OtherZoneLinks)).
 	
 	%%% ACTIONLOG PERCEPTS	
-	forall percept(actionlog(StakeholderID,ActionLog,LogID,Parameters)),
-		bel(not(actionlog(StakeholderID,ActionLog,LogID,Parameters)))
-		do insert(actionlog(StakeholderID,ActionLog,LogID,Parameters)).
+	forall percept(action_logs(ActList)), 
+		bel(member(actionlog(StakeholderID,Description,ActionID,IncList),ActList))
+		do insert(actionlog(StakeholderID,Description,ActionID,IncList)).
 		
 	%%% RELEVANT AREAS PERCEPTS
 	% insert relevant_areas/2
@@ -78,8 +78,8 @@ module tygronEvents {
 	% insert request/9 to beliefs
 	forall percept(request(Type,RequestType,RequestID,ContentLinkID,VisibieStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,Area,Answers)) 
 		do insert(request(Type,RequestType,RequestID,ContentLinkID,VisibieStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,Area,Answers)). 
-			
+
 	% enter tygronGoals to adopt goals when preconditions are met
-	if true then tygronGoals. 	
-	if true then tygronRequests.	
+	if true then tygronGoals.
+	if true then tygronRequests.
 }
