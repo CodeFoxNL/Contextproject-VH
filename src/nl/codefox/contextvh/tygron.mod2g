@@ -7,7 +7,7 @@ use demolish as module.
 use upgrade as module.
 
 
-exit=nogoals.
+exit=never.
 order = linearall.
 
 % The main module
