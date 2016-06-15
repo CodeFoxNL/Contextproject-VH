@@ -9,7 +9,6 @@ module tygronRequests {
 		do popup_answer(RequestID,AnswerID). 
 	
 	% if a request is a confirmation that you are buying land 
-	forall percept(requests(List)), bel(member(request("INFORMATION","BUY_LAND",_,_,[2],_,_,MultiPolygon,_,_),List)) do print("BLABLABLA").
 	forall percept(requests(List)),
 		bel(member(request("INFORMATION","BUY_LAND",_,_,[2],_,_,MultiPolygon,_,_),List),not(requestedLand(MultiPolygon,_))) do insert(requestedLand(MultiPolygon, 0)).
 	forall percept(requests(List)),
