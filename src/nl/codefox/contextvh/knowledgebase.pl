@@ -30,7 +30,6 @@
 :- dynamic emptyPoly/1.
 :- dynamic requestedLand/2.
 :- dynamic offeredLand/2.
-:- dynamic permaGoal.
 :- dynamic doneBuying/1.
 
 %%% Goals that can be adopted
