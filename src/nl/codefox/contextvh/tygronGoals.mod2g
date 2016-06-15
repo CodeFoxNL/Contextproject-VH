@@ -18,7 +18,6 @@ module tygronGoals {
 %		not(member(['NORMAL'], Categories)); not(member(['OTHER'], Categories)))
 %		then adopt(doneSelling(MultiPoly)).
 
-
 	% Adopt goal to build where a demolished building was previously located.
 	forall bel(emptyPoly(MultiPoly))
 		do adopt(constructBuilding(MultiPoly)).
