@@ -9,10 +9,11 @@ module tygronRequests {
 		do popup_answer(RequestID,AnswerID). 
 	
 	% if a request is a confirmation that you are buying land 
+	forall percept(requests(List)), bel(member(request("INFORMATION","BUY_LAND",_,_,[2],_,_,MultiPolygon,_,_),List)) do print("BLABLABLA").
 	forall percept(requests(List)),
-		bel(W\="NO_PRICE",member(request("INTERACTION","BUY_LAND",_,_,[2|T],_,W,MultiPolygon,_),List),not(requestedLand(MultiPolygon,_))) do insert(requestedLand(MultiPolygon, 1)).
+		bel(member(request("INFORMATION","BUY_LAND",_,_,[2],_,_,MultiPolygon,_,_),List),not(requestedLand(MultiPolygon,_))) do insert(requestedLand(MultiPolygon, 0)).
 	forall percept(requests(List)),
-		bel(W\="NO_PRICE",member(request("INTERACTION","BUY_LAND",_,_,[2|T],_,W,MultiPolygon,_),List),requestedLand(MultiPolygon,Counter),Counter<3,NewCounter is Counter+1) 
+		bel(member(request("INTERACTION","BUY_LAND",_,_,[2],_,"NO_PRICE",MultiPolygon,_,_),List),requestedLand(MultiPolygon,Counter),Counter<3,NewCounter is Counter+1) 
 		do delete(requestedLand(MultiPolygon, Counter), doneBuying(MultiPolygon)) + insert(requestedLand(MultiPolygon, NewCounter)) + adopt(doneBuying(MultiPolygon)).
 		
 	% if a request is incoming from another stakeholder to buy land, decline.	
