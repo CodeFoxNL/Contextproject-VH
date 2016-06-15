@@ -73,11 +73,6 @@ module tygronEvents {
 	% update relevant_areas/2
 	if percept(relevant_areas(CallID,NewMultiPolygons)), bel(relevant_areas(CallID,OldMultiPolygons))
 		then delete(relevant_areas(CallID,OldMultiPolygons))+ insert(relevant_areas(CallID,NewMultiPolygons)).
-		
-	%%% REQUEST PERCEPTS
-	% insert request/9 to beliefs
-	forall percept(request(Type,RequestType,RequestID,ContentLinkID,VisibieStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,Area,Answers)) 
-		do insert(request(Type,RequestType,RequestID,ContentLinkID,VisibieStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,Area,Answers)). 
 
 	% enter tygronGoals to adopt goals when preconditions are met
 	if true then tygronGoals.
