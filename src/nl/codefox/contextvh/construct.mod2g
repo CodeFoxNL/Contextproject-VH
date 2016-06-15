@@ -5,11 +5,11 @@ exit=always.
 order=linearall.
 % The constructing module
 module construct(MultiPoly) {
-	
+
 % construct a building on an empty multipolygon that we own
 if bel(needLuxeHouse,ourID(OurID),function(_,FunctionId,['LUXE']))
 	then building_plan_construction(FunctionId,OurID,MultiPoly) + delete(emptyPoly(MultiPoly)) + insert(constructed(MultiPoly)) + exit-module.
-if bel(not(needLuxeHouse),functions(FunctionList),ourID(OurID),member([_,FunctionId,['NORMAL']],FunctionList) )
+if bel(not(needLuxeHouse),ourID(OurID),function(_,FunctionId,['NORMAL']) )
 	then building_plan_construction(FunctionId,OurID,MultiPoly) + delete(emptyPoly(MultiPoly)) + insert(constructed(MultiPoly)) + exit-module.
 
 % Types of buildings that we want to build according to the wikipedia of Tygron: 
