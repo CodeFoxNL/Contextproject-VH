@@ -22,6 +22,8 @@
 :- dynamic upgrade_type/2.
 
 %%% Defined knowledge
+:- dynamic doneSelling/1.
+:- dynamic doneBuying/1.
 :- dynamic demolished/1.
 :- dynamic constructed/1.
 :- dynamic upgraded/1.
