@@ -62,11 +62,11 @@ module tygronEvents {
 		insert(indicator(IndicatorID,OtherValue,OtherTarget,OtherZoneLinks)).
 	
 	%%% ACTIONLOG PERCEPTS	
-	forall percept(actionlog(StakeholderID,ActionLog,LogID,Parameters)),
-		bel(not(actionlog(StakeholderID,ActionLog,LogID,Parameters)))
-		do insert(actionlog(StakeholderID,ActionLog,LogID,Parameters)).    
-			
+	forall percept(action_logs(ActList)), 
+		bel(member(actionlog(StakeholderID,Description,ActionID,IncList),ActList))
+		do insert(actionlog(StakeholderID,Description,ActionID,IncList)).
+
 	% enter tygronGoals to adopt goals when preconditions are met
-	if true then tygronGoals. 	
-	if true then tygronRequests.	
+	if true then tygronGoals.
+	if true then tygronRequests.
 }
