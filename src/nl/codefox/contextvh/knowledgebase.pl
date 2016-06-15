@@ -36,7 +36,7 @@
 demolishBuilding(BuildingID) :- demolished(BuildingID).
 constructBuilding(MultiPoly) :- constructed(MultiPoly).
 upgradeBuilding(UpgradeID,BuildingId) :- upgraded(BuildingId).
-improveZone(IndicatorID,ZoneID) :- improvedZone(IndicatorID,ZoneID).
+improveZone(IndicatorID,ZoneID, Weight) :- improvedZone(IndicatorID,ZoneID, Weight).
 % we achieve these goals when we have tried 3 times or when we actually bought or sold land.
 
 doneSelling(MultiPoly) :- (offeredLand(MultiPoly,Counter),Counter>=3); landOfOthers(MultiPoly).
@@ -44,7 +44,7 @@ doneSelling(MultiPoly) :- (offeredLand(MultiPoly,Counter),Counter>=3); landOfOth
 % determine when a zone needs to be improved and for which indicator
 needImprovement(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink),member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),CurrentValue<CurrentTarget.
 % a zone is improved when the indicator score is higher or equal to the agent's target
-improvedZone(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink),member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),CurrentValue>=CurrentTarget.
+improvedZone(IndicatorID,ZoneID, Weight) :- indicator(IndicatorID,Value,Target,ZoneLink),member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),CurrentValue>=CurrentTarget.
 
 %%% Checks
 % check if our agent owns a building
