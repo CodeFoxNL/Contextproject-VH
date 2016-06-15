@@ -63,6 +63,14 @@ module tygronEvents {
 		bel(not(actionlog(StakeholderID,ActionLog,LogID,Parameters)))
 		do insert(actionlog(StakeholderID,ActionLog,LogID,Parameters)).
 		
+	%%% RELEVANT AREAS PERCEPTS
+	% insert relevant_areas/2
+	if percept(relevant_areas(ID,MultiPolygons)), not(bel(relevant_areas(ID,_)))
+		then insert(relevant_areas(ID,MultiPolygons)).
+	% update relevant_areas/2
+	if percept(relevant_areas(ID,NewMultiPolygons)), bel(relevant_areas(ID,OldMultiPolygons))
+		then delete(relevant_areas(ID,OldMultiPolygons))+ insert(relevant_areas(ID,NewMultiPolygons)).
+		
 	%%% REQUEST PERCEPTS
 	% insert request/9 to beliefs
 	forall percept(request(Type,RequestType,RequestID,ContentLinkID,VisibieStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,Area,Answers)) 

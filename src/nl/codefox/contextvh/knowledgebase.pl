@@ -15,6 +15,7 @@
 :- dynamic land/5.
 :- dynamic zone/5. 
 :- dynamic building/9.
+:- dynamic relevant_areas/2.
 
 % others
 :- dynamic indicatorLink/2.
