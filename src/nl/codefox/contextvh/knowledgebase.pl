@@ -30,6 +30,7 @@
 :- dynamic emptyPoly/1.
 :- dynamic requestedLand/2.
 :- dynamic offeredLand/2.
+:- doneSelling/1.
 
 %%% Goals that can be adopted
 demolishBuilding(BuildingID) :- demolished(BuildingID).
@@ -38,7 +39,6 @@ upgradeBuilding(UpgradeID,MultiPolygon) :- upgraded(MultiPolygon).
 improveZone(IndicatorID,ZoneID) :- improvedZone(IndicatorID,ZoneID).
 % we achieve these goals when we have tried 3 times or when we actually bought or sold land.
 doneBuying(MultiPoly) :- (requestedLand(MultiPoly,Counter),Counter>=3); ourLand(MultiPoly).
-doneSelling(MultiPoly) :- (offeredLand(MultiPoly,Counter),Counter>=3); landOfOthers(MultiPoly).
 
 % determine when a zone needs to be improved and for which indicator
 needImprovement(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink),member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),CurrentValue<CurrentTarget.
@@ -69,15 +69,13 @@ needLuxeHouse :- indicator(34,_,_,ZoneLinkList),member(zone_link(0,_,Current1,Ta
 	Target1-Current1>Target2-Current2.
 
 % indicator of the spatial quality
-%qualityIndicator(Value, Target, ZoneID) :- 
-%	indicatorLink(_, IndicatorWeights), member(indicatorWeights(IndicatorID, IndicatorName, _), 
-%	IndicatorWeights), (IndicatorName == 'Ruimtelijke kwaliteit'), 
-%	indicator(IndicatorID, Value, Target, ZoneLink), 
-%	member(zone_link(ZoneID, IndicatorID, Value, Target), ZoneLink).
+%qualityIndicator(Value,Target,ZoneID) :- 
+%	indicatorLink(_,IndicatorWeights), member(indicatorWeights(IndicatorID,IndicatorName,_),IndicatorWeights),
+%	(IndicatorName == 'Ruimtelijke kwaliteit'), indicator(IndicatorID,Value,Target,ZoneLink),
+%	member(zone_link(ZoneID,IndicatorID,Value,Target),ZoneLink).
 
 % indicator of the sound
-%soundIndicator(Value, Target, ZoneID) :- 
-%	indicatorLink(_, IndicatorWeights), member(indicatorWeights(IndicatorID, IndicatorName, _),
-%	IndicatorWeights), (IndicatorName == 'Geluidsoverlast Verkeer'), 
-%	indicator(IndicatorID, Value, Target, ZoneLink), 
-%	member(zone_link(ZoneID, IndicatorID, Value, Target), ZoneLink).
+%soundIndicator(Value,Target,ZoneID) :- 
+%	indicatorLink(_,IndicatorWeights), member(indicatorWeights(IndicatorID,IndicatorName,_), IndicatorWeights),
+%	(IndicatorName == 'Geluidsoverlast Verkeer'), indicator(IndicatorID,Value,Target,ZoneLink),
+%	member(zone_link(ZoneID,IndicatorID,Value,Target),ZoneLink).

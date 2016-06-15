@@ -5,6 +5,10 @@ exit=always.
 
 % The selling land module
 module sellLand(MultiPoly) {
+	
+	% check if we succeeded in selling the land
+	if bel(not(ourLand(MultiPoly)))
+		then insert(doneSelling(MultiPoly)) + exit-module.
 		
 	if bel(ourLand(MultiPoly),offeredLand(MultiPoly,Counter),NextCounter is Counter + 1,Price is (-NextCounter * 50) + 300,notOurID(BuyerID))
 		then map_sell_land(BuyerID,MultiPoly,Price) + 
