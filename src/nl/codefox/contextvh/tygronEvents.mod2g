@@ -65,11 +65,11 @@ module tygronEvents {
 		
 	%%% RELEVANT AREAS PERCEPTS
 	% insert relevant_areas/2
-	if percept(relevant_areas(ID,MultiPolygons)), not(bel(relevant_areas(ID,_)))
-		then insert(relevant_areas(ID,MultiPolygons)).
+	if percept(relevant_areas(CallID,MultiPolygons)), not(bel(relevant_areas(CallID,_)))
+		then insert(relevant_areas(CallID,MultiPolygons)).
 	% update relevant_areas/2
-	if percept(relevant_areas(ID,NewMultiPolygons)), bel(relevant_areas(ID,OldMultiPolygons))
-		then delete(relevant_areas(ID,OldMultiPolygons))+ insert(relevant_areas(ID,NewMultiPolygons)).
+	if percept(relevant_areas(CallID,NewMultiPolygons)), bel(relevant_areas(CallID,OldMultiPolygons))
+		then delete(relevant_areas(CallID,OldMultiPolygons))+ insert(relevant_areas(CallID,NewMultiPolygons)).
 		
 	%%% REQUEST PERCEPTS
 	% insert request/9 to beliefs
