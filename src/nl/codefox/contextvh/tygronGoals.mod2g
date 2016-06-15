@@ -4,6 +4,21 @@ order = linearall.
 module tygronGoals {
 	%_______________________________Adopt goals based on the environment_______________________________%
 	
+	%%% Selling buildings
+
+	% possibility 1: sell buildings we own that are not meant for housing but could be useful to other stakeholders
+	% other categories may be added later
+	if bel(building(BuildingID,Name,OwnerID,_,Categories,FunctionID,_,MultiPoly,_),ourID(OwnerID),
+		member(['SHOPPING'], Categories); member(['LEISURE'], Categories); member(['OFFICES'], Categories))
+		then adopt(doneSelling(MultiPoly)).
+		
+	% possibility 2: sell all buildings we own that are not housing
+%	if bel(building(BuildingID,Name,OwnerID,_,Categories,FunctionID,_,MultiPoly,_),ourID(OwnerID),
+%		not(member(['LUXE'], Categories)), not(member(['SOCIAL'], Categories)); 
+%		not(member(['NORMAL'], Categories)); not(member(['OTHER'], Categories)))
+%		then adopt(doneSelling(MultiPoly)).
+
+
 	% Adopt goal to build where a demolished building was previously located.
 	forall bel(emptyPoly(MultiPoly))
 		do adopt(constructBuilding(MultiPoly)).
