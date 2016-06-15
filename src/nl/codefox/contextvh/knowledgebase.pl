@@ -35,7 +35,7 @@
 %%% Goals that can be adopted
 demolishBuilding(BuildingID) :- demolished(BuildingID).
 constructBuilding(MultiPoly) :- constructed(MultiPoly).
-upgradeBuilding(UpgradeID,MultiPolygon) :- upgraded(MultiPolygon).
+upgradeBuilding(UpgradeID,BuildingId) :- upgraded(BuildingId).
 improveZone(IndicatorID,ZoneID) :- improvedZone(IndicatorID,ZoneID).
 % we achieve these goals when we have tried 3 times or when we actually bought or sold land.
 
@@ -62,6 +62,7 @@ landOfOthers(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers
 ourLand(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',_,_),
 	land(LandID,stakeholder(StakeholderID,_,_,_),MultiPoly,_,_),
 	MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
+alreadyUpgraded(BuildingID) :- building(BuildingID,Name,_,_,_,_,_,_,_), sub_string(Name,_,3,_," + ").   
 
 % uses indicator scores to determine whether more Luxury houses are desirable,if this is not the case Normal houses are desirable.  
 needLuxeHouse:- indicator(34,_,_,ZoneLinkList),member(zone_link(0,_,Current1,Target1),ZoneLinkList),
