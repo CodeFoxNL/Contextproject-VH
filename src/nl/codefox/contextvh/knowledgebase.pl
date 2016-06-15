@@ -69,13 +69,13 @@ needLuxeHouse :- indicator(34,_,_,ZoneLinkList),member(zone_link(0,_,Current1,Ta
 	Target1-Current1>Target2-Current2.
 
 % indicator of the spatial quality
-%qualityIndicator(Value,Target,ZoneID) :- 
-%	indicatorLink(_,IndicatorWeights), member(indicatorWeights(IndicatorID,IndicatorName,_),IndicatorWeights),
-%	(IndicatorName == 'Ruimtelijke kwaliteit'), indicator(IndicatorID,Value,Target,ZoneLink),
-%	member(zone_link(ZoneID,IndicatorID,Value,Target),ZoneLink).
+qualityIndicator(Value,Target,ZoneID) :- 
+	indicatorLink(_,IndicatorWeights), member(indicatorWeights(IndicatorID,IndicatorName,_),IndicatorWeights),
+	(IndicatorName=='Ruimtelijke kwaliteit'), indicator(IndicatorID,Value,Target,ZoneLink),
+	member(zone_link(ZoneID,IndicatorID,Value,Target),ZoneLink).
 
 % indicator of the sound
-%soundIndicator(Value,Target,ZoneID) :- 
-%	indicatorLink(_,IndicatorWeights), member(indicatorWeights(IndicatorID,IndicatorName,_), IndicatorWeights),
-%	(IndicatorName == 'Geluidsoverlast Verkeer'), indicator(IndicatorID,Value,Target,ZoneLink),
-%	member(zone_link(ZoneID,IndicatorID,Value,Target),ZoneLink).
+soundIndicator(Value,Target,ZoneID) :- 
+	indicatorLink(_,IndicatorWeights), member(indicatorWeights(IndicatorID,IndicatorName,_),IndicatorWeights),
+	(IndicatorName=='Geluidsoverlast Verkeer'), indicator(IndicatorID,Value,Target,ZoneLink),
+	member(zone_link(ZoneID,IndicatorID,Value,Target),ZoneLink).
