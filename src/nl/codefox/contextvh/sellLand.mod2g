@@ -6,14 +6,14 @@ exit=always.
 % The selling land module
 module sellLand(MultiPoly) {
 		
-	if bel(ourLand(MultiPoly), offeredLand(MultiPoly, Counter), NextCounter is Counter + 1, Price is (-NextCounter * 50) + 300, notOurID(BuyerID))
-		then map_sell_land(BuyerID, MultiPoly, Price) + 
-		delete(offeredLand(MultiPoly, Counter)) + 
-		insert(offeredLand(MultiPoly, NextCounter)).
+	if bel(ourLand(MultiPoly),offeredLand(MultiPoly,Counter),NextCounter is Counter + 1,Price is (-NextCounter * 50) + 300,notOurID(BuyerID))
+		then map_sell_land(BuyerID,MultiPoly,Price) + 
+		delete(offeredLand(MultiPoly,Counter)) + 
+		insert(offeredLand(MultiPoly,NextCounter)).
 	
-	if bel(ourLand(MultiPoly), not(offeredLand(MultiPoly, Counter)), notOurID(BuyerID)) 
-		then map_sell_land(BuyerID, MultiPoly, 250) + 
-		insert(offeredLand(MultiPoly, 1)).
+	if bel(ourLand(MultiPoly),not(offeredLand(MultiPoly,Counter)),notOurID(BuyerID)) 
+		then map_sell_land(BuyerID,MultiPoly,250) + 
+		insert(offeredLand(MultiPoly,1)).
 	
 	if true then exit-module.
 	

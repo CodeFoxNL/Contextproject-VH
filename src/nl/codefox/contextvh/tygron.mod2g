@@ -30,8 +30,8 @@ module tygron {
 		then sellLand(MultiPoly).
 		
 	% upgrade a building
-	if goal (upgradeBuilding(UpgradeID, MultiPolygon)) 
-		then upgrade(UpgradeID, MultiPolygon). 
+	if goal (upgradeBuilding(UpgradeID,MultiPolygon)) 
+		then upgrade(UpgradeID,MultiPolygon). 
 	%__________________________________________________________________________________________________%
 	
 }
