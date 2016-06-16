@@ -14,7 +14,7 @@
 :- dynamic indicator/4.
 :- dynamic land/5.
 :- dynamic zone/5. 
-:- dynamic building/9.
+:- dynamic building/10.
 
 % others
 :- dynamic indicatorLink/2.
@@ -48,7 +48,7 @@ improvedZone(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink)
 
 %%% Checks
 % check if our agent owns a building
-ownedBuilding(BuildingID) :- ourID(ID), building(BuildingID,_,ID,_,_,_,_,MultiPoly,_), MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
+ownedBuilding(BuildingID) :- ourID(ID), building(BuildingID,_,ID,_,_,_,_,MultiPoly,_,_), MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
 % budget of our Stakeholder
 budget(Amount) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',Amount,Income).
 % stakeholder ID for our Stakeholder
