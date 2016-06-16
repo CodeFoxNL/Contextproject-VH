@@ -16,7 +16,7 @@ hs_err_pid*
 *.settings
 
 # Ignore LaTeX temporary files
-*.pdf
+**/Final Report.pdf
 *.log
 *.aux
 *.out
