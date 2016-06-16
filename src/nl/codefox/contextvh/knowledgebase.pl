@@ -41,17 +41,15 @@ upgradeBuilding(UpgradeID,BuildingId) :- upgraded(BuildingId).
 
 % we achieve these goals when we have tried 3 times or when we actually bought or sold land.
 doneSelling(MultiPoly) :- (offeredLand(MultiPoly,Counter),Counter>=3); landOfOthers(MultiPoly).
-
+ourIndicator(IndicatorID):- indicatorLink(2, Weights),member(indicatorWeights(IndicatorID,_,_),Weights).
 % determine when a zone needs to be improved and for which indicator
 needImprovement(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink),
 	member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),
-	CurrentValue<CurrentTarget, IndicatorID \= 34,indicatorLink(2, Weights),
-	member(indicatorWeights(IndicatorID,_,_),Weights).
+	CurrentValue<CurrentTarget, IndicatorID \= 34, ourIndicator(IndicatorID).
 % a zone is improved when the indicator score is higher or equal to the agent's target
 improvedZone(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink),
 	member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),
-	CurrentValue>=CurrentTarget, IndicatorID \= 34,indicatorLink(2, Weights),
-	member(indicatorWeights(IndicatorID,_,_),Weights).
+	CurrentValue>=CurrentTarget, IndicatorID \= 34,ourIndicator(IndicatorID).
 
 %%% Checks
 % check if our agent owns a building
@@ -71,8 +69,10 @@ ourLand(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',_,_
 	MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
 alreadyUpgraded(BuildingID) :- building(BuildingID,Name,_,_,_,_,_,_,_,_), sub_string(Name,_,3,_," + ").
 
-zoneToRenovate(ZoneId):- needImprovement(3,ZoneId);(indicator(34,Value,Target,_), Value < Target).   
+zoneToRenovate(ZoneId):- needImprovement(3,ZoneId) ; (indicator(34,Value,Target,_), Value < Target).   
+
 zoneForGreens(ZoneId):- indicator(19,_,_,ZoneLinkList),member(zone_link(_,ZoneId,Current,Target),ZoneLinkList),Current<Target.
+
 % uses indicator scores to determine whether more Luxury houses are desirable,if this is not the case Normal houses are desirable.  
 needLuxeHouse:- indicator(34,_,_,ZoneLinkList),member(zone_link(0,_,Current1,Target1),ZoneLinkList),
 	indicator(34,_,_,ZoneLinkList),member(zone_link(1,_,Current2,Target2),ZoneLinkList),

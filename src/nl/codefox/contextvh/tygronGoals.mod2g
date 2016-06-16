@@ -35,19 +35,14 @@ module tygronGoals {
 		%41/Zonnepanelen/
 			%6,Budget,-3318
 			%34,Surface,-0.002
-	if bel(needImprovement(3,ZoneId)) then print(search123).
-	if a-goal(zoneToRenovate(ZoneId)) then print(search1).
 	if bel(UpgradeID is 0,upgrade_type(UpgradeID,UpgradeTypes),
-	random_member(upgrade_pair(FunctionId,_),
-	UpgradeTypes),building(BuildingId,_,_,_,_,FunctionId,_,_,_,ZoneId),
-	ownedBuilding(BuildingId)), a-goal(zoneToRenovate(ZoneId)) then print(search2).
-	
-	if bel(UpgradeID is 0,upgrade_type(UpgradeID,UpgradeTypes),random_member(upgrade_pair(FunctionId,_),UpgradeTypes),building(BuildingId,_,_,_,_,FunctionId,_,_,_,ZoneId),ownedBuilding(BuildingId)), 
-		a-goal(zoneToRenovate(ZoneId)), not(a-goal(demolishBuilding(BuildingId)))
+		random_member(upgrade_pair(FunctionId,_),UpgradeTypes),
+		building(BuildingId,_,_,_,_,FunctionId,_,_,_,ZoneId),
+		zoneToRenovate(ZoneId),
+		ownedBuilding(BuildingId)) 
 		then adopt(upgradeBuilding(UpgradeID,BuildingId)).
-		
-	forall a-goal(indicator(19,_,_,ZoneLinkList),member(zone_link(_,ZoneId,Current,Target),ZoneLinkList),Current<Target,
-		building(BuildingId,_,_,_,_,FunctionId,_,_,_,ZoneId),ownedBuilding(BuildingId),alreadyUpgraded(BuildingId),
+			
+	forall bel(building(BuildingId,_,_,_,_,FunctionId,_,_,_,ZoneId),ownedBuilding(BuildingId),alreadyUpgraded(BuildingId),
 		upgrade_type(UpgradeID,UpgradeTypes),random_member(upgrade_pair(FunctionId,_),UpgradeTypes))
 		do print(UpgradeID).
 	
