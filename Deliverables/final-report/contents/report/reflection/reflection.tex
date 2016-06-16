@@ -1,5 +1,5 @@
-\chapter{Reflection from a software engineering perspective}
-\label{sec:Reflection from a software engineering perspective}
+\chapter[Reflection from a software engineering perspective]{Reflection from a software \\ engineering perspective}
+\label{chap:Reflection from a software engineering perspective}
 
 The "Virtual Humans"-project was mostly divided into two separate products.
 First of all their was the agent itself, and secondly their was the connector between the environment and the agents.
@@ -7,7 +7,7 @@ These two parts will be discussed separately. General software engineering princ
 followed by the software engineering aspects that relate to the two different products specifically.
 
 \section{General}
-\label{sub:General}
+\label{sec:General}
 
 For this project we where required to use the SCRUM-methodology. This states that our product should be in a working state at the end of every sprint, with a sprint being defined as one week.
 According to SCRUM, this is realized with the use of backlog at the beginning of each sprint, daily SCRUM meetings during the sprint, and a reflection at the end of the sprint.
@@ -23,7 +23,7 @@ two members of group (or two other groups in case of the connector) approved of 
 Unfortunately, reviews weren't always very critical, which led to lots of inconsistencies in style, which in turn meant that later on, a lot of refactoring needed to be done.
 
 \section{Private Housing Company Agent}
-\label{sub:Private Housing Company Agent}
+\label{sec:Private Housing Company Agent}
 
 The agent was developed u with the GOAL programming language. The use of GOAL caused a lot of challenges regarding static analysis tools and continuous integration.
 Unfortunately, none of the static analysis tools required for the project worked in conjunction with GOAL. This meant that the Travis configuration used for the agents is very limited.
@@ -35,7 +35,7 @@ tests weren't added till very late in the development process. Also not all modu
 to sometimes be near impossible.
 
 \section{Tygron Connector}
-\label{sub:Tygron Connector}
+\label{sec:Tygron Connector}
 
 Since the connector was completely written in Java, static analysis tools and continuous integration were no challenge, unlike with the agents. This meant that all required static analysis tools were
 used extensively, creating a consistent style, and level of quality found in the connector.
