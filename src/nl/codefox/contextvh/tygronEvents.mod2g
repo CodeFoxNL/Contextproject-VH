@@ -8,9 +8,9 @@ module tygronEvents {
 	%%%%% Percept Processing %%%%%
 	
 	% update settings if they have changed
-	if percept(settings(X)),bel(settings(Y),X \= Y) then delete(settings(Y)) + insert(settings(X)).
+	if percept(settings(X)), bel(settings(Y),X \= Y) then delete(settings(Y)) + insert(settings(X)).
 	% update list actions if they have changed
-	if percept(actions(X)),bel(actions(Y)) then delete(actions(X)) + insert(actions(Y)).
+	if percept(actions(X)), bel(actions(Y)) then delete(actions(X)) + insert(actions(Y)).
 		
 	%%% BUILDING PERCEPTS
 	% update building/9 when another percept is received with similar ID but with other values.
@@ -65,6 +65,14 @@ module tygronEvents {
 	forall percept(action_logs(ActList)), 
 		bel(member(actionlog(StakeholderID,Description,ActionID,IncList),ActList))
 		do insert(actionlog(StakeholderID,Description,ActionID,IncList)).
+		
+	%%% RELEVANT AREAS PERCEPTS
+	% insert relevant_areas/2
+	if percept(relevant_areas(CallID,MultiPolygons)), not(bel(relevant_areas(CallID,_)))
+		then insert(relevant_areas(CallID,MultiPolygons)).
+	% update relevant_areas/2
+	if percept(relevant_areas(CallID,NewMultiPolygons)), bel(relevant_areas(CallID,OldMultiPolygons))
+		then delete(relevant_areas(CallID,OldMultiPolygons))+ insert(relevant_areas(CallID,NewMultiPolygons)).
 
 	% enter tygronGoals to adopt goals when preconditions are met
 	if true then tygronGoals.
