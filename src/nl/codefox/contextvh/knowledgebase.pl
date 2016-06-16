@@ -17,7 +17,6 @@
 :- dynamic building/10.
 :- dynamic relevant_areas/2.
 
-
 % others
 :- dynamic indicatorLink/2.
 :- dynamic actionlog/4.
