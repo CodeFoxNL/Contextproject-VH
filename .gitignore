@@ -14,3 +14,14 @@ hs_err_pid*
 # Ignore Eclipse files and directories
 *.project
 *.settings
+
+# Ignore LaTeX temporary files
+**/final-report/Final Report.pdf
+*.log
+*.aux
+*.out
+*.synctex.gz
+*.toc
+
+# Misc Files
+**/desktop.ini

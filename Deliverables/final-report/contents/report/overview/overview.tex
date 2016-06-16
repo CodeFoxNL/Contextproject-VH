@@ -1,0 +1,13 @@
+\chapter[Overview of the software product]{Overview of the software \\ product}
+In this chapter we will provide an overview of our developed product and implemented software.
+
+The product we developed consists out of the virtual human, written in GOAL, and the connector that lets the agent connect to the environment, written in Java. The connector makes sure that we can provide our agent with continually updated information from the Tygron engine. This is needed for the agent to act and react on everything that happens in the environment.
+
+The connector translates XML objects that are received by the Tygron engine, to parameters usable by the GOAL language and the other way around, so the environment will change when the agent executes actions on it.
+
+The connector uses the Tygron SDK to return information from the tygron engine to the Tygron Environment, the SDK contains MapLinks which contain all the information of every class which can be called on by the environment. These MapLinks can be added to a listener and  when a MapLink is being updated by the Tygron Engine the environment gets an update with the itemset the MapLink contains.Another way to utilize the SDK is by creating actions in the environment which call on usable Actions in the SDK to manipulate the engine. 
+
+While the connector ensures that the agent will be provided by useful information from the environment, the agent takes all the information in account to decide the best thing to do in his situation. 
+
+The agent never terminates unless it is manually done. In the beginning the agent will initialize its beliefs in the tygronInit module. The project in GOAL runs through an endless amount of cycles. Every cycle the agent will handle all the incoming percepts and process them accurately. It will then enter the tygronGoals module where the agent will decide upon which goals to adopt. Following this in the main module the agent will handle the goals by entering the required modules accordingly (the buyLand, sellLand, demolish, construct and upgrade modules). In these modules the agent will perform actions that are defined in the action module.
+\newpage
