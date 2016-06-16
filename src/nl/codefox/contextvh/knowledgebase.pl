@@ -76,3 +76,6 @@ soundIndicator(Value,Target,ZoneID) :-
 	indicatorLink(_,IndicatorWeights), member(indicatorWeights(IndicatorID,IndicatorName,_),IndicatorWeights),
 	(IndicatorName=='Geluidsoverlast Verkeer'), indicator(IndicatorID,Value,Target,ZoneLink),
 	member(zone_link(ZoneID,IndicatorID,Value,Target),ZoneLink).
+	
+%NotHousingMember
+notHousingMember(Categories):-member('SHOPPING', Categories); member('LEISURE', Categories); member('OFFICES', Categories).
