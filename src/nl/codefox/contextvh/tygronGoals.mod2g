@@ -41,22 +41,12 @@ module tygronGoals {
 		zoneToRenovate(ZoneId),
 		ownedBuilding(BuildingId)) 
 		then adopt(upgradeBuilding(UpgradeID,BuildingId)).
-			
-	forall bel(building(BuildingId,_,_,_,_,FunctionId,_,_,_,ZoneId),ownedBuilding(BuildingId),alreadyUpgraded(BuildingId),
-		upgrade_type(UpgradeID,UpgradeTypes),random_member(upgrade_pair(FunctionId,_),UpgradeTypes))
-		do print(UpgradeID).
-	
-	
-	if a-goal(indicator(19,_,_,ZoneLinkList),member(zone_link(_,ZoneId,Current,Target),ZoneLinkList),Current<Target,
-		building(BuildingId,_,_,_,_,FunctionId,_,_,_,ZoneId),ownedBuilding(BuildingId),alreadyUpgraded(BuildingId),
-		UpgradeID is 0, upgrade_type(UpgradeID,UpgradeTypes),random_member(upgrade_pair(FunctionId,_),UpgradeTypes))
-		then adopt(upgradeBuilding(UpgradeID, BuildingId)).
-		
+					
 	% Adopt goals to demolish social buildings when we want more luxury or normal buildings
 	if bel(indicator(34,_,_,ZoneLinkList), ourID(OurID), member(zone_link(OurID,_,Current3,Target3),ZoneLinkList),Current3<Target3,
 		member(zone_link(1,_,Current2,Target2),ZoneLinkList),member(zone_link(0,_,Current1,Target1),ZoneLinkList),
 		(Current1<Target1;Current2<Target2),building(BuildingId,_,_,_,['SOCIAL'],_,_,_,_,_),ownedBuilding(BuildingId),
-		not(alreadyUpgraded(BuildingId)))
+		not(alreadyUpgraded(BuildingId)), not(upgraded(BuildingId))), not(goal(upgradeBuilding(_,BuildingId)))
 		then adopt (demolishBuilding(BuildingId)).
 	%__________________________________________________________________________________________________%
 }
