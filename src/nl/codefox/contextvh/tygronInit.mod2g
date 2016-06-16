@@ -26,8 +26,8 @@ module tygronInit {
 			do insert(zone(ZoneID,Name,Floors,Size,Categories)).
 		% initialize all buildings
 		forall percept(buildings(List)),
-			bel(member(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPoly,Area),List))
-			do insert(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPoly,Area)).
+			bel(member(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPoly,Area,Zone),List))
+			do insert(building(ID,Name,OwnerID,BuildYear,Categories,FunctionID,Floors,MultiPoly,Area,Zone)).
 
 		% initialize the indicatorLinks of our agent				
 		forall percept(stakeholders(List)),
