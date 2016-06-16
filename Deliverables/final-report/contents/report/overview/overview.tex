@@ -5,7 +5,7 @@ The product we developed consists out of the virtual human, written in GOAL, and
 
 The connector translates XML objects that are received by the Tygron engine, to parameters usable by the GOAL language and the other way around, so the environment will change when the agent executes actions on it.
 
-\textbf{!!!!!!!!! HIER SCHRIJFT MARCO SDK SHIT OP (-> over hoe de environment op tygron sdk is gebouwd en eishub shit enz)}
+The connector uses the Tygron SDK to return information from the tygron engine to the Tygron Environment, the SDK contains MapLinks which contain all the information of every class which can be called on by the environment. These MapLinks can be added to a listener and  when a MapLink is being updated by the Tygron Engine the environment gets an update with the itemset the MapLink contains.Another way to utilize the SDK is by creating actions in the environment which call on usable Actions in the SDK to manipulate the engine. 
 
 While the connector ensures that the agent will be provided by useful information from the environment, the agent takes all the information in account to decide the best thing to do in his situation. 
 
