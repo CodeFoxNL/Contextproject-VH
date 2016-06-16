@@ -13,7 +13,7 @@ module sellLand(MultiPoly) {
 	
 	% try another buyer when we have tried it three times with facilities
 	if bel(offeredLand(MultiPoly,BuyerID,Counter),facilitiesID(BuyerID),Counter=3,
-		not(ourID(OtherBuyerID)),not(facilitiesID(BuyerID)))
+		not(ourID(OtherBuyerID)),not(facilitiesID(OtherBuyerID)))
 		then map_sell_land(OtherBuyerID,MultiPoly,400) + 
 		insert(offeredLand(MultiPoly,OtherBuyerID,1)).
 		
