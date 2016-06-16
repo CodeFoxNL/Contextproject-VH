@@ -23,8 +23,8 @@ module tygronGoals {
 		do adopt(constructBuilding(MultiPoly)).
 	
 	% Adopt goals to improve zones for which the agent has not achieved it's target values'
-	forall bel(zones(List),indicator(Indicator,_,_,_),member(zone(Zone,_,_,_,_),List),needImprovement(Indicator,Zone))
-		do adopt(improveZone(Indicator,Zone)).
+	forall bel(indicator(Indicator,_,_,_),zone(Zone,_,_,_,_),indicatorLink(2, List), member(indicatorWeights(IndicatorID,_,Weight), List),needImprovement(Indicator,Zone))
+		do adopt(improveZone(Indicator,Zone,Weight)).
 	
 	% Example of buying and demolish on ground that we just bought.
 	if bel(building(BuildingId,'Overige functie (1218) verkocht',_,_,_,_,_,MultiPoly,_),ownedBuilding(BuildingId))
@@ -36,7 +36,7 @@ module tygronGoals {
 	
 	% Example of a building we will demolish
 	if bel(building(BuildingId,'Prof. Henketstraat 48-80',_,_,_,_,_,_,_),ownedBuilding(BuildingId))
-		then adopt( demolishBuilding(BuildingId)).
+		then adopt(demolishBuilding(BuildingId)).	
 	
 	% Example of building we will upgrade by replacing and rebuilding it
 	if bel(building(BuildingId,_,_,_,['LUXE'],FunctionID,_,MultiPolygon,_),ownedBuilding(BuildingId),upgrade_type(UpgradeID,UpgradeTypes),member(upgrade_pair(FunctionID,_),UpgradeTypes)), not(a-goal(demolishBuilding(BuildingId)))

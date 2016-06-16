@@ -15,6 +15,7 @@
 :- dynamic land/5.
 :- dynamic zone/5. 
 :- dynamic building/9.
+:- dynamic relevant_areas/2.
 
 % others
 :- dynamic indicatorLink/2.
@@ -35,13 +36,14 @@
 %%% Goals that can be adopted
 demolishBuilding(BuildingID) :- demolished(BuildingID).
 constructBuilding(MultiPoly) :- constructed(MultiPoly).
-upgradeBuilding(UpgradeID,MultiPolygon) :- upgraded(MultiPolygon).
-improveZone(IndicatorID,ZoneID) :- improvedZone(IndicatorID,ZoneID).
+
+upgradeBuilding(UpgradeID,BuildingId) :- upgraded(BuildingId).
+improveZone(IndicatorID,ZoneID, Weight) :- improvedZone(IndicatorID,ZoneID, Weight).
 
 % determine when a zone needs to be improved and for which indicator
 needImprovement(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink),member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),CurrentValue<CurrentTarget.
 % a zone is improved when the indicator score is higher or equal to the agent's target
-improvedZone(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink),member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),CurrentValue>=CurrentTarget.
+improvedZone(IndicatorID,ZoneID,Weight) :- indicator(IndicatorID,Value,Target,ZoneLink),member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),CurrentValue>=CurrentTarget.
 
 %%% Checks
 % check if our agent owns a building
