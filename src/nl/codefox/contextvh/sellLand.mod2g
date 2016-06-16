@@ -9,12 +9,14 @@ module sellLand(MultiPoly) {
 	% check if we succeeded in selling the land
 	if bel(not(ourLand(MultiPoly)))
 		then insert(doneSelling(MultiPoly)) + exit-module.
-		
-	if bel(ourLand(MultiPoly),offeredLand(MultiPoly,Counter),NextCounter is Counter + 1,Price is (-NextCounter * 50) + 300,notOurID(BuyerID))
+	
+	% if we have offered land to a buyer but we still did not sell it, reduce the price	
+	if bel(offeredLand(MultiPoly,Counter),NextCounter is Counter+1,Price is (-NextCounter*50) + 300, notOurID(BuyerID))
 		then map_sell_land(BuyerID,MultiPoly,Price) + 
 		delete(offeredLand(MultiPoly,Counter)) + 
 		insert(offeredLand(MultiPoly,NextCounter)).
 	
+	% if we have land to sell and we have not offered it to anyone before, set price and try to sell
 	if bel(ourLand(MultiPoly),not(offeredLand(MultiPoly,Counter)),notOurID(BuyerID)) 
 		then map_sell_land(BuyerID,MultiPoly,250) + 
 		insert(offeredLand(MultiPoly,1)).
