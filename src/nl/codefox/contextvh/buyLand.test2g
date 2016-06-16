@@ -7,7 +7,7 @@ timeout = 10.
 
 
 test buyLand(_) with
-	pre{bel(building(BuildingId, 'Overige functie (1218)', _, _, _, _, _, MultiPoly, _), landOfOthers(MultiPoly), not(doneBuying(MultiPoly)))}
+	pre{bel(building(BuildingId,'Overige functie (1218)',_,_,_,_,_,MultiPoly,_,_),landOfOthers(MultiPoly),not(doneBuying(MultiPoly)))}
 	in{ 
 		goal(doneBuying(MultiPoly)) leadsto done(map_buy_land(MultiPoly, Price)).
 		goal(doneBuying(MultiPoly)) leadsto done(buyLand(MultiPoly)).
@@ -16,6 +16,7 @@ test buyLand(_) with
 		goal(doneBuying(MultiPoly)) leadsto not(done(construct(_))).
 		goal(doneBuying(MultiPoly)) leadsto not(done(demolish(_))).
 		goal(doneBuying(MultiPoly)) leadsto not(done(upgrade(_))).
+		goal(doneBuying(MultiPoly)) leadsto not(done(doneSelling(_))).
 	}
 	post{true}
 	
