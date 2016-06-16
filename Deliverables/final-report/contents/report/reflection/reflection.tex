@@ -9,11 +9,35 @@ followed by software engineering aspects that relate to the two different produc
 \section{General}
 \label{sub:General}
 
+For this project we where required to use the SCRUM-methodology. This states that our product should be in a working state at the end of every sprint, with a sprint being defined as one week.
+According to SCRUM, this is realized with the use of backlog at the beginning of each sprint, daily SCRUM meetings during the sprint, and a reflection at the end of the sprint.
+The backlog was systematically made at the beginning of each sprint and was overall effectively used to divide the tasks for the upcoming sprint.
+At the beginning of the project, the prioritization of the tasks wasn't completely up to par, but this was adjusted accordingly in later sprints.
+We elected to have the daily SCRUM meetings through voice chat, every day. However the attendance at these meetings was abysmal, often only 2 or 3 members of the group were present during the meetings.
+Reflections were also made systematically at the end of each week, but the overall quality of the reflections varied quite a lot during the project.
+To our displeasure, we were unable to deliver a working agent at the end some/most sprints. At times this was caused by factors outside of our control, but often it was due to bad time management,
+and many tasks needed to be carried over to future sprints.
 
+Secondly a pull-based development model was used throughout the development. New functionality, bug fixes, documentation etc. were all added through pull request, and were only merged after at least
+two members of group (or two other groups in case of the connector) approved of the changes.
+Unfortunately, reviews weren't always very critical, which led to lots of inconsistencies in style, which in turn meant that later on, a lot of refactoring needed to be done.
 
 \section{Private Housing Company Agent}
 \label{sub:Private Housing Company Agent}
 
+The agent was developed u with the GOAL programming language. The use of GOAL caused a lot of challenges regarding static analysis tools and continuous integration.
+Unfortunately, none of the static analysis tools required for the project worked in conjunction with GOAL. This meant that the Travis configuration used for the agents is very limited.
+At first, we did manage to find a way that Travis would verify that all test cases written would run successfully. However we later discovered that GOAL-tests don't run as intended when ran by Travis,
+Because of this reason, only some specific tests are ran through Travis.
+
+The test driven development model was completely unused during the project. Lots of functionality was added to the agent without any tests whatsoever. Manual testing was always performed, but automatic
+tests weren't added till very late in the development process. Also not all modules have automated test cases, because of the many dependencies with the connector, creating these automated tests proved
+to sometimes be near impossible.
 
 \section{Tygron Connector}
 \label{sub:Tygron Connector}
+
+Since the connector was completely written in Java, static analysis tools and continuous integration were no challenge, unlike with the agents. This meant that all required static analysis tools were
+used extensively, creating a consistent style, and level of quality found in the connector.
+
+Test driven development was, unfortunately also not used in the development of the connector, but unlike with the agent, every feature was thoroughly tested before being added to the final product.
