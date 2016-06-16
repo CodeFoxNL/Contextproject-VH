@@ -31,7 +31,7 @@
 :- dynamic improvedZone/1.
 :- dynamic emptyPoly/1.
 :- dynamic requestedLand/2.
-:- dynamic offeredLand/2.
+:- dynamic offeredLand/3.
 
 %%% Goals that can be adopted
 demolishBuilding(BuildingID) :- demolished(BuildingID).
@@ -52,6 +52,8 @@ budget(Amount) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',Amount,
 ourID(StakeholderID) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',Money,Income).
 % stakeholder IDs for other stakeholders
 notOurID(StakeholderID) :- stakeholder(StakeholderID,_,_,_),not(ourID(StakeholderID)).
+% stakeholder ID of services stakeholder (they are likely to buy land)
+facilitiesID(StakeholderID) :- stakeholder(StakeholderID,'Voorzieningen',Money,Income).
 % check if our agent owns a building
 ownedBuilding(BuildingID) :- ourID(ID), building(BuildingID,_,ID,_,_,_,_,MultiPoly,_,_), MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
 
@@ -67,7 +69,7 @@ ourLand(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',_,_
 housingMember(Categories) :- member('LUXE',Categories); member('NORMAL',Categories); member('SOCIAL',Categories); member('OTHER',Categories).
 % categories that are a member of categories that could be useful for the facilities party
 facilitiesMember(Categories) :- member('SHOPPING',Categories); member('LEISURE',Categories); member('OFFICES',Categories).
-	
+
 %%% Indicators
 
 % uses indicator scores to determine whether more Luxury houses are desirable,if this is not the case Normal houses are desirable.  

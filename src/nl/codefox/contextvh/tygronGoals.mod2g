@@ -8,7 +8,7 @@ module tygronGoals {
 
 	% possibility 1: sell buildings we own that are not meant for housing but could be useful to other stakeholders
 	% other categories may be added later
-	if bel(building(BuildingID,Name,_,_,Categories,FunctionID,_,MultiPoly,_,_),ownedBuilding(BuildingID),
+	if bel(building(BuildingID,Name,_,_,Categories,FunctionID,_,MultiPoly,_,_),ownedBuilding(BuildingID),ourLand(MultiPoly),
 		facilitiesMember(Categories))
 		then adopt(doneSelling(MultiPoly)).
 		
