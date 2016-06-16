@@ -1,0 +1,24 @@
+\chapter{Evaluation}
+In this chapter we will evaluate the state of the product compared to what we had in mind at the start of the project as well as evaluate what went wrong along the way.
+
+\section{Evaluation of the product}
+The product is, in it's entirety as it is today, not exactly as we envisioned at the start of the project.
+
+\subsection{Product Plan evaluation} We have implemented all our \emph{must haves} as listed in our Product Plan, though we haven't (fully) implemented some \emph{should haves} and \emph{could haves}, most notably the following:
+
+\emph{The agent should be able to make decisions which have a negative effect on its goals, if it has a great benefit that can later be utilized.} This \emph{should have} may have been too ambitions and, in retrospect, should have been listed as a \emph{could have}.
+
+Another one that was not implemented is \emph{The agent should be able to ask other parties to perform actions which are beneficial to the goals of our agent}. This was not implemented because this level of communication and interaction with other agents is not implemented in other bots and the connector at this time, and this is also very difficult to achieve without implementing some natural language processing.
+
+\subsection{Business Plan evaluation} Our business plan was very optimistic concerning the state of the connector. Almost all our requirements written in there are requirements that need a lot of spatial knowledge, something that the connector is not able to provide yet. Some of our requirements were: \emph{We prefer not to build houses near student houses}, \emph{We want to make sure that our residents have parking lots near their houses}, \emph{We want to build houses on ground that is not too close to roads that create a lot of noise disturbance}, \emph{We want to build houses near enough green so the residents will have a nice environment}. All these things require a lot of spacial information and calculations, which we thought the environment would be able to provide us. After the realisation that the environment was in a very poor state, these requirements were practically given up on.
+
+We have implemented the requirements that \emph{We must obey all local restrictions.} and \emph{We want to renovate or rebuild outdated districts whenever they do not satisfy our conditions}.
+
+\section{Evaluation of failures}
+We had some start up problems at the start of the project, like a lack of information, scattered communication and members not arriving to meetings on time. These were resolved by making Slack the main communication platform and make clear agreements for the meetings.
+
+In sprint three we encountered the largest problem in the project. The connector was embarrassingly less developed than was assumed. The reaction to this was that the following weeks up to week seven was spent mostly to only on working on the connector to get it as far as we required it to be.
+
+In the following sprints we encountered problems like people that were writing dependencies for other people did not communicate their progress clearly, so the dependent people did not know when they could start working on their part. There were some issues with improper and dirty branching. GOAL debugging stopped working and has not been fixed since, so we had to come up with a roundabout way to still be able to get some debug information while testing the bot. This caused some performance loss, because testing would take considerably longer.
+
+In sprint six one of our members experienced a large problem with GOAL, because of which we practically lost one member for a week worth of work.
