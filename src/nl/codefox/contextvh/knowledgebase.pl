@@ -36,7 +36,6 @@
 %%% Goals that can be adopted
 demolishBuilding(BuildingID) :- demolished(BuildingID).
 constructBuilding(MultiPoly) :- constructed(MultiPoly).
-
 upgradeBuilding(UpgradeID,BuildingId) :- upgraded(BuildingId).
 improveZone(IndicatorID,ZoneID, Weight) :- improvedZone(IndicatorID,ZoneID, Weight).
 
@@ -46,14 +45,16 @@ needImprovement(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLi
 improvedZone(IndicatorID,ZoneID,Weight) :- indicator(IndicatorID,Value,Target,ZoneLink),member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),CurrentValue>=CurrentTarget.
 
 %%% Checks
-% check if our agent owns a building
-ownedBuilding(BuildingID) :- ourID(ID), building(BuildingID,_,ID,_,_,_,_,MultiPoly,_,_), MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
-% budget of our Stakeholder
+
+% budget of our stakeholder
 budget(Amount) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',Amount,Income).
 % stakeholder ID for our Stakeholder
 ourID(StakeholderID) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',Money,Income).
 % stakeholder IDs for other stakeholders
 notOurID(StakeholderID) :- stakeholder(StakeholderID,_,_,_),not(ourID(StakeholderID)).
+% check if our agent owns a building
+ownedBuilding(BuildingID) :- ourID(ID), building(BuildingID,_,ID,_,_,_,_,MultiPoly,_,_), MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
+
 % predicates to determine if land on the map is ours or others
 landOfOthers(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',_,_),
 	not(land(LandID,stakeholder(StakeholderID,_,_,_),MultiPoly,_,_)),
@@ -61,23 +62,23 @@ landOfOthers(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers
 ourLand(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',_,_),
 	land(LandID,stakeholder(StakeholderID,_,_,_),MultiPoly,_,_),
 	MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
+	
+% categories that are not a member of housing
+notHousingMember(Categories):- member('SHOPPING',Categories); member('LEISURE',Categories); member('OFFICES',Categories).
+	
+%%% Indicators
 
 % uses indicator scores to determine whether more Luxury houses are desirable,if this is not the case Normal houses are desirable.  
 needLuxeHouse :- indicator(34,_,_,ZoneLinkList),member(zone_link(0,_,Current1,Target1),ZoneLinkList),
 	indicator(34,_,_,ZoneLinkList),member(zone_link(1,_,Current2,Target2),ZoneLinkList),
 	Target1-Current1>Target2-Current2.
-
 % indicator of the spatial quality
 qualityIndicator(Value,Target,ZoneID) :- 
 	indicatorLink(_,IndicatorWeights), member(indicatorWeights(IndicatorID,IndicatorName,_),IndicatorWeights),
 	(IndicatorName=='Ruimtelijke kwaliteit'), indicator(IndicatorID,Value,Target,ZoneLink),
 	member(zone_link(ZoneID,IndicatorID,Value,Target),ZoneLink).
-
 % indicator of the sound
 soundIndicator(Value,Target,ZoneID) :- 
 	indicatorLink(_,IndicatorWeights), member(indicatorWeights(IndicatorID,IndicatorName,_),IndicatorWeights),
 	(IndicatorName=='Geluidsoverlast Verkeer'), indicator(IndicatorID,Value,Target,ZoneLink),
 	member(zone_link(ZoneID,IndicatorID,Value,Target),ZoneLink).
-	
-%NotHousingMember
-notHousingMember(Categories):-member('SHOPPING', Categories); member('LEISURE', Categories); member('OFFICES', Categories).
