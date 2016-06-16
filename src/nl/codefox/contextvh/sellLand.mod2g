@@ -11,21 +11,27 @@ module sellLand(MultiPoly) {
 		then delete(offeredLand(MultiPoly,BuyerID,Counter)) + 
 		insert(doneSelling(MultiPoly)) + exit-module.
 	
+	% try another buyer when we have tried it three times with facilities
+	if bel(offeredLand(MultiPoly,BuyerID,Counter),facilitiesID(BuyerID),Counter=3,
+		not(ourID(OtherBuyerID)),not(facilitiesID(BuyerID)))
+		then map_sell_land(OtherBuyerID,MultiPoly,400) + 
+		insert(offeredLand(MultiPoly,OtherBuyerID,1)).
+		
 	% stop trying to sell for less when we have tried it three times	
-	if bel(not(ourLand(MultiPoly)),offeredLand(MultiPoly,BuyerID,Counter), Counter=3)
+	if bel(offeredLand(MultiPoly,BuyerID,Counter),Counter=3)
 		then delete(offeredLand(MultiPoly,BuyerID,Counter)) + exit-module.
 	
 	% if we have offered land to a buyer but we still did not sell it, reduce the price	
-	if bel(offeredLand(MultiPoly,BuyerID,Counter),NextCounter is Counter+1,Price is (-NextCounter*50) + 400, notOurID(BuyerID))
+	if bel(offeredLand(MultiPoly,BuyerID,Counter),NextCounter is Counter+1,Price is (-NextCounter*50)+400,notOurID(BuyerID))
 		then map_sell_land(BuyerID,MultiPoly,Price) +
 		delete(offeredLand(MultiPoly,BuyerID,Counter)) + 
 		insert(offeredLand(MultiPoly,BuyerID,NextCounter)).
 	
 	% if we have land to sell and we have not offered it to anyone before, set price and try to sell for the first time
 	% standard price per m2 according to Tygron
-	if bel(ourLand(MultiPoly),not(offeredLand(MultiPoly,BuyerID,Counter)),facilitiesID(BuyerID)) 
-		then map_sell_land(BuyerID,MultiPoly,400) + 
-		insert(offeredLand(MultiPoly,BuyerID,1)).
+	if bel(not(offeredLand(MultiPoly,BuyerID,Counter)),facilitiesID(PossibleBuyerID)) 
+		then map_sell_land(PossibleBuyerID,MultiPoly,400) + 
+		insert(offeredLand(MultiPoly,PossibleBuyerID,1)).
 	
 	if true then exit-module.
 	

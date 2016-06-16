@@ -54,6 +54,10 @@ ourID(StakeholderID) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',M
 notOurID(StakeholderID) :- stakeholder(StakeholderID,_,_,_),not(ourID(StakeholderID)).
 % stakeholder ID of services stakeholder (they are likely to buy land)
 facilitiesID(StakeholderID) :- stakeholder(StakeholderID,'Voorzieningen',Money,Income).
+% stakeholder ID of duwo
+duwoID(StakeholderID) :- stakeholder(StakeholderID,'DUWO',Money,Income).
+% stakeholder ID of the tu
+tuID(StakeholderID) :- stakeholder(StakeholderID,'TU',Money,Income).
 % check if our agent owns a building
 ownedBuilding(BuildingID) :- ourID(ID), building(BuildingID,_,ID,_,_,_,_,MultiPoly,_,_), MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
 
