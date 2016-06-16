@@ -9,19 +9,20 @@ module tygronGoals {
 		do adopt(constructBuilding(MultiPoly)).
 	
 	% Adopt goals to improve zones for which the agent has not achieved it's target values'
-	forall bel(indicator(Indicator,_,_,_),zone(Zone,_,_,_,_),indicatorLink(2, List), member(indicatorWeights(Indicator,_,Weight), List),Weight>=0,needImprovement(Indicator,Zone))
+	forall bel(indicator(Indicator,_,_,_),zone(Zone,_,_,_,_),indicatorLink(2, List), member(indicatorWeights(IndicatorID,_,Weight), List),needImprovement(Indicator,Zone))
 		do adopt(improveZone(Indicator,Zone,Weight)).
 	
 	% Example of buying and demolish on ground that we just bought.
-	if bel(building(BuildingId,'Overige functie (1218) verkocht',_,_,_,_,_,MultiPoly,_),ownedBuilding(BuildingId))
+	if bel(building(BuildingId,'Overige functie (1218) verkocht',_,_,_,_,_,MultiPoly,_,_),ownedBuilding(BuildingId))
 		then adopt(demolishBuilding(BuildingId)).
 	
 	% Example of buying and demolish on ground that we just bought.
-	if bel(building(BuildingId,'Overige functie (1218)',_,_,_,_,_,MultiPoly,_),landOfOthers(MultiPoly),not(doneBuying(MultiPoly)))
+	if bel(building(BuildingId,'Overige functie (1218)',_,_,_,_,_,MultiPoly,_,_),landOfOthers(MultiPoly),not(doneBuying(MultiPoly)))
 		then adopt(doneBuying(MultiPoly)).
 	
 	% Example of a building we will demolish
-	if bel(building(BuildingId,'Prof. Henketstraat 48-80',_,_,_,_,_,_,_),ownedBuilding(BuildingId))
+
+	if bel(building(BuildingId,'Prof. Henketstraat 48-80',_,_,_,_,_,_,_,_),ownedBuilding(BuildingId))
 		then adopt(demolishBuilding(BuildingId)).	
 	
 	% Example of building we will upgrade by replacing and rebuilding it
@@ -34,14 +35,16 @@ module tygronGoals {
 		%41/Zonnepanelen/
 			%6,Budget,-3318
 			%34,Surface,-0.002
-	if a-goal(improveZone(3, ZoneId, Weight)), bel(UpgradeID is 0, upgrade_type(UpgradeID,UpgradeTypes),random_member(upgrade_pair(FunctionID,_),UpgradeTypes),building(BuildingId,_,_,_,_,FunctionID,_,_,_),ownedBuilding(BuildingId)), not(a-goal(demolishBuilding(BuildingId)))
+	if a-goal(improveZone(3, ZoneId, Weight)), bel(UpgradeID is 0, upgrade_type(UpgradeID,UpgradeTypes),random_member(upgrade_pair(FunctionID,_),UpgradeTypes),building(BuildingId,_,_,_,_,FunctionID,_,_,_,_),ownedBuilding(BuildingId)), not(a-goal(demolishBuilding(BuildingId)))
 		then adopt(upgradeBuilding(UpgradeID,BuildingId)).
+
 	
 	% Adopt goals to demolish social buildings when we want more luxury or normal buildings
 	if bel(indicator(34,_,_,ZoneLinkList),member(zone_link(2,_,Current3,Target3),ZoneLinkList),Current3<Target3,
 		member(zone_link(1,_,Current2,Target2),ZoneLinkList),member(zone_link(0,_,Current1,Target1),ZoneLinkList),
-		(Current1<Target1;Current2<Target2),building(BuildingId,_,_,_,['SOCIAL'],_,_,_,_),ownedBuilding(BuildingId),
+		(Current1<Target1;Current2<Target2),building(BuildingId,_,_,_,['SOCIAL'],_,_,_,_,_),ownedBuilding(BuildingId),
 		not(alreadyUpgraded(BuildingId)))
+
 		then adopt (demolishBuilding(BuildingId)).
 	%__________________________________________________________________________________________________%
 }

@@ -14,7 +14,7 @@ test construct(_) with
 		goal(constructBuilding(MultiPoly)) leadsto done(construct(MultiPoly)).
 		goal(constructBuilding(MultiPoly)) leadsto not(bel(emptyPoly(MultiPoly))).
 		goal(constructBuilding(MultiPoly)) leadsto bel(constructed(MultiPoly)).
-		goal(constructBuilding(MultiPoly)) leadsto bel(building(_, _, _, _, _, _, _, MultiPoly,_)).
+		goal(constructBuilding(MultiPoly)) leadsto bel(building(_,_,_,_,_,_,_,MultiPoly,_,_)).
 		
 		goal(constructBuilding(MultiPoly)) leadsto not(done(buyLand(_))).
 		goal(constructBuilding(MultiPoly)) leadsto not(done(demolish(_))).
