@@ -2,49 +2,51 @@ use knowledgebase as knowledge.
 use tygron as actionspec. 
 order = linearall.
 module tygronRequests {
-	% if a request is incoming with no other options than default answer, just give the default answer	
-	forall percept(requests(List)), 
-		bel(member(request(_,_,RequestID,_,_,_,_,_,_,[answer(AnswerID, _)]), List),
+	% if a request is incoming with no other options than default answer,just give the default answer	
+	forall percept(requests(List)),
+		bel(member(request(_,_,RequestID,_,_,_,_,_,_,[answer(AnswerID,_)]),List),
 		not(request(_,_,RequestID,_,_,_,_,_,_,_)))		
 		do popup_answer(RequestID,AnswerID). 
 	
-	% if a request is a confirmation that you are buying land 
+	% if a request is a confirmation that you are buying land add requestedLand(MultiPolygon,0) 
+	% which is used to retry to buy land when the request is denied by the seller.
 	forall percept(requests(List)),
-		bel(member(request("INFORMATION","BUY_LAND",_,_,[2],_,_,MultiPolygon,_,_),List),not(requestedLand(MultiPolygon,_))) do insert(requestedLand(MultiPolygon, 0)).
+		bel(member(request("INFORMATION","BUY_LAND",_,_,[2],_,_,MultiPolygon,_,_),List),not(requestedLand(MultiPolygon,_))) do insert(requestedLand(MultiPolygon,0)).
+	% When a request for land is rejected update your counter which triggers a price increase and insert a new buy goal.
 	forall percept(requests(List)),
 		bel(member(request("INTERACTION","BUY_LAND",_,_,[2],_,"NO_PRICE",MultiPolygon,_,_),List),requestedLand(MultiPolygon,Counter),Counter<3,NewCounter is Counter+1) 
-		do delete(requestedLand(MultiPolygon, Counter), doneBuying(MultiPolygon)) + insert(requestedLand(MultiPolygon, NewCounter)) + adopt(doneBuying(MultiPolygon)).
+		do delete(requestedLand(MultiPolygon,Counter),doneBuying(MultiPolygon)) + insert(requestedLand(MultiPolygon,NewCounter)) + adopt(doneBuying(MultiPolygon)).
 		
-	% if a request is incoming from another stakeholder to buy land, decline.	
-	forall percept(requests(List)), 
-		bel(member(request("INTERACTION","BUY_LAND",RequestID,ContentLinkID,VisibleStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,AreaSize,AnswersList), List),
+	% if a request is incoming from another stakeholder to buy land,decline.	
+	forall percept(requests(List)),
+		bel(member(request("INTERACTION","BUY_LAND",RequestID,ContentLinkID,VisibleStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,AreaSize,AnswersList),List),
 		member(request("INFORMATION","BUY_LAND",RequestID2,ContentLinkID,SenderStakeholdersIDList,_,_,_,_,_),List),
 		not(request(_,_,RequestID,_,_,_,_,_,_,_)),
 		not(request(_,_,RequestID2,_,_,_,_,_,_,_)),
 		ourID(ID),
-		not(member(ID, SenderStakeholdersIDList)),
-		member(answer(AnsID, "Nee"), AnswersList))
-		do popup_answer(RequestID, AnsID). 
+		not(member(ID,SenderStakeholdersIDList)),
+		member(answer(AnsID,"Nee"),AnswersList))
+		do popup_answer(RequestID,AnsID). 
 		
-	% if a request is incoming from another stakeholder to sell land to us, decline.	
-	forall percept(requests(List)), 
-		bel(member(request("INTERACTION","SELL_LAND",RequestID,ContentLinkID,VisibleStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,AreaSize,AnswersList), List),
+	% if a request is incoming from another stakeholder to sell land to us,decline.	
+	forall percept(requests(List)),
+		bel(member(request("INTERACTION","SELL_LAND",RequestID,ContentLinkID,VisibleStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,AreaSize,AnswersList),List),
 		member(request("INFORMATION","BUY_LAND",RequestID2,ContentLinkID,SenderStakeholdersIDList,_,_,_,_,_),List),
 		not(request(_,_,RequestID,_,_,_,_,_,_,_)),
 		not(request(_,_,RequestID2,_,_,_,_,_,_,_)),
 		ourID(ID),
-		not(member(ID, SenderStakeholdersIDList)),
-		member(ID, VisibleStakeholdersIDList),
-		member(answer(AnsID, "Nee"), AnswersList))
-		do popup_answer(RequestID, AnsID). 
+		not(member(ID,SenderStakeholdersIDList)),
+		member(ID,VisibleStakeholdersIDList),
+		member(answer(AnsID,"Nee"),AnswersList))
+		do popup_answer(RequestID,AnsID). 
 		
 	% if a request to buy land from a stakeholder is declined increase the requestedLand counter 
 	%%%not functional because of MultiPolygon comparison #TODO!%%%
-	if percept(requests(List)), bel(member(request("INTERACTION","BUY_LAND",RequestID,_,[2|T],_,"NO_PRICE",MultiPolygon,_,_), List), not(request(_,_,RequestID,_,_,_,_,_,_,_)), requestedLand(MultiPolygon, Counter)) then print(3).
+	if percept(requests(List)),bel(member(request("INTERACTION","BUY_LAND",RequestID,_,[2|T],_,"NO_PRICE",MultiPolygon,_,_),List),not(request(_,_,RequestID,_,_,_,_,_,_,_)),requestedLand(MultiPolygon,Counter)) then print(3).
 	
 	% insert request/10 to beliefs
-	forall percept(requests(List)), 
-		bel(member(request(Type,RequestType,RequestID,ContentLinkID,VisibleStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,AreaSize,AnswersList), List),
+	forall percept(requests(List)),
+		bel(member(request(Type,RequestType,RequestID,ContentLinkID,VisibleStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,AreaSize,AnswersList),List),
 		RequestType \= 'PERMIT',
 		not(request(_,_,RequestID,_,_,_,_,_,_,_)))
 		do insert(request(Type,RequestType,RequestID,ContentLinkID,VisibleStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,AreaSize,AnswersList)). 
