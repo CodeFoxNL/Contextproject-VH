@@ -7,8 +7,9 @@ exit=always.
 module sellLand(MultiPoly) {
 	
 	% check if we succeeded in selling the land
-	if bel(not(ourLand(MultiPoly)))
-		then insert(doneSelling(MultiPoly)) + exit-module.
+	if bel(not(ourLand(MultiPoly)),offeredLand(MultiPoly,Counter))
+		then delete(offeredLand(MultiPoly,Counter)) + 
+		insert(doneSelling(MultiPoly)) + exit-module.
 	
 	% if we have offered land to a buyer but we still did not sell it, reduce the price	
 	if bel(offeredLand(MultiPoly,Counter),NextCounter is Counter+1,Price is (-NextCounter*50) + 300, notOurID(BuyerID))
