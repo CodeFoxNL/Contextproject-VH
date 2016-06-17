@@ -16,7 +16,7 @@ test sellLand(_) with
 		goal(doneSelling(MultiPoly)) leadsto not(done(construct(_))).
 		goal(doneSelling(MultiPoly)) leadsto not(done(demolish(_))).
 		goal(doneSelling(MultiPoly)) leadsto not(done(upgrade(_))).
-		goal(doneSelling(MultiPoly)) leadsto not(done(doneBuying(_))).
+		goal(doneSelling(MultiPoly)) leadsto not(done(buyLand(_))).
 
 	}
 	post{true}
