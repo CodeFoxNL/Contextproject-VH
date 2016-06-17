@@ -65,8 +65,10 @@ ourLand(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',_,_
 	land(LandID,stakeholder(StakeholderID,_,_,_),MultiPoly,_,_),
 	MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
 
+housingIndicator(IndicatorID):- ourID(OwnerID),indicatorLink(OwnerID,Weights),member(indicatorWeights(IndicatorID,IndicatorName,_),Weights),IndicatorName=="Building Privaat".
+
 % uses indicator scores to determine whether more Luxury houses are desirable,if this is not the case Normal houses are desirable.  
-needLuxeHouse:- indicator(34,_,_,ZoneLinkList),member(zone_link(0,_,Current1,Target1),ZoneLinkList),
-	indicator(34,_,_,ZoneLinkList),member(zone_link(1,_,Current2,Target2),ZoneLinkList),
+needLuxeHouse:- housingIndicator(ID),indicator(ID,_,_,ZoneLinkList),member(zone_link(0,_,Current1,Target1),ZoneLinkList),
+	indicator(ID,_,_,ZoneLinkList),member(zone_link(1,_,Current2,Target2),ZoneLinkList),
 	Target1-Current1>Target2-Current2.
 
