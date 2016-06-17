@@ -21,6 +21,7 @@
 :- dynamic indicatorLink/2.
 :- dynamic actionlog/4.
 :- dynamic upgrade_type/2.
+:- dynamic sellTo/2.
 
 %%% Defined knowledge
 :- dynamic doneSelling/1.
