@@ -28,7 +28,7 @@ module sellLand(MultiPoly) {
 	% stop trying to sell the land for a reduced price when we have tried it three times already with one buyer
 	if bel(offeredLand(MultiPoly,Counter),Counter>3,sellTo(MultiPoly,BuyerID))
 		then delete(sellTo(MultiPoly,BuyerID)) +
-		insert(doneSelling(MultiPoly)) +
+		insert(doneSelling(MultiPoly),failedToSell(MultiPoly)) +
 		exit-module.
 	
 	% if we have offered land to a buyer but we still did not sell it, reduce the price	

@@ -22,6 +22,7 @@
 :- dynamic actionlog/4.
 :- dynamic upgrade_type/2.
 :- dynamic sellTo/2.
+:- dynamic failedToSell/1.
 
 %%% Defined knowledge
 :- dynamic doneSelling/1.

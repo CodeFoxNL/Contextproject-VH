@@ -5,14 +5,13 @@ module tygronGoals {
 	%_______________________________Adopt goals based on the environment_______________________________%
 	
 	%%% Selling buildings
-
-	% possibility 1: sell buildings we own that are not meant for housing but could be useful to other stakeholders
-	% other categories may be added later
-%	if bel(building(BuildingID,Name,_,_,Categories,FunctionID,_,MultiPoly,_,_),ownedBuilding(BuildingID),ourLand(MultiPoly),
-%		facilitiesBuildings(Categories))
-%		then adopt(doneSelling(MultiPoly)).
+	
+	% If we want to sell a building but failed to do it before, we demolish it.
+	if bel(building(BuildingID,Name,OwnerID,_,Categories,FunctionID,_,MultiPoly,_,_),ourID(OwnerID),not(housingBuildings(Categories)),
+		failedToSell(MultiPoly))
+		then adopt(demolishBuilding(BuildingID)).
 		
-	% possibility 2: sell all buildings we own that are not housing
+	% Sell all buildings that we own that are not part of housing
 	if bel(building(BuildingID,Name,OwnerID,_,Categories,FunctionID,_,MultiPoly,_,_),ourID(OwnerID),not(housingBuildings(Categories)))
 		then adopt(doneSelling(MultiPoly)).
 
