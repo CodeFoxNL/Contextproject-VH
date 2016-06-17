@@ -12,7 +12,7 @@ module tygronRequests {
 	% if a request is a confirmation that we are selling land add offeredLand(MultiPolygon,0) 
 	% which is used to retry to sell land when the request is denied by the buyer.
 	forall percept(requests(List)),
-		bel(member(request("INFORMATION","SELL_LAND",_,_,[2],_,_,MultiPolygon,_,_),List),not(offeredLand(MultiPolygon,_))) do insert(offeredLand(MultiPolygon,0)).
+		bel(member(request("INTERACTION","SELL_LAND",_,_,[2],_,"NO_PRICE",MultiPolygon,_,_),List),not(offeredLand(MultiPolygon,_))) do insert(offeredLand(MultiPolygon,0)).
 	% when a request for a sale is rejected update the counter, which triggers a price decrease and inserts a new sell goal.
 	forall percept(requests(List)),
 		bel(member(request("INTERACTION","SELL_LAND",_,_,[2],_,"NO_PRICE",MultiPolygon,_,_),List),offeredLand(MultiPolygon,Counter),Counter<3,NewCounter is Counter+1) 

@@ -70,7 +70,7 @@ ourLand(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',_,_
 	MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
 	
 % categories that are a member of housing
-housingBuildings(Categories) :- member('LUXE',Categories); member('NORMAL',Categories); member('SOCIAL',Categories); member('OTHER',Categories); member('GARDEN',Categories).
+housingBuildings(Categories) :- member('LUXE',Categories);member('NORMAL',Categories);member('SOCIAL',Categories);member('OTHER',Categories);member('GARDEN',Categories);member('ROAD', Categories);member('INTERSECTION',Categories).
 % categories that are a member of categories that could be useful for the facilities party
 facilitiesBuildings(Categories) :- member('SHOPPING',Categories); member('LEISURE',Categories); member('OFFICES',Categories).
 
