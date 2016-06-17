@@ -43,4 +43,5 @@ module tygronInit {
 		forall percept(upgrade_types(List)),
 			bel(member(upgrade_type(UpgradeID,UpgradePairs),List),not(upgrade_type(UpgradeID,_)))
 			do insert(upgrade_type(UpgradeID,UpgradePairs)).
+
 }
