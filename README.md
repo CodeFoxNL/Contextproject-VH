@@ -23,8 +23,8 @@ ContextProject Virtual Humans for Serious Gaming
 | 4      | [Sprint 4 Backlog][S4P] | [Sprint 4 Retrospective][S4R] | |
 | 5      | [Sprint 5 Backlog][S5P] | [Sprint 5 Retrospective][S5R] | [Architecture Design 2016.05.27][AD2016.05.27] |
 | 6      | [Sprint 6 Backlog][S6P] | [Sprint 6 Retrospective][S6R] | [Architecture Design 2016.06.03][AD2016.06.03] |
-| 7      | [Sprint 7 Backlog][S7P] | [Sprint 7 Retrospective][S7R] | [Architecture Design 2016.06.03][AD2016.06.10] |
-| 8      | [Sprint 8 Backlog][S8P] | Sprint 8 Retrospective (TBM) | |
+| 7      | [Sprint 7 Backlog][S7P] | [Sprint 7 Retrospective][S7R] | [Architecture Design 2016.06.10][AD2016.06.10] |
+| 8      | [Sprint 8 Backlog][S8P] | [Sprint 8 Retrospective][S8R] | [Architecture Design 2016.06.17][AD2016.06.17] |
 
 ### Software Engineering Aspects
 
@@ -77,7 +77,9 @@ ContextProject Virtual Humans for Serious Gaming
 [S7P]: Deliverables/Week%207/Backlog%20Sprint%207.pdf
 [S7R]: Deliverables/Week%208/Retrospective%20Sprint%207.pdf
 [S8P]: Deliverables/Week%208/Backlog%20Sprint%208.pdf
+[S8R]: Deliverables/Week%209/Retrospective%20Sprint%208.pdf
 [AD2016.05.06]: Deliverables/Week%203/Architecture_Design_2016.05.06.pdf
 [AD2016.05.27]: Deliverables/Week%206/Architecture_Design_2016.05.27.pdf
 [AD2016.06.03]: Deliverables/Week%207/Architecture_Design_2016.06.03.pdf
 [AD2016.06.10]: Deliverables/Week%208/Architecture_Design_2016.06.10.pdf
+[AD2016.06.17]: Deliverables/Week%208/Architecture_Design_Final.pdf
