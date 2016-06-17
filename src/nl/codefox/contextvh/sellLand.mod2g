@@ -2,13 +2,14 @@ use knowledgebase as knowledge.
 use tygron as actionspec.
 
 exit=always.
+order=linearall.
 
 % The selling land module
 module sellLand(MultiPoly) {
 	
 	% check if we succeeded in selling the land
 	if bel(not(ourLand(MultiPoly))) 
-		then insert(sold(MultiPoly)) + exit-module.
+		then insert(doneSelling(MultiPoly)) + exit-module.
 	
 	% try another buyer when we have tried it three times with facilities
 %	if bel(offeredLand(MultiPoly,BuyerID,Counter),facilitiesID(BuyerID),Counter=3,
@@ -22,16 +23,14 @@ module sellLand(MultiPoly) {
 		exit-module.
 	
 	% if we have offered land to a buyer but we still did not sell it, reduce the price	
-	if bel(offeredLand(MultiPoly,Counter),Price is (-NextCounter*50)+400,notOurID(BuyerID))
+	if bel(offeredLand(MultiPoly,Counter),Price is (-Counter*50)+400,notOurID(BuyerID))
 		then map_sell_land(BuyerID,MultiPoly,Price) +
 		insert(doneSelling(MultiPoly)).
 	
 	% if we have land to sell and we have not offered it to anyone before, set price and try to sell for the first time to facilities
 	% standard price per m2 according to Tygron
-	if bel(not(offeredLand(MultiPoly,Counter)),facilitiesID(PossibleBuyerID)) 
-		then map_sell_land(PossibleBuyerID,MultiPoly,400) +
+	if bel(not(offeredLand(MultiPoly,Counter))) 
+		then map_sell_land(5,MultiPoly,400) +
 		insert(doneSelling(MultiPoly)).
-	
-	if true then exit-module.
 	
 }
