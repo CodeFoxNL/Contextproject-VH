@@ -16,6 +16,7 @@ test demolish(_) with
 		goal(demolishBuilding(MultiPoly)) leadsto not(done(buyLand(_))).
 		goal(demolishBuilding(MultiPoly)) leadsto not(done(construct(_))).
 		goal(demolishBuilding(MultiPoly)) leadsto not(done(upgrade(_))).
+		goal(demolishBuilding(MultiPoly)) leadsto not(done(sellLand(_))).
 	}
 	post{true}
 	

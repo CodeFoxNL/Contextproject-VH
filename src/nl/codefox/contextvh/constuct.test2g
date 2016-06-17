@@ -19,6 +19,7 @@ test construct(_) with
 		goal(constructBuilding(MultiPoly)) leadsto not(done(buyLand(_))).
 		goal(constructBuilding(MultiPoly)) leadsto not(done(demolish(_))).
 		goal(constructBuilding(MultiPoly)) leadsto not(done(upgrade(_))).
+		goal(constructBuilding(MultiPoly)) leadsto not(done(sellLand(_))).
 	}
 	post{true}
 	
