@@ -5,20 +5,23 @@ use tygron as module.
 %use tygron as actionspec.
 timeout = 10.
 
-
+%Test module for the buyLand module.
 test buyLand(_) with
-
+	%Set up pre condition for test cases.
 	pre{bel(building(BuildingId,'Overige functie (1218)',_,_,_,_,_,MultiPoly,_,_),landOfOthers(MultiPoly),not(doneBuying(MultiPoly)))}
-
 	in{
+		%Test if the module executes map_buy_land action
 		goal(doneBuying(MultiPoly)) leadsto done(map_buy_land(MultiPoly, Price)).
+		%Test if the correct module is executed.
 		goal(doneBuying(MultiPoly)) leadsto done(buyLand(MultiPoly)).
+		%Test if correct believe is inserted after the module is executed.
 		goal(doneBuying(MultiPoly)) leadsto bel(ownedBuilding(BuildingId)).
 
+		%Test if only the necessary module is executed.
 		goal(doneBuying(MultiPoly)) leadsto not(done(construct(_))).
 		goal(doneBuying(MultiPoly)) leadsto not(done(demolish(_))).
 		goal(doneBuying(MultiPoly)) leadsto not(done(upgrade(_))).
-		goal(doneBuying(MultiPoly)) leadsto not(done(doneSelling(_))).
+		goal(doneBuying(MultiPoly)) leadsto not(done(sellLand(_))).
 	}
 	post{true}
 

@@ -6,19 +6,26 @@ use tygron as module.
 timeout = 10.
 
 test construct(_) with
+	%Set up pre condition for test cases.
 	pre{bel(emptyPoly(MultiPoly))}
 	in{ 
+		%Test if the correct goal is adopted.
 		bel(emptyPoly(MultiPoly)) leadsto goal(constructBuilding(MultiPoly)).
 		
+		%Test if the module executes the correct action.
 		goal(constructBuilding(MultiPoly)) leadsto done(building_plan_construction(_, _, MultiPoly)).
+		%Test if the correct module is executed.
 		goal(constructBuilding(MultiPoly)) leadsto done(construct(MultiPoly)).
+		%Test if the correct beliefs are present after execution.
 		goal(constructBuilding(MultiPoly)) leadsto not(bel(emptyPoly(MultiPoly))).
 		goal(constructBuilding(MultiPoly)) leadsto bel(constructed(MultiPoly)).
 		goal(constructBuilding(MultiPoly)) leadsto bel(building(_,_,_,_,_,_,_,MultiPoly,_,_)).
 		
+		%Test if only the necessary module is executed.
 		goal(constructBuilding(MultiPoly)) leadsto not(done(buyLand(_))).
 		goal(constructBuilding(MultiPoly)) leadsto not(done(demolish(_))).
 		goal(constructBuilding(MultiPoly)) leadsto not(done(upgrade(_))).
+		goal(constructBuilding(MultiPoly)) leadsto not(done(sellLand(_))).
 	}
 	post{true}
 	
