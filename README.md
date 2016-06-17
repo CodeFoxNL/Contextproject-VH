@@ -13,6 +13,8 @@ ContextProject Virtual Humans for Serious Gaming
 
 [Final Report (Draft)](Deliverables/Week 9/Final Report (Draft).pdf)
 
+[Architecture Design](Deliverables/Week 9/Architecture_Design_Final.pdf)
+
 ### Sprints
 
 | Sprint | Plan | Retrospective | Architecture Design |
