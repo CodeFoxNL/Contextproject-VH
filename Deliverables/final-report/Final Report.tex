@@ -1,0 +1,33 @@
+\documentclass[10pt, a4paper, twoside, openright]{report}
+
+\include{settings/packages}
+\include{settings/macros}
+
+%For digital release
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=11mm]{geometry}
+%For print release
+%\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=6mm]{geometry}
+
+\begin{document}
+
+\pagestyle{fancy}
+\pagestyle{maincontent}
+
+\input{contents/title}
+
+% Front matter
+\cleardoublepage
+\newroman
+\input{contents/introduction}
+
+% Main content
+\cleardoublepage
+\newarabic
+
+\tableofcontents
+\thispagestyle{empty}
+
+\input{contents/report/report}
+\input{contents/appendix/appendix}
+
+\end{document}
