@@ -31,7 +31,7 @@ module tygronInit {
 
 		% initialize the indicatorLinks of our agent				
 		forall percept(stakeholders(List)),
-			bel(member(SubList,List),member(indicatorLink(StakeholderID,Weights),SubList),ourID(StakeholderID)) 
+			bel(member(SubList,List),ourID(StakeholderID),member(indicatorLink(StakeholderID,Weights),SubList)) 
 			do insert(indicatorLink(StakeholderID,Weights)).
 		
 		% initialize all indicators	

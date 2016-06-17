@@ -63,7 +63,8 @@ module tygronEvents {
 	
 	%%% ACTIONLOG PERCEPTS	
 	forall percept(action_logs(ActList)), 
-		bel(member(actionlog(StakeholderID,Description,ActionID,IncList),ActList))
+		bel(member(actionlog(StakeholderID,Description,ActionID,IncList),ActList),
+		not(actionlog(_,_,ActionID,_)))
 		do insert(actionlog(StakeholderID,Description,ActionID,IncList)).
 		
 	%%% RELEVANT AREAS PERCEPTS

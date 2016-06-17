@@ -39,15 +39,20 @@
 demolishBuilding(BuildingID) :- demolished(BuildingID).
 constructBuilding(MultiPoly) :- constructed(MultiPoly).
 upgradeBuilding(UpgradeID,BuildingId) :- upgraded(BuildingId).
-improveZone(IndicatorID,ZoneID, Weight) :- improvedZone(IndicatorID,ZoneID, Weight).
 
 % determine when a zone needs to be improved and for which indicator
-needImprovement(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink),member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),CurrentValue<CurrentTarget.
+needImprovement(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink),
+	member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),
+	CurrentValue<CurrentTarget,IndicatorID \= 34,ourIndicator(IndicatorID).
 % a zone is improved when the indicator score is higher or equal to the agent's target
-improvedZone(IndicatorID,ZoneID,Weight) :- indicator(IndicatorID,Value,Target,ZoneLink),member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),CurrentValue>=CurrentTarget.
+improvedZone(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink),
+	member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),
+	CurrentValue>=CurrentTarget,IndicatorID \= 34,ourIndicator(IndicatorID).
 
 %%% Checks
 
+% check if our agent owns a building
+ownedBuilding(BuildingID) :- ourID(ID),building(BuildingID,_,ID,_,_,_,_,MultiPoly,_,_),MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
 % budget of our stakeholder
 budget(Amount) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',Amount,Income).
 % stakeholder ID for our Stakeholder
@@ -60,8 +65,6 @@ facilitiesID(StakeholderID) :- stakeholder(StakeholderID,'Voorzieningen',Money,I
 duwoID(StakeholderID) :- stakeholder(StakeholderID,'DUWO',Money,Income).
 % stakeholder ID of the tu
 tuID(StakeholderID) :- stakeholder(StakeholderID,'TU',Money,Income).
-% check if our agent owns a building
-ownedBuilding(BuildingID) :- ourID(ID), building(BuildingID,_,ID,_,_,_,_,MultiPoly,_,_), MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
 
 % predicates to determine if land on the map is ours or others
 landOfOthers(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',_,_),
@@ -70,6 +73,11 @@ landOfOthers(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers
 ourLand(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',_,_),
 	(land(LandID,stakeholder(StakeholderID,_,_,_),MultiPoly,_,_);building(_,_,StakeholderID,_,_,_,_,MultiPoly,_,_)),
 	MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
+alreadyUpgraded(BuildingID) :- building(BuildingID,Name,_,_,_,_,_,_,_,_),sub_string(Name,_,3,_," + ").
+
+% zones
+zoneToRenovate(ZoneId):- needImprovement(3,ZoneId) ; (indicator(34,Value,Target,_),Value < Target).   
+zoneForGreens(ZoneId):- indicator(19,_,_,ZoneLinkList),member(zone_link(_,ZoneId,Current,Target),ZoneLinkList),Current<Target.
 
 % categories that are a member of housing
 housingBuildings(Categories) :- member('LUXE',Categories);member('NORMAL',Categories);member('SOCIAL',Categories);
@@ -79,11 +87,10 @@ housingBuildings(Categories) :- member('LUXE',Categories);member('NORMAL',Catego
 facilitiesBuildings(Categories) :- member('SHOPPING',Categories); member('LEISURE',Categories); member('OFFICES',Categories).
 
 %%% Indicators
-
+ourIndicator(IndicatorID):- indicatorLink(2,Weights),member(indicatorWeights(IndicatorID,_,_),Weights).
 housingIndicator(IndicatorID):- ourID(OwnerID),indicatorLink(OwnerID,Weights),member(indicatorWeights(IndicatorID,IndicatorName,_),Weights),IndicatorName=="Building Privaat".
 
 % uses indicator scores to determine whether more Luxury houses are desirable,if this is not the case Normal houses are desirable.
-
 needLuxeHouse:- housingIndicator(ID),indicator(ID,_,_,ZoneLinkList),member(zone_link(0,_,Current1,Target1),ZoneLinkList),
 	indicator(ID,_,_,ZoneLinkList),member(zone_link(1,_,Current2,Target2),ZoneLinkList),
 	Target1-Current1>Target2-Current2.
