@@ -12,9 +12,10 @@ test upgrade(_, _) with
 		goal(upgradeBuilding(UpgradeID, MultiPolygon)) leadsto done(upgrade(UpgradeID, MultiPolygon)).
 		goal(upgradeBuilding(UpgradeID, MultiPolygon)) leadsto bel(upgraded(MultiPolygon)).
 		
-		goal(demolishBuilding(MultiPoly)) leadsto not(done(buyLand(_))).
-		goal(demolishBuilding(MultiPoly)) leadsto not(done(construct(_))).
-		goal(demolishBuilding(MultiPoly)) leadsto not(done(demolish(_))).
+		goal(upgradeBuilding(UpgradeID, MultiPolygon)) leadsto not(done(buyLand(_))).
+		goal(upgradeBuilding(UpgradeID, MultiPolygon)) leadsto not(done(construct(_))).
+		goal(upgradeBuilding(UpgradeID, MultiPolygon)) leadsto not(done(demolish(_))).
+		goal(upgradeBuilding(UpgradeID, MultiPolygon)) leadsto not(done(sellLand(_))).
 	}
 	post{true}
 	
