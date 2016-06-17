@@ -13,7 +13,7 @@
 :- dynamic function/3.
 :- dynamic indicator/4.
 :- dynamic land/5.
-:- dynamic zone/5. 
+:- dynamic zone/5.
 :- dynamic building/10.
 :- dynamic relevant_areas/2.
 
@@ -68,7 +68,7 @@ landOfOthers(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers
 ourLand(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',_,_),
 	(land(LandID,stakeholder(StakeholderID,_,_,_),MultiPoly,_,_);building(_,_,StakeholderID,_,_,_,_,MultiPoly,_,_)),
 	MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
-	
+
 % categories that are a member of housing
 housingBuildings(Categories) :- member('LUXE',Categories);member('NORMAL',Categories);member('SOCIAL',Categories);member('OTHER',Categories);member('GARDEN',Categories);member('ROAD', Categories);member('INTERSECTION',Categories).
 % categories that are a member of categories that could be useful for the facilities party
@@ -76,17 +76,20 @@ facilitiesBuildings(Categories) :- member('SHOPPING',Categories); member('LEISUR
 
 %%% Indicators
 
-% uses indicator scores to determine whether more Luxury houses are desirable,if this is not the case Normal houses are desirable.  
-needLuxeHouse :- indicator(34,_,_,ZoneLinkList),member(zone_link(0,_,Current1,Target1),ZoneLinkList),
-	indicator(34,_,_,ZoneLinkList),member(zone_link(1,_,Current2,Target2),ZoneLinkList),
+housingIndicator(IndicatorID):- ourID(OwnerID),indicatorLink(OwnerID,Weights),member(indicatorWeights(IndicatorID,IndicatorName,_),Weights),IndicatorName=="Building Privaat".
+
+% uses indicator scores to determine whether more Luxury houses are desirable,if this is not the case Normal houses are desirable.
+
+needLuxeHouse:- housingIndicator(ID),indicator(ID,_,_,ZoneLinkList),member(zone_link(0,_,Current1,Target1),ZoneLinkList),
+	indicator(ID,_,_,ZoneLinkList),member(zone_link(1,_,Current2,Target2),ZoneLinkList),
 	Target1-Current1>Target2-Current2.
 % indicator of the spatial quality
-qualityIndicator(Value,Target,ZoneID) :- 
+qualityIndicator(Value,Target,ZoneID) :-
 	indicatorLink(_,IndicatorWeights), member(indicatorWeights(IndicatorID,IndicatorName,_),IndicatorWeights),
 	(IndicatorName=='Ruimtelijke kwaliteit'), indicator(IndicatorID,Value,Target,ZoneLink),
 	member(zone_link(ZoneID,IndicatorID,Value,Target),ZoneLink).
 % indicator of the sound
-soundIndicator(Value,Target,ZoneID) :- 
+soundIndicator(Value,Target,ZoneID) :-
 	indicatorLink(_,IndicatorWeights), member(indicatorWeights(IndicatorID,IndicatorName,_),IndicatorWeights),
 	(IndicatorName=='Geluidsoverlast Verkeer'), indicator(IndicatorID,Value,Target,ZoneLink),
 	member(zone_link(ZoneID,IndicatorID,Value,Target),ZoneLink).

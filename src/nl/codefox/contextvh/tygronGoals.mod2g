@@ -34,11 +34,12 @@ module tygronGoals {
 	if bel(building(BuildingId,'Prof. Henketstraat 48-80',_,_,_,_,_,_,_,_),ownedBuilding(BuildingId))
 		then adopt(demolishBuilding(BuildingId)).
 	% Example of building we will upgrade by replacing and rebuilding it
-	if bel(building(BuildingId,_,_,_,['LUXE'],FunctionID,_,MultiPolygon,_,_),ownedBuilding(BuildingId),upgrade_type(UpgradeID,UpgradeTypes),member(upgrade_pair(FunctionID,_),UpgradeTypes)), not(a-goal(demolishBuilding(BuildingId)))
+	if bel(building(BuildingId,_,_,_,['LUXE'],FunctionID,_,MultiPolygon,_,_),ownedBuilding(BuildingId),upgrade_type(UpgradeID,UpgradeTypes),
+		member(upgrade_pair(FunctionID,_),UpgradeTypes)), not(a-goal(demolishBuilding(BuildingId)))
 		then adopt(upgradeBuilding(UpgradeID,MultiPolygon)).
 	
 	% Adopt goals to demolish social buildings when we want more luxury or normal buildings
-	if bel(indicator(34,_,_,ZoneLinkList),member(zone_link(2,_,Current3,Target3),ZoneLinkList),Current3<Target3,
+	if bel(housingIndicator(IndicatorID),indicator(IndicatorID,_,_,ZoneLinkList),member(zone_link(2,_,Current3,Target3),ZoneLinkList),Current3<Target3,
 		member(zone_link(1,_,Current2,Target2),ZoneLinkList),member(zone_link(0,_,Current1,Target1),ZoneLinkList),
 		(Current1<Target1;Current2<Target2),building(BuildingId,_,_,_,['SOCIAL'],_,_,_,_,_),ownedBuilding(BuildingId))
 		then adopt (demolishBuilding(BuildingId)).
