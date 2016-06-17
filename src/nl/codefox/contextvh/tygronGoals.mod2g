@@ -9,11 +9,11 @@ module tygronGoals {
 	% possibility 1: sell buildings we own that are not meant for housing but could be useful to other stakeholders
 	% other categories may be added later
 %	if bel(building(BuildingID,Name,_,_,Categories,FunctionID,_,MultiPoly,_,_),ownedBuilding(BuildingID),ourLand(MultiPoly),
-%		facilitiesMember(Categories))
+%		facilitiesBuildings(Categories))
 %		then adopt(doneSelling(MultiPoly)).
 		
 	% possibility 2: sell all buildings we own that are not housing
-	if bel(building(BuildingID,Name,OwnerID,_,Categories,FunctionID,_,MultiPoly,_,_),ourID(OwnerID),not(housingMember(Categories)))
+	if bel(building(BuildingID,Name,OwnerID,_,Categories,FunctionID,_,MultiPoly,_,_),ourID(OwnerID),not(housingBuildings(Categories)))
 		then adopt(doneSelling(MultiPoly)).
 
 	% Adopt goal to build where a demolished building was previously located.
@@ -27,15 +27,12 @@ module tygronGoals {
 	% Example of buying and demolish on ground that we just bought.
 	if bel(building(BuildingId,'Overige functie (1218) verkocht',_,_,_,_,_,MultiPoly,_,_),ownedBuilding(BuildingId))
 		then adopt(demolishBuilding(BuildingId)).
-	
 	% Example of buying and demolish on ground that we just bought.
 	if bel(building(BuildingId,'Overige functie (1218)',_,_,_,_,_,MultiPoly,_,_),landOfOthers(MultiPoly),not(doneBuying(MultiPoly)))
 		then adopt(doneBuying(MultiPoly)).
-	
 	% Example of a building we will demolish
 	if bel(building(BuildingId,'Prof. Henketstraat 48-80',_,_,_,_,_,_,_,_),ownedBuilding(BuildingId))
 		then adopt(demolishBuilding(BuildingId)).
-	
 	% Example of building we will upgrade by replacing and rebuilding it
 	if bel(building(BuildingId,_,_,_,['LUXE'],FunctionID,_,MultiPolygon,_,_),ownedBuilding(BuildingId),upgrade_type(UpgradeID,UpgradeTypes),member(upgrade_pair(FunctionID,_),UpgradeTypes)), not(a-goal(demolishBuilding(BuildingId)))
 		then adopt(upgradeBuilding(UpgradeID,MultiPolygon)).

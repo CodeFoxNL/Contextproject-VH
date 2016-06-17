@@ -29,15 +29,17 @@
 :- dynamic constructed/1.
 :- dynamic upgraded/1.
 :- dynamic improvedZone/1.
+:- dynamic sold/1.
 :- dynamic emptyPoly/1.
 :- dynamic requestedLand/2.
-:- dynamic offeredLand/3.
+:- dynamic offeredLand/2.
 
 %%% Goals that can be adopted
 demolishBuilding(BuildingID) :- demolished(BuildingID).
 constructBuilding(MultiPoly) :- constructed(MultiPoly).
 upgradeBuilding(UpgradeID,BuildingId) :- upgraded(BuildingId).
 improveZone(IndicatorID,ZoneID, Weight) :- improvedZone(IndicatorID,ZoneID, Weight).
+doneSelling(MultiPoly) :- sold(MultiPoly).
 
 % determine when a zone needs to be improved and for which indicator
 needImprovement(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink),member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),CurrentValue<CurrentTarget.
@@ -70,9 +72,9 @@ ourLand(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',_,_
 	MultiPoly\=multipolygon('MULTIPOLYGON EMPTY').
 	
 % categories that are a member of housing
-housingMember(Categories) :- member('LUXE',Categories); member('NORMAL',Categories); member('SOCIAL',Categories); member('OTHER',Categories).
+housingBuildings(Categories) :- member('LUXE',Categories); member('NORMAL',Categories); member('SOCIAL',Categories); member('OTHER',Categories); member('GARDEN',Categories).
 % categories that are a member of categories that could be useful for the facilities party
-facilitiesMember(Categories) :- member('SHOPPING',Categories); member('LEISURE',Categories); member('OFFICES',Categories).
+facilitiesBuildings(Categories) :- member('SHOPPING',Categories); member('LEISURE',Categories); member('OFFICES',Categories).
 
 %%% Indicators
 
