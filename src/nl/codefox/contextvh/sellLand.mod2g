@@ -32,7 +32,7 @@ module sellLand(MultiPoly) {
 		exit-module.
 	
 	% if we have offered land to a buyer but we still did not sell it, reduce the price	
-	if bel(offeredLand(MultiPoly,Counter),Price is (-Counter*50)+450)
-		then map_sell_land(5,MultiPoly,Price) +
+	if bel(offeredLand(MultiPoly,Counter),Price is (-Counter*50)+450,sellTo(MultiPoly,BuyerID))
+		then map_sell_land(BuyerID,MultiPoly,Price) +
 		insert(doneSelling(MultiPoly)).	
 }
