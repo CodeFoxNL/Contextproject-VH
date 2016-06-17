@@ -1,0 +1,29 @@
+use Tygron as mas.
+use knowledgebase as knowledge.
+use upgrade as module.
+use tygron as module.
+%use tygron as actionspec.
+timeout = 10.
+
+test upgrade(_, _) with
+	%Set up pre condition for test cases.
+	pre{bel(building(BuildingId,'Prof. Henketstraat 49-85',_,_,_,FunctionID,_,MultiPolygon,_,_), ownedBuilding(BuildingId), upgrade_type(UpgradeID,FunctionID))}
+	in{
+		%Test if the module executes the correct action
+		goal(upgradeBuilding(UpgradeID, MultiPolygon)) leadsto done(building_plan_upgrade(UpgradeID, MultiPolygon)).
+		%Test if the correct module is executed.
+		goal(upgradeBuilding(UpgradeID, MultiPolygon)) leadsto done(upgrade(UpgradeID, MultiPolygon)).
+		%Test if the correct beliefs are present after execution.
+		goal(upgradeBuilding(UpgradeID, MultiPolygon)) leadsto bel(upgraded(MultiPolygon)).
+		
+		%Test if only the necessary module is executed.
+		goal(upgradeBuilding(UpgradeID, MultiPolygon)) leadsto not(done(buyLand(_))).
+		goal(upgradeBuilding(UpgradeID, MultiPolygon)) leadsto not(done(construct(_))).
+		goal(upgradeBuilding(UpgradeID, MultiPolygon)) leadsto not(done(demolish(_))).
+		goal(upgradeBuilding(UpgradeID, MultiPolygon)) leadsto not(done(sellLand(_))).
+	}
+	post{true}
+	
+	tygronagent {
+		do tygron.
+	}
