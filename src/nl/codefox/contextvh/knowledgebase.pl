@@ -41,13 +41,13 @@ constructBuilding(MultiPoly) :- constructed(MultiPoly).
 upgradeBuilding(UpgradeID,BuildingId) :- upgraded(BuildingId).
 
 % determine when a zone needs to be improved and for which indicator
-needImprovement(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink),
+needImprovement(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink),housingIndicator(HouseIndicator),
 	member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),
-	CurrentValue<CurrentTarget,IndicatorID \= 34,ourIndicator(IndicatorID).
+	CurrentValue<CurrentTarget,IndicatorID \= HouseIndicator,ourIndicator(IndicatorID).
 % a zone is improved when the indicator score is higher or equal to the agent's target
 improvedZone(IndicatorID,ZoneID) :- indicator(IndicatorID,Value,Target,ZoneLink),
-	member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),
-	CurrentValue>=CurrentTarget,IndicatorID \= 34,ourIndicator(IndicatorID).
+	member(zone_link(ZoneID,IndicatorID,CurrentValue,CurrentTarget),ZoneLink),housingIndicator(HouseIndicator),
+	CurrentValue>=CurrentTarget,IndicatorID \= HouseIndicator,ourIndicator(IndicatorID).
 
 %%% Checks
 
@@ -76,8 +76,8 @@ ourLand(MultiPoly) :- stakeholder(StakeholderID,'Private_Woningbouw_Burgers',_,_
 alreadyUpgraded(BuildingID) :- building(BuildingID,Name,_,_,_,_,_,_,_,_),sub_string(Name,_,3,_," + ").
 
 % zones
-zoneToRenovate(ZoneId):- needImprovement(3,ZoneId) ; (indicator(34,Value,Target,_),Value < Target).   
-zoneForGreens(ZoneId):- indicator(19,_,_,ZoneLinkList),member(zone_link(_,ZoneId,Current,Target),ZoneLinkList),Current<Target.
+zoneToRenovate(ZoneId):- housingIndicator(HouseIndicator),qualityIndicator(IndicatorID),(needImprovement(IndicatorID,ZoneId);(indicator(HouseIndicator,Value,Target,_),Value < Target)).   
+zoneForGreens(ZoneId):- greenIndicator(IndicatorID),indicator(IndicatorID,_,_,ZoneLinkList),member(zone_link(ZoneId,_,Current,Target),ZoneLinkList),Current < Target.
 
 % categories that are a member of housing
 housingBuildings(Categories) :- member('LUXE',Categories);member('NORMAL',Categories);member('SOCIAL',Categories);
@@ -87,19 +87,17 @@ housingBuildings(Categories) :- member('LUXE',Categories);member('NORMAL',Catego
 facilitiesBuildings(Categories) :- member('SHOPPING',Categories); member('LEISURE',Categories); member('OFFICES',Categories).
 
 %%% Indicators
-ourIndicator(IndicatorID):- indicatorLink(2,Weights),member(indicatorWeights(IndicatorID,_,_),Weights).
+ourIndicator(IndicatorID):- ourID(OurID),indicatorLink(OurID,Weights),member(indicatorWeights(IndicatorID,_,_),Weights).
 housingIndicator(IndicatorID):- ourID(OwnerID),indicatorLink(OwnerID,Weights),member(indicatorWeights(IndicatorID,IndicatorName,_),Weights),IndicatorName=="Building Privaat".
+greenIndicator(IndicatorID):- indicatorLink(_,Weights),member(indicatorWeights(IndicatorID,IndicatorName,_),Weights),IndicatorName=="Gemeente Groen".
+qualityIndicator(IndicatorID) :- indicatorLink(_,Weights), member(indicatorWeights(IndicatorID,IndicatorName,_),Weights),IndicatorName=="Ruimtelijke kwaliteit".
 
 % uses indicator scores to determine whether more Luxury houses are desirable,if this is not the case Normal houses are desirable.
 needLuxeHouse:- housingIndicator(ID),indicator(ID,_,_,ZoneLinkList),member(zone_link(0,_,Current1,Target1),ZoneLinkList),
 	indicator(ID,_,_,ZoneLinkList),member(zone_link(1,_,Current2,Target2),ZoneLinkList),
 	Target1-Current1>Target2-Current2.
-% indicator of the spatial quality
-qualityIndicator(Value,Target,ZoneID) :-
-	indicatorLink(_,IndicatorWeights), member(indicatorWeights(IndicatorID,IndicatorName,_),IndicatorWeights),
-	(IndicatorName=='Ruimtelijke kwaliteit'), indicator(IndicatorID,Value,Target,ZoneLink),
-	member(zone_link(ZoneID,IndicatorID,Value,Target),ZoneLink).
-% indicator of the sound
+
+% indicator of sound disturbance
 soundIndicator(Value,Target,ZoneID) :-
 	indicatorLink(_,IndicatorWeights), member(indicatorWeights(IndicatorID,IndicatorName,_),IndicatorWeights),
 	(IndicatorName=='Geluidsoverlast Verkeer'), indicator(IndicatorID,Value,Target,ZoneLink),

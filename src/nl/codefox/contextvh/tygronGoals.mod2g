@@ -33,12 +33,40 @@ module tygronGoals {
 		%41/Zonnepanelen/
 			%6,Budget,-3318
 			%34,Surface,-0.002
-	if bel(UpgradeID is 0,upgrade_type(UpgradeID,UpgradeTypes),
-		random_member(upgrade_pair(FunctionId,_),UpgradeTypes),
-		building(BuildingId,_,_,_,_,FunctionId,_,_,_,ZoneId),
-		zoneToRenovate(ZoneId),
-		ownedBuilding(BuildingId)) 
+		%1000000/Groen Dak/
+			%3, SpatialQuality, +
+			%6, Budget, -
+			%19, Green, +	
+	
+	 % Upgrade "Groen dak"
+     if bel(alreadyUpgraded(BuildingId),
+     	zoneForGreens(ZoneId),
+     	building(BuildingId,_,_,_,_,340,_,_,_,ZoneIdList),
+     	member(ZoneId, ZoneIdList),
+     	ownedBuilding(BuildingId),     	
+        upgrade_type(UpgradeID,UpgradeTypes),
+        member(upgrade_pair(340,348),UpgradeTypes))
+        then adopt(upgradeBuilding(UpgradeID, BuildingId)).
+	
+	% Upgrade "Renoveren"			
+	if bel(zoneToRenovate(ZoneId),
+		zoneForGreens(ZoneId),
+		building(BuildingId,_,_,_,_,1,_,_,_,ZoneIdList),
+		member(ZoneId, ZoneIdList),
+		ownedBuilding(BuildingId),
+		upgrade_type(UpgradeID,UpgradeTypes),
+		member(upgrade_pair(1,340),UpgradeTypes)) 
 		then adopt(upgradeBuilding(UpgradeID,BuildingId)).
+	
+	% Upgrade "Renoveren"			
+	if not(goal(upgradeBuilding(_,_))),
+		bel(zoneToRenovate(ZoneId),
+		building(BuildingId,_,_,_,_,1,_,_,_,ZoneIdList),
+		member(ZoneId, ZoneIdList),
+		ownedBuilding(BuildingId),
+		upgrade_type(UpgradeID,UpgradeTypes),
+		member(upgrade_pair(1,340),UpgradeTypes)) 
+		then adopt(upgradeBuilding(UpgradeID,BuildingId)).	
 					
 	% Adopt goals to demolish social buildings when we want more luxury or normal buildings
 	if bel(housingIndicator(IndicatorID),indicator(IndicatorID,_,_,ZoneLinkList),member(zone_link(2,_,Current3,Target3),ZoneLinkList),Current3<Target3,
