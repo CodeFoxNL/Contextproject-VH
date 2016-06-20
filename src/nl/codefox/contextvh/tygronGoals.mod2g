@@ -38,8 +38,8 @@ module tygronGoals {
 			%6, Budget, -
 			%19, Green, +	
 	
-	 % Upgrade "Groen dak"
-     if bel(alreadyUpgraded(BuildingId),
+	% Upgrade "Groen dak"
+    if bel(alreadyUpgraded(BuildingId),
      	zoneForGreens(ZoneId),
      	building(BuildingId,_,_,_,_,340,_,_,_,ZoneIdList),
      	member(ZoneId, ZoneIdList),
