@@ -81,7 +81,7 @@ zoneForGreens(ZoneId):- greenIndicator(IndicatorID),indicator(IndicatorID,_,_,Zo
 
 % categories that are a member of housing
 housingBuildings(Categories) :- member('LUXE',Categories);member('NORMAL',Categories);member('SOCIAL',Categories);
-	member('OTHER',Categories);member('GARDEN',Categories);member('ROAD', Categories);member('INTERSECTION',Categories);
+	member('OTHER',Categories);member('GARDEN',Categories);member('ROAD',Categories);member('INTERSECTION',Categories);
 	member('BRIDGE',Categories).
 % categories that are a member of categories that could be useful for the facilities party'
 facilitiesBuildings(Categories) :- member('SHOPPING',Categories); member('LEISURE',Categories); member('OFFICES',Categories).
@@ -90,7 +90,7 @@ facilitiesBuildings(Categories) :- member('SHOPPING',Categories); member('LEISUR
 ourIndicator(IndicatorID):- ourID(OurID),indicatorLink(OurID,Weights),member(indicatorWeights(IndicatorID,_,_),Weights).
 housingIndicator(IndicatorID):- ourID(OwnerID),indicatorLink(OwnerID,Weights),member(indicatorWeights(IndicatorID,IndicatorName,_),Weights),IndicatorName=="Building Privaat".
 greenIndicator(IndicatorID):- indicatorLink(_,Weights),member(indicatorWeights(IndicatorID,IndicatorName,_),Weights),IndicatorName=="Gemeente Groen".
-qualityIndicator(IndicatorID) :- indicatorLink(_,Weights), member(indicatorWeights(IndicatorID,IndicatorName,_),Weights),IndicatorName=="Ruimtelijke kwaliteit".
+qualityIndicator(IndicatorID) :- indicatorLink(_,Weights),member(indicatorWeights(IndicatorID,IndicatorName,_),Weights),IndicatorName=="Ruimtelijke kwaliteit".
 
 % uses indicator scores to determine whether more Luxury houses are desirable,if this is not the case Normal houses are desirable.
 needLuxeHouse:- housingIndicator(ID),indicator(ID,_,_,ZoneLinkList),member(zone_link(0,_,Current1,Target1),ZoneLinkList),
@@ -99,6 +99,6 @@ needLuxeHouse:- housingIndicator(ID),indicator(ID,_,_,ZoneLinkList),member(zone_
 
 % indicator of sound disturbance
 soundIndicator(Value,Target,ZoneID) :-
-	indicatorLink(_,IndicatorWeights), member(indicatorWeights(IndicatorID,IndicatorName,_),IndicatorWeights),
-	(IndicatorName=='Geluidsoverlast Verkeer'), indicator(IndicatorID,Value,Target,ZoneLink),
+	indicatorLink(_,IndicatorWeights),member(indicatorWeights(IndicatorID,IndicatorName,_),IndicatorWeights),
+	(IndicatorName=='Geluidsoverlast Verkeer'),indicator(IndicatorID,Value,Target,ZoneLink),
 	member(zone_link(ZoneID,IndicatorID,Value,Target),ZoneLink).
