@@ -7,12 +7,12 @@ test tygronInit with
 	pre{true}
 	in{
 		%Test if all stakeholders are added to the beliefbase.
-		eventually bel(stakeholder(0, 'Gemeente', _, _)).	
-		eventually bel(stakeholder(1, 'Bedrijf', _, _)).
-		eventually bel(stakeholder(2, 'Private_Woningbouw_Burgers', _, _)).
-		eventually bel(stakeholder(3, 'TU', _, _)).
-		eventually bel(stakeholder(4, 'DUWO', _, _)).
-		eventually bel(stakeholder(5, 'Voorzieningen', _, _)).
+		%eventually bel(stakeholder(0, 'Gemeente', _, _)).	
+		%eventually bel(stakeholder(1, 'Bedrijf', _, _)).
+		%eventually bel(stakeholder(2, 'Private_Woningbouw_Burgers', _, _)).
+		%eventually bel(stakeholder(3, 'TU', _, _)).
+		%eventually bel(stakeholder(4, 'DUWO', _, _)).
+		%eventually bel(stakeholder(5, 'Voorzieningen', _, _)).
 			
 		%Test if all indicatorLinks are added to the beliefbase.
 		%eventually bel(indicatorLink(StakeHolderID, Weights)).
