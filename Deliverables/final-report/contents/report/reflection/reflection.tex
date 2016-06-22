@@ -3,41 +3,42 @@
 
 The "Virtual Humans"-project was mostly divided into two separate products.
 First of all there was the agent itself, and secondly there was the connector between the environment and the agents.
-These two parts will be discussed separately. General software engineering principles will be discussed first,
+These two parts will be discussed separately, because the agent was individual effort for each group and the connector was a collaboration between all groups. General software engineering principles will be discussed first,
 followed by the software engineering aspects that relate to the two different products specifically.
 
 \section{General}
 \label{sec:General}
 
-For this project we were required to use the SCRUM-methodology. This states that our product should be in a working state at the end of every sprint, with a sprint being defined as one week.
+We were required to use the SCRUM-methodology. This states that our product should be in a working state at the end of every sprint, with a sprint being defined as one week.
 According to SCRUM, this is realized with the use of backlog at the beginning of each sprint, daily SCRUM meetings during the sprint, and a reflection at the end of the sprint.
-The backlog was systematically made at the beginning of each sprint and was overall effectively used to divide the tasks for the upcoming sprint.
-At the beginning of the project, the prioritization of the tasks was not completely up to par, but this was adjusted accordingly in later sprints.
-We elected to have the daily SCRUM meetings through voice chat, every day. However the attendance at these meetings was abysmal, often only two or three members of the group were present during the meetings.
-Reflections were also made systematically at the end of each week, but the overall quality of the reflections varied quite a lot during the project.
-To our displeasure, we were unable to deliver a working agent at the end of some sprints. At times this was caused by factors outside of our control, but often it was due to bad time management,
-and many tasks needed to be carried over to future sprints.
 
-Secondly a pull-based development model was used throughout the development. New functionality, bug fixes, documentation etc. were all added through pull request, and were only merged after at least
-two members of group (or two other groups in case of the connector) approved of the changes.
-Unfortunately, reviews were not always very critical, which led to lots of inconsistencies in style, which in turn meant that later on a lot of refactoring needed to be done.
+As for our scrum management, the backlog was systematically made at the beginning of each sprint and was overall effectively used to divide the tasks for the upcoming sprint. At the beginning of the project, the prioritization of the tasks was not completely up to par, but this was adjusted accordingly in later sprints.
+We elected to have the daily SCRUM meetings through voice chat, every day. However the attendance at these meetings was abysmal, often only two or three members of the group were present during these meetings.
+Reflections were also made systematically at the end of each week, but the overall quality of the reflections varied quite a lot during the project.
+To our displeasure, we were unable to deliver a working agent at the end of some sprints. At times this was caused by factors outside of our control, but it was also due to bad time management,
+which caused the need for tasks to be carried over to future sprints.
+
+Additionally a pull-based development model had to be used throughout the development-process. New functionality, bug fixes, documentation etc. were all added through pull requests, and were supposed to only be merged after at least a majority of the participants have reviewed and approved the request. 
+
+Within our group, reviews of pull requests were not always extensive enough, which led to lots of inconsistencies in style, which caused that later on re-factoring had to be done.
+
+Most of the afore mentioned issues would have had significantly less impact if team members showed more dedication at the start of a sprint, because then there would have been more time to correct mistakes and solve issues that arose throughout the project. This would be the best improvement for following projects. 
 
 \section{Private Housing Company Agent}
 \label{sec:Private Housing Company Agent}
 
-The agent was developed with the GOAL programming language. The use of GOAL caused a lot of challenges regarding static analysis tools and continuous integration.
-Unfortunately, none of the static analysis tools required for the project worked in conjunction with GOAL. This meant that the Travis configuration used for the agents is very limited.
-At first, we did manage to find a way that Travis would verify that all test cases written would run successfully. However we later discovered that GOAL-tests do not run as intended when ran by Travis.
-Because of this reason, only some specific tests are ran through Travis.
+We were obliged to utilize continuous integration with proper branch management. For that purpose we also had to make use of static analysis tools such as: 'CheckStyle', 'PMD' and 'FindBugs'. Additionally we had to use test driven development. We had to make use of 'Travis' to check each commit on static analysis and tests. 
 
-The test driven development model was completely unused during the project. Lots of functionality was added to the agent without any tests whatsoever. Manual testing was always performed, but automatic
-tests were not added until very late in the development process. Also not all modules have automated test cases and because of the many dependencies with the connector, creating these automated tests proved
-to sometimes be near impossible.
+The agent was developed with the GOAL programming language. The use of GOAL caused a lot of challenges regarding static analysis tools and continuous integration. None of the static analysis tools required for the project worked in conjunction with GOAL. This meant that the 'Travis' configuration used for the agents is very limited.
+
+At first, we managed to find a way that Travis would verify that all test cases written would run successfully. However we later discovered that GOAL-tests do not run as intended when ran by Travis. 
+Because of this reason, only some specific tests are ran through Travis. 
+
+The test driven development model was completely unused during the project. Lots of functionality was added to the agent without any automatic tests. This was partly caused by bad time management but mostly because of external issues. Tests in GOAL initially did not function properly, which made automatic testing available only past halfway in the project. As soon as the issue was solved, we started adding automatic tests for already existing modules. For multiple modules however, there was either interaction required with other stakeholders or there were multiple connector dependencies, which meant that there was no way to add proper automatic tests for these modules. We managed to get around the lack of tests fairly good as we always had all our code manually tested thoroughly and all encountered issues were usually solved before merging a pull request. Some pull requests however were still improperly tested before the merge, causing team members to spend much time on testing and debugging the code of another member. 
 
 \section{Tygron Connector}
 \label{sec:Tygron Connector}
 
-Since the connector was completely written in Java, static analysis tools and continuous integration were no challenge, unlike with the agents in GOAL. This meant that all required static analysis tools were
-used extensively, creating a consistent style, and level of quality found in the connector.
+Since the connector was completely written in Java, static analysis tools and continuous integration did not cause issues, unlike with the agents in GOAL. This meant that all required static analysis tools were used extensively, creating a consistent style and level of quality in the connector.
 
-Test driven development was, unfortunately, also not used in the development of the connector, but unlike with the agent, every feature was thoroughly tested before being added to the final product.
+Test driven development was not used in the development of the connector, this was a decision made with all groups, because for the provided connector it was not feasible to obtain a high enough level of understanding to start test driven development given the time-frame. But unlike with the agent, every feature was thoroughly tested automatically before being added to the final product.
