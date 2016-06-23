@@ -1,49 +1,31 @@
 \chapter[Description of Developed Functionalities]{Description of Developed \\ Functionalities}
-In this chapter we will extensively describe the functionalities that we developed for our agent.
+This chapter describes developed functionalities for the connector and the GOAL agent.
 
 The agent that we have been working on fulfils the role of a Private Housing Corporation. What this corporation wants is to keep up and improve its reputation and obviously, to make profits. In order to achieve these two things we have designed our agent to take all necessary indicators in account. We will now provide an explanation per developed functionality based on the strategy that the agent has.
-
-\section{Constructing Functionality}
-When the agent has land without any buildings on it, for example from a previously demolished building, it will construct a new building here. Depending on the indicators for the balance and the environment, it will be luxury, normal or social housing.
-
-\section{Upgrading Functionality}
-The agent will adopt a goal to improve a zone whenever this certain zone does not live up to our standards according to the indicator target. We will then find buildings we own in this zone so that we can improve them and also the indicator numbers. 
-
-\section{Buying Land Functionality}
-Currently the agent is never looking to buy any land. However we will change this in the short future. When the agent gets a request from another stakeholder looking to sell land to us, we will always say no. We will change this later too. 
-
-\section{Selling Land Functionality}
-The agent will try to sell land that contains buildings on it that have nothing to do with housing, such as offices, leisure and other categories that do not fit our housing image. The agent makes an effort to sell these buildings to other stakeholders, to which they might be useful. It starts by trying to sell it to the Facilities stakeholder, as they are always looking to buy land. The agent will make a maximum of three attempts to sell the land to the potential buyer, each time with a slightly reduced price.
-Whenever an agent sends us a request to buy land from us, we will decline the offer as we already have construction plans for all empty land that we possess.
-
-\section{Demolishing Functionality}
-When our agent attempted to sell land but it did not succeed, the agent will demolish the building so that some other building that will be more useful to us can be constructed. Also the agent will demolish social housing buildings whenever the indicator that gives the number of different kind of housings points out that we would like to have more luxury or normal housing. 
-
-EVERYTHING DOWN HERE IS NEW
-
 
 \section{Connector} 
 The connector was a joint effort by all groups which were working on this context project. Our group has done several contributions to the connector on which we will expand: The custom indicators, used to track progress of the stakeholder, the Upgrade Types percept, which makes it possible for a bot to use Upgrades, and the Extension of Buildings percept, which gave more functionality to our agent.
 
 \paragraph{Custom Indicators}
-The custom indicators percept was developed to make sure that every group had the possibility to create and update indicators which they deemed fit to reach their goal in the played session. It enabled the user to choose which information the indicator should send to the bot and it has been expanded throughout the process to accommodate every groups needs.
+The custom indicators percept was developed to make sure that every group had the possibility to create and update indicators which they deemed fit to reach their goal in the played session. It enabled the user to choose which information the indicator should send to the agent and it has been expanded throughout the process to accommodate every groups needs.
 
 \paragraph{Upgrade Types}
-The Upgrade Types percept is used by the bots to look which buildings they own can be upgraded into a building which would improve their indicators. The Upgrade Types percept was built to return an upgrade identifier with only one set of upgrades which could be called on by the agent, in the following weeks we noticed that some of the Upgrade Types had multiple sets and the percept was updated by project group RAMpestampers.
+The Upgrade Types percept is used by the agents to look which buildings they own can be upgraded into a building which would improve their indicators. The Upgrade Types percept was built to return an upgrade identifier with only one set of upgrades which could be called on by the agent, in the following weeks we noticed that some of the Upgrade Types had multiple sets and the percept was updated by project group RAMpestampers.
 
 \paragraph{Extension of Buildings}
 The Buildings percept has been extended with extra information regarding the zones in which a building had been built. This makes it possible for the agent to make a better decision on what to do with its owned buildings as he is aware in which zone they are located.
 
 \section{GOAL Agent}
-The agent has the following functionalities which we will expand on: Building and demolishing buildings, Upgrading Buildings, Buying and Selling land and communication with other stakeholders.
+The agent was solely developed by our group and has the following functionalities which will be expanded on: Building and demolishing buildings, Upgrading Buildings, Buying and Selling land and communication with other stakeholders.
 
 \paragraph{Building and Demolishing buildings}
 The agent will build and demolish building which are available for him to build and demolish. It will also be focussed on building luxury housing and demolishing the amount of social housing. This is because the Private Housing Corporation is looking to improve the overall quality of housing in the zones they have buildings. Also buildings are demolished if they are not useful to the housing corporation and could not be sold to other stakeholders.
 
 \paragraph{Upgrading buildings}
-The agent will be looking to renovate as much buildings as possible to improve the overall quality of the housing in its zones if they were not chosen to be demolished for more modern housing. It is also used to keep the Municipality on its side by improving indicators the Municipality finds interesting. This might mean the Municipality will return a favor later into the session.
+The agent will be looking to renovate as much buildings as possible to improve the overall quality of the housing in its zones if they were not chosen to be demolished for more modern housing. It is also used to keep the Municipality on its side by improving one of the Municipality's indicators, this might mean the Municipality will return a favor later into the session.
 
-\paragraph{Buying and Selling land}
-As the Housing corporation is also trying to increase its overall presence in the session and tries to reach its indicators it will be trying to increase its owned zones to build more buildings to improve its indicators without demolishing housing which should not be demolished. It tries to sell land on which buildings reside the Housing Corporation is not interested in. It will first try to sell these buildings, if this is impossible it will destroy the building and build something of its own.
+\paragraph{Selling expensive land}
+The Housing Corporation owns a piece of land which is very expensive to work with because it contains a building it can't use and it is very expensive to demolish the building for a few extra houses. This is why the agent tries to sell this piece of land to other stakeholders, the agent offers this land to the other stakeholders on 3 different prices, the first price is 50 euros above the average price per $m^2$, the second price on the average price and the third price is 50 euros under the average price.
 
 \paragraph{Communicating with other stakeholders}
+The agent has communication with other stakeholders to a certain extent, it will always react on permits which he should react on. If another stakeholder tries to sell land to the agent and the agent has been trying to buy this land but the offer was never accepted the agent will look at the price the other stakeholder offers and decide if it wants to buy the land. This works in the same extent for land our agent is selling, if another stakeholder tries to buy land on a location the agent is selling the land it will take the price in consideration. 
