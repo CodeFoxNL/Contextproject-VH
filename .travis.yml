@@ -39,6 +39,6 @@ script:
 # if there is a test failed then the build fails
 - grep "test failed:" result.txt && exit 1 || echo 0
 # check that the tests actually passed otherwise the build still fails
-- grep "test passed:" result.txt && echo 0 || exit 1
+- grep "test passed:" result.txt && echo 0 || $?
 jdk:
 - oraclejdk8

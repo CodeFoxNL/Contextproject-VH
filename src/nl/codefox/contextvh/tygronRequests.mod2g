@@ -27,8 +27,23 @@ module tygronRequests {
 	forall percept(requests(List)),
 		bel(member(request("INTERACTION","BUY_LAND",_,_,[2],_,"NO_PRICE",MultiPolygon,_,_),List),requestedLand(MultiPolygon,Counter),Counter<3,NewCounter is Counter+1) 
 		do delete(requestedLand(MultiPolygon,Counter),doneBuying(MultiPolygon)) + insert(requestedLand(MultiPolygon,NewCounter)) + adopt(doneBuying(MultiPolygon)).
+	
+	% if a request is incoming from another stakeholder to buy land, accept if we try to sell it.	
+	forall percept(requests(List)),
+		bel(member(request("INTERACTION","BUY_LAND",RequestID,ContentLinkID,VisibleStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,AreaSize,AnswersList),List),
+		member(request("INFORMATION","BUY_LAND",RequestID2,ContentLinkID,SenderStakeholdersIDList,_,_,_,_,_),List),
+		not(request(_,_,RequestID,_,_,_,_,_,_,_)),
+		not(request(_,_,RequestID2,_,_,_,_,_,_,_)),
+		ourID(ID),
+		not(member(ID,SenderStakeholdersIDList)),
+		offeredLand(MultiPolygon,Counter),
+		Price is (-Counter*50)+450,
+		PriceM2 is Price / AreaSize,
+		Price =< PriceM2,
+		member(answer(AnsID,"Ja"),AnswersList))
+		do popup_answer(RequestID,AnsID). 
 		
-	% if a request is incoming from another stakeholder to buy land,decline.	
+	% if a request is incoming from another stakeholder to buy land, decline.	
 	forall percept(requests(List)),
 		bel(member(request("INTERACTION","BUY_LAND",RequestID,ContentLinkID,VisibleStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,AreaSize,AnswersList),List),
 		member(request("INFORMATION","BUY_LAND",RequestID2,ContentLinkID,SenderStakeholdersIDList,_,_,_,_,_),List),
@@ -37,9 +52,25 @@ module tygronRequests {
 		ourID(ID),
 		not(member(ID,SenderStakeholdersIDList)),
 		member(answer(AnsID,"Nee"),AnswersList))
-		do popup_answer(RequestID,AnsID). 
-		
-	% if a request is incoming from another stakeholder to sell land to us,decline.	
+		do popup_answer(RequestID,AnsID). 		
+	
+	% if a request is incoming from another stakeholder to sell land to us, accept if we try to buy it.	
+	forall percept(requests(List)),
+		bel(member(request("INTERACTION","SELL_LAND",RequestID,ContentLinkID,VisibleStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,AreaSize,AnswersList),List),
+		member(request("INFORMATION","BUY_LAND",RequestID2,ContentLinkID,SenderStakeholdersIDList,_,_,_,_,_),List),
+		not(request(_,_,RequestID,_,_,_,_,_,_,_)),
+		not(request(_,_,RequestID2,_,_,_,_,_,_,_)),
+		ourID(ID),
+		not(member(ID,SenderStakeholdersIDList)),
+		member(ID,VisibleStakeholdersIDList),
+		requestedLand(MultiPolygon, Counter),
+		Price is Counter * 150 + 100,
+		PriceM2 is Price / AreaSize,
+		Price >= PriceM2,
+		member(answer(AnsID,"Ja"),AnswersList))
+		do popup_answer(RequestID,AnsID). 	
+	
+	% if a request is incoming from another stakeholder to sell land to us, decline.	
 	forall percept(requests(List)),
 		bel(member(request("INTERACTION","SELL_LAND",RequestID,ContentLinkID,VisibleStakeholdersIDList,ActionLogIDList,Price,MultiPolygon,AreaSize,AnswersList),List),
 		member(request("INFORMATION","BUY_LAND",RequestID2,ContentLinkID,SenderStakeholdersIDList,_,_,_,_,_),List),
